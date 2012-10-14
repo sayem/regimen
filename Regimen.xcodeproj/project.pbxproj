@@ -1,0 +1,328 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B0339305162B33D500A8D40D /* 83-calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = B0339304162B33D500A8D40D /* 83-calendar.png */; };
+		B0643AB7161DE0310086CEEB /* RegimenMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643AB6161DE0310086CEEB /* RegimenMonthController.m */; };
+		B0643ABB161DE0D30086CEEB /* RegimenYearController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABA161DE0D30086CEEB /* RegimenYearController.m */; };
+		B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */; };
+		B0FEDAA2161CE4B0008D1CBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */; };
+		B0FEDAA4161CE4B0008D1CBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA3161CE4B0008D1CBA /* Foundation.framework */; };
+		B0FEDAA6161CE4B0008D1CBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA5161CE4B0008D1CBA /* CoreGraphics.framework */; };
+		B0FEDAAC161CE4B0008D1CBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAAA161CE4B0008D1CBA /* InfoPlist.strings */; };
+		B0FEDAAE161CE4B0008D1CBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDAAD161CE4B0008D1CBA /* main.m */; };
+		B0FEDAB2161CE4B0008D1CBA /* RegimenAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDAB1161CE4B0008D1CBA /* RegimenAppDelegate.m */; };
+		B0FEDAB4161CE4B0008D1CBA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB3161CE4B0008D1CBA /* Default.png */; };
+		B0FEDAB6161CE4B0008D1CBA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB5161CE4B0008D1CBA /* Default@2x.png */; };
+		B0FEDAB8161CE4B0008D1CBA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB7161CE4B0008D1CBA /* Default-568h@2x.png */; };
+		B0FEDABB161CE4B1008D1CBA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB9161CE4B1008D1CBA /* MainStoryboard.storyboard */; };
+		B0FEDABE161CE4B1008D1CBA /* RegimenDayController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */; };
+		B0FEDAC5161CE4B1008D1CBA /* RegimenWeekController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDAC4161CE4B1008D1CBA /* RegimenWeekController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B0339304162B33D500A8D40D /* 83-calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "83-calendar.png"; sourceTree = "<group>"; };
+		B0643AB5161DE0310086CEEB /* RegimenMonthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenMonthController.h; sourceTree = "<group>"; };
+		B0643AB6161DE0310086CEEB /* RegimenMonthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenMonthController.m; sourceTree = "<group>"; };
+		B0643AB9161DE0D30086CEEB /* RegimenYearController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenYearController.h; sourceTree = "<group>"; };
+		B0643ABA161DE0D30086CEEB /* RegimenYearController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenYearController.m; sourceTree = "<group>"; };
+		B0643ABC161DE1060086CEEB /* RegimenLongTermController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenLongTermController.h; sourceTree = "<group>"; };
+		B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenLongTermController.m; sourceTree = "<group>"; };
+		B0FEDA9D161CE4B0008D1CBA /* Regimen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Regimen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B0FEDAA3161CE4B0008D1CBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B0FEDAA5161CE4B0008D1CBA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B0FEDAA9161CE4B0008D1CBA /* Regimen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Regimen-Info.plist"; sourceTree = "<group>"; };
+		B0FEDAAB161CE4B0008D1CBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B0FEDAAD161CE4B0008D1CBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Regimen-Prefix.pch"; sourceTree = "<group>"; };
+		B0FEDAB0161CE4B0008D1CBA /* RegimenAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegimenAppDelegate.h; sourceTree = "<group>"; };
+		B0FEDAB1161CE4B0008D1CBA /* RegimenAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegimenAppDelegate.m; sourceTree = "<group>"; };
+		B0FEDAB3161CE4B0008D1CBA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B0FEDAB5161CE4B0008D1CBA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		B0FEDAB7161CE4B0008D1CBA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B0FEDABA161CE4B1008D1CBA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		B0FEDABC161CE4B1008D1CBA /* RegimenDayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegimenDayController.h; sourceTree = "<group>"; };
+		B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegimenDayController.m; sourceTree = "<group>"; };
+		B0FEDAC3161CE4B1008D1CBA /* RegimenWeekController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegimenWeekController.h; sourceTree = "<group>"; };
+		B0FEDAC4161CE4B1008D1CBA /* RegimenWeekController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegimenWeekController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B0FEDA9A161CE4B0008D1CBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FEDAA2161CE4B0008D1CBA /* UIKit.framework in Frameworks */,
+				B0FEDAA4161CE4B0008D1CBA /* Foundation.framework in Frameworks */,
+				B0FEDAA6161CE4B0008D1CBA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B0FEDA92161CE4B0008D1CBA = {
+			isa = PBXGroup;
+			children = (
+				B0FEDAA7161CE4B0008D1CBA /* Regimen */,
+				B0FEDAA0161CE4B0008D1CBA /* Frameworks */,
+				B0FEDA9E161CE4B0008D1CBA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B0FEDA9E161CE4B0008D1CBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B0FEDA9D161CE4B0008D1CBA /* Regimen.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B0FEDAA0161CE4B0008D1CBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */,
+				B0FEDAA3161CE4B0008D1CBA /* Foundation.framework */,
+				B0FEDAA5161CE4B0008D1CBA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B0FEDAA7161CE4B0008D1CBA /* Regimen */ = {
+			isa = PBXGroup;
+			children = (
+				B0FEDAB0161CE4B0008D1CBA /* RegimenAppDelegate.h */,
+				B0FEDAB1161CE4B0008D1CBA /* RegimenAppDelegate.m */,
+				B0FEDAB9161CE4B1008D1CBA /* MainStoryboard.storyboard */,
+				B0FEDABC161CE4B1008D1CBA /* RegimenDayController.h */,
+				B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */,
+				B0FEDAC3161CE4B1008D1CBA /* RegimenWeekController.h */,
+				B0FEDAC4161CE4B1008D1CBA /* RegimenWeekController.m */,
+				B0643AB5161DE0310086CEEB /* RegimenMonthController.h */,
+				B0643AB6161DE0310086CEEB /* RegimenMonthController.m */,
+				B0643AB9161DE0D30086CEEB /* RegimenYearController.h */,
+				B0643ABA161DE0D30086CEEB /* RegimenYearController.m */,
+				B0643ABC161DE1060086CEEB /* RegimenLongTermController.h */,
+				B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */,
+				B0FEDAA8161CE4B0008D1CBA /* Supporting Files */,
+			);
+			path = Regimen;
+			sourceTree = "<group>";
+		};
+		B0FEDAA8161CE4B0008D1CBA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B0339304162B33D500A8D40D /* 83-calendar.png */,
+				B0FEDAA9161CE4B0008D1CBA /* Regimen-Info.plist */,
+				B0FEDAAA161CE4B0008D1CBA /* InfoPlist.strings */,
+				B0FEDAAD161CE4B0008D1CBA /* main.m */,
+				B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */,
+				B0FEDAB3161CE4B0008D1CBA /* Default.png */,
+				B0FEDAB5161CE4B0008D1CBA /* Default@2x.png */,
+				B0FEDAB7161CE4B0008D1CBA /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B0FEDA9C161CE4B0008D1CBA /* Regimen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0FEDACC161CE4B1008D1CBA /* Build configuration list for PBXNativeTarget "Regimen" */;
+			buildPhases = (
+				B0FEDA99161CE4B0008D1CBA /* Sources */,
+				B0FEDA9A161CE4B0008D1CBA /* Frameworks */,
+				B0FEDA9B161CE4B0008D1CBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Regimen;
+			productName = Regimen;
+			productReference = B0FEDA9D161CE4B0008D1CBA /* Regimen.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B0FEDA94161CE4B0008D1CBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Regimen;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "HatTrick Labs, LLC";
+			};
+			buildConfigurationList = B0FEDA97161CE4B0008D1CBA /* Build configuration list for PBXProject "Regimen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B0FEDA92161CE4B0008D1CBA;
+			productRefGroup = B0FEDA9E161CE4B0008D1CBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B0FEDA9C161CE4B0008D1CBA /* Regimen */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B0FEDA9B161CE4B0008D1CBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FEDAAC161CE4B0008D1CBA /* InfoPlist.strings in Resources */,
+				B0FEDAB4161CE4B0008D1CBA /* Default.png in Resources */,
+				B0FEDAB6161CE4B0008D1CBA /* Default@2x.png in Resources */,
+				B0FEDAB8161CE4B0008D1CBA /* Default-568h@2x.png in Resources */,
+				B0FEDABB161CE4B1008D1CBA /* MainStoryboard.storyboard in Resources */,
+				B0339305162B33D500A8D40D /* 83-calendar.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B0FEDA99161CE4B0008D1CBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FEDAAE161CE4B0008D1CBA /* main.m in Sources */,
+				B0FEDAB2161CE4B0008D1CBA /* RegimenAppDelegate.m in Sources */,
+				B0FEDABE161CE4B1008D1CBA /* RegimenDayController.m in Sources */,
+				B0FEDAC5161CE4B1008D1CBA /* RegimenWeekController.m in Sources */,
+				B0643AB7161DE0310086CEEB /* RegimenMonthController.m in Sources */,
+				B0643ABB161DE0D30086CEEB /* RegimenYearController.m in Sources */,
+				B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B0FEDAAA161CE4B0008D1CBA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0FEDAAB161CE4B0008D1CBA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B0FEDAB9161CE4B1008D1CBA /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0FEDABA161CE4B1008D1CBA /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B0FEDACA161CE4B1008D1CBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B0FEDACB161CE4B1008D1CBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B0FEDACD161CE4B1008D1CBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Regimen/Regimen-Prefix.pch";
+				INFOPLIST_FILE = "Regimen/Regimen-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B0FEDACE161CE4B1008D1CBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Regimen/Regimen-Prefix.pch";
+				INFOPLIST_FILE = "Regimen/Regimen-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B0FEDA97161CE4B0008D1CBA /* Build configuration list for PBXProject "Regimen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0FEDACA161CE4B1008D1CBA /* Debug */,
+				B0FEDACB161CE4B1008D1CBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0FEDACC161CE4B1008D1CBA /* Build configuration list for PBXNativeTarget "Regimen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0FEDACD161CE4B1008D1CBA /* Debug */,
+				B0FEDACE161CE4B1008D1CBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B0FEDA94161CE4B0008D1CBA /* Project object */;
+}
