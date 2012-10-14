@@ -8,7 +8,7 @@
         <scene sceneID="11">
             <objects>
                 <viewController title="Day" id="2" customClass="RegimenDayController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Day" id="h8S-aa-W4K">
+                    <navigationItem key="navigationItem" id="h8S-aa-W4K">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="bVa-9B-wD7"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="IbL-t6-9rb"/>
                     </navigationItem>
@@ -53,7 +53,7 @@
         <scene sceneID="13">
             <objects>
                 <viewController title="Week" id="3" customClass="RegimenWeekController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Week" id="DE3-gy-zcK">
+                    <navigationItem key="navigationItem" id="DE3-gy-zcK">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="btg-Y5-lJB"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="48t-jE-JuK"/>
                     </navigationItem>
@@ -66,7 +66,7 @@
         <scene sceneID="xql-X1-a38">
             <objects>
                 <tableViewController title="Year" id="P8h-BO-ed8" customClass="RegimenYearController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Year" id="dwc-7n-brB">
+                    <navigationItem key="navigationItem" id="dwc-7n-brB">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="qDl-gP-gwX"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="ImM-ua-bAK"/>
                     </navigationItem>
@@ -79,7 +79,7 @@
         <scene sceneID="mD0-GX-n30">
             <objects>
                 <tableViewController title="LongTerm" id="42G-T1-fD1" customClass="RegimenLongTermController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Long-Term" id="RCx-xq-uy2">
+                    <navigationItem key="navigationItem" id="RCx-xq-uy2">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="j21-E6-5ks"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="4b6-oj-aCt"/>
                     </navigationItem>
@@ -163,7 +163,7 @@
         <scene sceneID="DA8-p3-doJ">
             <objects>
                 <tableViewController title="Month" id="WfP-mL-x8X" customClass="RegimenMonthController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Month" id="Tme-GJ-cg8">
+                    <navigationItem key="navigationItem" id="Tme-GJ-cg8">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="52p-Nl-y9W"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="kGY-YM-G74"/>
                     </navigationItem>

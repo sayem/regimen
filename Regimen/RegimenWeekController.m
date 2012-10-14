@@ -19,11 +19,25 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSDate *today = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM"];
+
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:today];
+    [components setDay:([components day]-([components weekday]-1))];
+    
+    NSInteger week_start = [components day];
+    NSInteger week_end = [components day] + 6;
+    NSString *week = [NSString stringWithFormat:@"%@ %d - %d", [formatter stringFromDate:today], week_start, week_end];
+    
+    UINavigationItem *nav = [self navigationItem];
+    [nav setTitle:week];
 }
 
 - (void)didReceiveMemoryWarning

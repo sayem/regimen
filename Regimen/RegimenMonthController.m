@@ -22,7 +22,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    NSDate *now = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM yyyy"];
+    
+    UINavigationItem *nav = [self navigationItem];
+    [nav setTitle:[formatter stringFromDate:now]];
 }
 
 - (void)didReceiveMemoryWarning
