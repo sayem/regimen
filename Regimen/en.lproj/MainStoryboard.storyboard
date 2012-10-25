@@ -8,6 +8,22 @@
         <scene sceneID="11">
             <objects>
                 <viewController title="Day" id="2" customClass="RegimenDayController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9FP-43-oPY">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="efF-5g-fGW">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
                     <navigationItem key="navigationItem" id="h8S-aa-W4K">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="bVa-9B-wD7"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="IbL-t6-9rb"/>
@@ -53,6 +69,22 @@
         <scene sceneID="13">
             <objects>
                 <viewController title="Week" id="3" customClass="RegimenWeekController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rxm-nE-tOe">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="8Xn-qO-wAy">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
                     <navigationItem key="navigationItem" id="DE3-gy-zcK">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="btg-Y5-lJB"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="48t-jE-JuK"/>
@@ -65,7 +97,27 @@
         <!--Regimen Year Controller - Year-->
         <scene sceneID="xql-X1-a38">
             <objects>
-                <tableViewController title="Year" id="P8h-BO-ed8" customClass="RegimenYearController" sceneMemberID="viewController">
+                <tableViewController title="Year" clearsSelectionOnViewWillAppear="NO" id="P8h-BO-ed8" customClass="RegimenYearController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Pdr-KG-wZM">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="mWG-dn-O9i">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="P8h-BO-ed8" id="0L5-Jj-2OB"/>
+                            <outlet property="delegate" destination="P8h-BO-ed8" id="d0b-ye-lz7"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" id="dwc-7n-brB">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="qDl-gP-gwX"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="ImM-ua-bAK"/>
@@ -79,6 +131,26 @@
         <scene sceneID="mD0-GX-n30">
             <objects>
                 <tableViewController title="LongTerm" id="42G-T1-fD1" customClass="RegimenLongTermController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Iqc-UW-hdx">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="A3P-H6-6vn">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="42G-T1-fD1" id="ixN-kP-iFU"/>
+                            <outlet property="delegate" destination="42G-T1-fD1" id="feP-Qx-Org"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" id="RCx-xq-uy2">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="j21-E6-5ks"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="4b6-oj-aCt"/>
@@ -163,6 +235,26 @@
         <scene sceneID="DA8-p3-doJ">
             <objects>
                 <tableViewController title="Month" id="WfP-mL-x8X" customClass="RegimenMonthController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="J9V-kk-9XL">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="iMG-Ap-31S">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WfP-mL-x8X" id="nHQ-Ew-eBw"/>
+                            <outlet property="delegate" destination="WfP-mL-x8X" id="cQY-o6-Vm9"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" id="Tme-GJ-cg8">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="52p-Nl-y9W"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="kGY-YM-G74"/>
@@ -174,19 +266,19 @@
         </scene>
     </scenes>
     <classes>
-        <class className="RegimenDayController" superclassName="UIViewController">
+        <class className="RegimenDayController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenDayController.h"/>
         </class>
-        <class className="RegimenLongTermController" superclassName="UIViewController">
+        <class className="RegimenLongTermController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenLongTermController.h"/>
         </class>
-        <class className="RegimenMonthController" superclassName="UIViewController">
+        <class className="RegimenMonthController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenMonthController.h"/>
         </class>
-        <class className="RegimenWeekController" superclassName="UIViewController">
+        <class className="RegimenWeekController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenWeekController.h"/>
         </class>
-        <class className="RegimenYearController" superclassName="UIViewController">
+        <class className="RegimenYearController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenYearController.h"/>
         </class>
     </classes>

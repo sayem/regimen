@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegimenLongTermController : UIViewController
+@interface RegimenLongTermController : UITableViewController
 
 @end

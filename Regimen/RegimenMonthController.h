@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegimenMonthController : UIViewController
+@interface RegimenMonthController : UITableViewController
 
 @end

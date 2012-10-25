@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegimenDayController : UIViewController
+@interface RegimenDayController : UITableViewController
 
 @end

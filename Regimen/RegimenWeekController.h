@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegimenWeekController : UIViewController
+@interface RegimenWeekController : UITableViewController
 
 @end
