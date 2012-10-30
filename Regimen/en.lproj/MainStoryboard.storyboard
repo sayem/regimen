@@ -19,8 +19,45 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Finish Regimen App" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VzT-bm-vei">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="IHT-bx-WPI"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="VzT-bm-vei" firstAttribute="leading" secondItem="efF-5g-fGW" secondAttribute="leading" constant="20" type="default" id="HAd-4Z-sdg"/>
+                                    <constraint firstAttribute="trailing" secondItem="VzT-bm-vei" secondAttribute="trailing" constant="20" type="default" id="wq3-dW-cUl"/>
+                                    <constraint firstItem="VzT-bm-vei" firstAttribute="centerY" secondItem="efF-5g-fGW" secondAttribute="centerY" type="default" id="zwh-i4-Hwh"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="AddGoal" id="wgJ-UV-hgh">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add goal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhC-VV-YaY">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="169" id="cyu-9w-nlm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="FhC-VV-YaY" firstAttribute="leading" secondItem="wgJ-UV-hgh" secondAttribute="leading" constant="20" type="default" id="oQV-6c-bqN"/>
+                                    <constraint firstItem="FhC-VV-YaY" firstAttribute="top" secondItem="wgJ-UV-hgh" secondAttribute="top" constant="11" id="zis-AZ-Lb0"/>
+                                </constraints>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -266,6 +303,9 @@
         </scene>
     </scenes>
     <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
         <class className="RegimenDayController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenDayController.h"/>
         </class>

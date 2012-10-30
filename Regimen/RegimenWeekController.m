@@ -24,17 +24,19 @@
     [super viewDidLoad];
     
     NSDate *today = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM"];
-
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:today];
-    [components setDay:([components day]-([components weekday]-1))];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
     
-    NSInteger week_start = [components day];
-    NSInteger week_end = [components day] + 6;
-    NSString *week = [NSString stringWithFormat:@"%@ %d - %d", [formatter stringFromDate:today], week_start, week_end];
+    NSTimeInterval minusDays = ([components weekday]-1) * 24 * 60 * 60;
+    NSTimeInterval plusDays = (7-[components weekday]) * 24 * 60 * 60;
+    
+    NSDate *startWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:-minusDays];
+    NSDate *endWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:plusDays];
+    
+    NSDateComponents *sunday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:startWeek];
+    NSDateComponents *saturday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:endWeek];
+    
+    NSString *week = [NSString stringWithFormat:@"%d/%d - %d/%d", [sunday month], [sunday day],[saturday month], [saturday day]];
     
     UINavigationItem *nav = [self navigationItem];
     [nav setTitle:week];
