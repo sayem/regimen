@@ -25,7 +25,7 @@
     
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM dd"];
+    [formatter setDateFormat:@"MMM d"];
     
     UINavigationItem *nav = [self navigationItem];
     [nav setTitle:[formatter stringFromDate:now]];
@@ -42,17 +42,15 @@
 {
     return 5;
 }
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     return cell;
 
-    
-    UITableViewCell *add = [tableView dequeueReusableCellWithIdentifier:@"AddGoal"];
-    return add;
-    
-    
 }
 
+ 
 @end

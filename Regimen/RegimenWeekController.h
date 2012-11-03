@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegimenWeekController : UITableViewController
+@interface RegimenWeekController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
