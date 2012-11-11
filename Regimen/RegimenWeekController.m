@@ -7,14 +7,16 @@
 //
 
 #import "RegimenWeekController.h"
+#import "RegimenGoal.h"
 
 @interface RegimenWeekController ()
 
 @end
 
-@implementation RegimenWeekController
+@implementation RegimenWeekController {
+    NSMutableArray *items;
+}
 @synthesize tableView = _tableView;
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -24,6 +26,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    items = [[NSMutableArray alloc] initWithCapacity:20];
+    
+    RegimenGoal *item;
+    
+    item = [[RegimenGoal alloc] init];
+    item.text = @"Walk the dog";
+    [items addObject:item];
+    
+    item = [[RegimenGoal alloc] init];
+    item.text = @"Brush my teeth";
+    [items addObject:item];
+    
+    item = [[RegimenGoal alloc] init];
+    item.text = @"Learn iOS development";
+    [items addObject:item];
+    
+    item = [[RegimenGoal alloc] init];
+    item.text = @"Soccer practice";
+    [items addObject:item];
+    
+    item = [[RegimenGoal alloc] init];
+    item.text = @"Eat ice cream";
+    [items addObject:item];
+    
+    
     
     NSDate *today = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -52,18 +80,42 @@
 
 
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [items count];
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    
+    UILabel *label = (UILabel *)[cell viewWithTag:1000];
     return cell;
 }
 
- 
+
+- (IBAction)addItem {
+
+    int newRowIndex = [items count];
+    RegimenGoal *item = [[RegimenGoal alloc] init];
+    item.text = @"I am a new row";
+    [items addObject:item];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
