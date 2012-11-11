@@ -11,8 +11,11 @@
 @class AddGoalViewController;
 @class RegimenGoal;
 @protocol AddGoalViewControllerDelegate <NSObject>
+
 - (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller;
+
 - (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item;
+
 @end
 
 

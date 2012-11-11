@@ -16,6 +16,4 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) RegimenWeek *weeklygoal;
 
-- (IBAction)addItem;
-
 @end
