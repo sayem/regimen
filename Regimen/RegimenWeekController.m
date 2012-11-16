@@ -78,20 +78,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [items count];
 }
-
 
 - (void)configureTextForCell:(UITableViewCell *)cell withRegimenGoal:(RegimenGoal *)item
 {
     UILabel *label = (UILabel *)[cell viewWithTag:1000];
     label.text = item.text;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -103,27 +99,26 @@
     return cell;
 }
 
-
 - (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 - (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item
 {
     int newRowIndex = [items count];
     [items addObject:item];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddGoal"]) {
-        UINavigationController * navigationController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
         AddGoalViewController *controller = (AddGoalViewController *)
         navigationController.topViewController;
         controller.delegate = self;

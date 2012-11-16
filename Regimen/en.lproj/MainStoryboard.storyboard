@@ -103,22 +103,23 @@
                                     <segue destination="eQc-WC-dlz" kind="modal" identifier="AddGoal" id="8MX-ND-XFM"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-hg-ePs">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-hg-ePs">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="359" id="XRY-18-3r9"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="xas-zs-SfA">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="Some Goal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmm-ci-3Tf">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmm-ci-3Tf">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="102" id="Cx1-Ye-W0q"/>
+                                                        <constraint firstAttribute="height" constant="21" id="ux4-KZ-VlF"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -128,8 +129,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="top" secondItem="xas-zs-SfA" secondAttribute="top" constant="11" id="0Ok-9D-8P3"/>
-                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="leading" secondItem="xas-zs-SfA" secondAttribute="leading" constant="14" id="EQC-c2-QRZ"/>
+                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="top" secondItem="xas-zs-SfA" secondAttribute="top" constant="12" id="TBF-ru-SIZ"/>
+                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="leading" secondItem="xas-zs-SfA" secondAttribute="leading" constant="24" id="rZM-IC-UKp"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -152,6 +153,9 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="btg-Y5-lJB"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="48t-jE-JuK"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="ksK-hg-ePs" id="RAX-Hj-B1t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,7 +173,7 @@
                         <sections>
                             <tableViewSection id="agw-yx-G6u">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qt9-RV-iuJ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qt9-RV-iuJ">
                                         <rect key="frame" x="0.0" y="10" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -185,7 +189,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="done" destination="2VM-Wc-XNg" eventType="editingDidEndOnExit" id="GJh-5o-lae"/>
-                                                        <outlet property="delegate" destination="2VM-Wc-XNg" id="MgO-s7-wcV"/>
+                                                        <outlet property="delegate" destination="2VM-Wc-XNg" id="7uV-uq-dKg"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>

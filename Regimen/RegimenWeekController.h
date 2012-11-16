@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AddGoalViewController.h"
 
-@class RegimenWeek;
-
 @interface RegimenWeekController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) RegimenWeek *weeklygoal;
 
 @end
