@@ -13,11 +13,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWZ-6H-Xce">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="149" id="ic3-pe-SWH"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add Goal">
+                                <state key="normal" title="Add goals for today">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -41,10 +38,10 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-Od-Nno">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-Od-Nno">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="102" id="2HI-g8-2BS"/>
-                                                        <constraint firstAttribute="height" constant="21" id="RVk-3M-wGz"/>
+                                                        <constraint firstAttribute="height" constant="43" id="Ihy-Va-rcb"/>
+                                                        <constraint firstAttribute="width" constant="275" id="sBd-J8-LEF"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -54,8 +51,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="leading" secondItem="AaS-Lr-zXf" secondAttribute="leading" constant="24" id="7el-Ph-kJm"/>
-                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="top" secondItem="AaS-Lr-zXf" secondAttribute="top" constant="12" id="RJd-Tb-hpN"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="centerX" secondItem="AaS-Lr-zXf" secondAttribute="centerX" type="default" id="ScZ-vn-szt"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="top" secondItem="AaS-Lr-zXf" secondAttribute="top" constant="1" id="TPb-iU-orf"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -127,11 +124,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hc7-56-3rc">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="149" id="oWv-xL-ru3"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add Goal">
+                                <state key="normal" title="Add goals for this week">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -155,10 +149,10 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmm-ci-3Tf">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="mmm-ci-3Tf">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="102" id="Cx1-Ye-W0q"/>
-                                                        <constraint firstAttribute="height" constant="21" id="ux4-KZ-VlF"/>
+                                                        <constraint firstAttribute="height" constant="43" id="8cO-jH-XgH"/>
+                                                        <constraint firstAttribute="width" constant="275" id="dKx-hn-7q9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -168,8 +162,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="top" secondItem="xas-zs-SfA" secondAttribute="top" constant="12" id="TBF-ru-SIZ"/>
-                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="leading" secondItem="xas-zs-SfA" secondAttribute="leading" constant="24" id="rZM-IC-UKp"/>
+                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="centerX" secondItem="xas-zs-SfA" secondAttribute="centerX" type="default" id="Fh4-66-Zgf"/>
+                                            <constraint firstItem="mmm-ci-3Tf" firstAttribute="top" secondItem="xas-zs-SfA" secondAttribute="top" constant="1" id="QSw-lK-3MJ"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -225,7 +219,7 @@
                                                         <constraint firstAttribute="height" constant="43" id="Qto-7C-o1i"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="done" destination="2VM-Wc-XNg" eventType="editingDidEndOnExit" id="GJh-5o-lae"/>
                                                         <outlet property="delegate" destination="2VM-Wc-XNg" id="7uV-uq-dKg"/>
@@ -366,11 +360,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMd-6I-2iw">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="149" id="rBH-vN-0Yj"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add Goal">
+                                <state key="normal" title="Add goals for this month">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -394,10 +385,10 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilD-6W-Ri6">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="ilD-6W-Ri6">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="102" id="NR0-ew-gDP"/>
-                                                        <constraint firstAttribute="height" constant="21" id="gcb-9E-Ujy"/>
+                                                        <constraint firstAttribute="height" constant="43" id="Mif-Hf-aD4"/>
+                                                        <constraint firstAttribute="width" constant="300" id="dM4-0d-TFE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -407,8 +398,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="ilD-6W-Ri6" firstAttribute="leading" secondItem="Nqj-Mb-MQI" secondAttribute="leading" constant="24" id="Eir-mK-Zxv"/>
-                                            <constraint firstItem="ilD-6W-Ri6" firstAttribute="top" secondItem="Nqj-Mb-MQI" secondAttribute="top" constant="12" id="ew1-jr-BGQ"/>
+                                            <constraint firstItem="ilD-6W-Ri6" firstAttribute="top" secondItem="Nqj-Mb-MQI" secondAttribute="top" constant="1" id="gL2-kg-UFY"/>
+                                            <constraint firstItem="ilD-6W-Ri6" firstAttribute="centerX" secondItem="Nqj-Mb-MQI" secondAttribute="centerX" type="default" id="ghb-Oh-Gqs"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -448,11 +439,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGy-bi-ms9">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="149" id="uA1-K4-s0w"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add Goal">
+                                <state key="normal" title="Add goals for this year">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -476,10 +464,10 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-5k-jed">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-5k-jed">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="102" id="5PK-75-B7V"/>
-                                                        <constraint firstAttribute="height" constant="21" id="NKP-CH-boK"/>
+                                                        <constraint firstAttribute="width" constant="300" id="8ED-dl-UED"/>
+                                                        <constraint firstAttribute="height" constant="43" id="FUC-17-7f2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -489,8 +477,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="dHI-5k-jed" firstAttribute="leading" secondItem="GJs-ME-Y3J" secondAttribute="leading" constant="24" id="bXb-Pe-khm"/>
-                                            <constraint firstItem="dHI-5k-jed" firstAttribute="top" secondItem="GJs-ME-Y3J" secondAttribute="top" constant="12" id="wkc-jx-2Ds"/>
+                                            <constraint firstItem="dHI-5k-jed" firstAttribute="top" secondItem="GJs-ME-Y3J" secondAttribute="top" constant="1" id="QOg-kQ-xYG"/>
+                                            <constraint firstItem="dHI-5k-jed" firstAttribute="centerX" secondItem="GJs-ME-Y3J" secondAttribute="centerX" type="default" id="S4p-Y8-baN"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
@@ -530,11 +518,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0d-pX-pfe">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="149" id="96N-wj-1HQ"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add Goal">
+                                <state key="normal" title="Add long-term goals">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -558,10 +543,10 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vK2-VF-vUK">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="vK2-VF-vUK">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="9va-0P-icX"/>
-                                                        <constraint firstAttribute="width" constant="102" id="x5q-w6-n6Z"/>
+                                                        <constraint firstAttribute="height" constant="43" id="0SZ-dM-0cJ"/>
+                                                        <constraint firstAttribute="width" constant="300" id="Acw-ar-Vxh"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -571,8 +556,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="vK2-VF-vUK" firstAttribute="top" secondItem="a3u-G7-yGf" secondAttribute="top" constant="12" id="TwP-cC-lJf"/>
-                                            <constraint firstItem="vK2-VF-vUK" firstAttribute="leading" secondItem="a3u-G7-yGf" secondAttribute="leading" constant="24" id="WNS-Px-WZr"/>
+                                            <constraint firstItem="vK2-VF-vUK" firstAttribute="centerX" secondItem="a3u-G7-yGf" secondAttribute="centerX" type="default" id="7DI-54-79X"/>
+                                            <constraint firstItem="vK2-VF-vUK" firstAttribute="top" secondItem="a3u-G7-yGf" secondAttribute="top" constant="1" id="og4-EI-sg8"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
