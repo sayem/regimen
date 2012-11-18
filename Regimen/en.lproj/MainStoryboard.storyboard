@@ -8,40 +8,79 @@
         <scene sceneID="11">
             <objects>
                 <viewController title="Day" id="2" customClass="RegimenDayController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="9FP-43-oPY">
+                    <view key="view" contentMode="scaleToFill" id="RId-qV-A4G">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="efF-5g-fGW">
-                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Finish Regimen App" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VzT-bm-vei">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="IHT-bx-WPI"/>
-                                                <constraint firstAttribute="width" constant="280" id="m4V-Kn-YPJ"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWZ-6H-Xce">
                                 <constraints>
-                                    <constraint firstItem="VzT-bm-vei" firstAttribute="leading" secondItem="efF-5g-fGW" secondAttribute="leading" constant="30" id="u2r-yd-SEm"/>
-                                    <constraint firstItem="VzT-bm-vei" firstAttribute="centerY" secondItem="efF-5g-fGW" secondAttribute="centerY" type="default" id="zwh-i4-Hwh"/>
+                                    <constraint firstAttribute="width" constant="149" id="ic3-pe-SWH"/>
                                 </constraints>
-                            </tableViewCell>
-                        </prototypes>
-                    </tableView>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Add Goal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eQc-WC-dlz" kind="modal" identifier="AddGoal" id="z8m-bB-mLV"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="ktv-pO-1vJ">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="359" id="UIy-Sp-Cep"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RegimenGoal" id="AaS-Lr-zXf">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-Od-Nno">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="102" id="2HI-g8-2BS"/>
+                                                        <constraint firstAttribute="height" constant="21" id="RVk-3M-wGz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="leading" secondItem="AaS-Lr-zXf" secondAttribute="leading" constant="24" id="7el-Ph-kJm"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="top" secondItem="AaS-Lr-zXf" secondAttribute="top" constant="12" id="RJd-Tb-hpN"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2" id="3VW-06-dFI"/>
+                                    <outlet property="delegate" destination="2" id="fFQ-uq-zaP"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OWZ-6H-Xce" firstAttribute="top" secondItem="RId-qV-A4G" secondAttribute="top" constant="20" symbolic="YES" type="default" id="14Y-qY-Stk"/>
+                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="leading" secondItem="RId-qV-A4G" secondAttribute="leading" type="default" id="L4X-gt-1pK"/>
+                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="top" secondItem="RId-qV-A4G" secondAttribute="top" constant="91" id="Zvf-A8-KDq"/>
+                            <constraint firstItem="OWZ-6H-Xce" firstAttribute="leading" secondItem="RId-qV-A4G" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="gkf-S2-qHT"/>
+                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="trailing" secondItem="RId-qV-A4G" secondAttribute="trailing" type="default" id="n0h-qQ-d7X"/>
+                        </constraints>
+                    </view>
                     <navigationItem key="navigationItem" id="h8S-aa-W4K">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="bVa-9B-wD7"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="IbL-t6-9rb"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="ktv-pO-1vJ" id="Ok1-O1-VD5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
@@ -445,8 +484,11 @@
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
-        <class className="RegimenDayController" superclassName="UITableViewController">
+        <class className="RegimenDayController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenDayController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="RegimenLongTermController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenLongTermController.h"/>
@@ -469,4 +511,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="z8m-bB-mLV"/>
+    </inferredMetricsTieBreakers>
 </document>

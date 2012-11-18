@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddGoalViewController.h"
 
-@interface RegimenDayController : UITableViewController
+@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
