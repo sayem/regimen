@@ -30,29 +30,6 @@
     
     items = [[NSMutableArray alloc] initWithCapacity:20];
     
-    RegimenGoal *item;
-    
-    item = [[RegimenGoal alloc] init];
-    item.text = @"Walk the dog";
-    [items addObject:item];
-    
-    item = [[RegimenGoal alloc] init];
-    item.text = @"Brush my teeth";
-    [items addObject:item];
-    
-    item = [[RegimenGoal alloc] init];
-    item.text = @"Learn iOS development";
-    [items addObject:item];
-    
-    item = [[RegimenGoal alloc] init];
-    item.text = @"Soccer practice";
-    [items addObject:item];
-    
-    item = [[RegimenGoal alloc] init];
-    item.text = @"Eat ice cream";
-    [items addObject:item];
-    
-    
     NSDate *today = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
