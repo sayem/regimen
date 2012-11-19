@@ -28,6 +28,11 @@
 {
     [super viewDidLoad];
     
+
+    
+    [self.tableView setAllowsSelection:YES];
+    
+    
     items = [[NSMutableArray alloc] initWithCapacity:20];
     
     NSDate *now = [NSDate date];
@@ -90,5 +95,37 @@
         controller.delegate = self;
     }
 }
+
+
+
+
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int lastRow = [items count] - 1;
+    NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
+    
+    
+/*
+
+    [items removeObjectAtIndex:indexPath.row];
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+
+*/
+
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:( UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
+{
+    [items removeObjectAtIndex:indexPath.row];
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+
 
 @end
