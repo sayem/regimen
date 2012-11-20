@@ -8,6 +8,7 @@
 
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
+#import "RegimenStrikethroughLabel.h"
 
 @interface RegimenDayController ()
 
@@ -27,11 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
-    
-    [self.tableView setAllowsSelection:YES];
-    
     
     items = [[NSMutableArray alloc] initWithCapacity:20];
     
@@ -95,9 +91,6 @@
         controller.delegate = self;
     }
 }
-
-
-
 
 
 
