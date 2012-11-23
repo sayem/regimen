@@ -8,28 +8,22 @@
 
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
-#import "RegimenStrikethroughLabel.h"
+#import "RegimenCell.h"
 
 @interface RegimenDayController ()
 
 @end
 
 @implementation RegimenDayController {
-    NSMutableArray *items;
-}
-
-@synthesize tableView = _tableView;
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    NSMutableArray* _goals;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    items = [[NSMutableArray alloc] initWithCapacity:20];
+    _goals = [[NSMutableArray alloc] initWithCapacity:20];
+    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
     
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -39,30 +33,37 @@
     [nav setTitle:[formatter stringFromDate:now]];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [items count];
+    return [_goals count];
 }
 
-- (void)configureTextForCell:(UITableViewCell *)cell withRegimenGoal:(RegimenGoal *)item
+- (void)configureTextForCell:(UITableViewCell *)cell withRegimenGoal:(RegimenGoal *)goal
 {
     UILabel *label = (UILabel *)[cell viewWithTag:1000];
-    label.text = item.text;
+    label.text = goal.text;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
-    RegimenGoal *item = [items objectAtIndex:indexPath.row];
+    RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     
-    [self configureTextForCell:cell withRegimenGoal:item];
+    RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
+    [self configureTextForCell:cell withRegimenGoal:goal];
+    
     return cell;
 }
 
@@ -71,10 +72,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item
+- (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)goal
 {
-    int newRowIndex = [items count];
-    [items addObject:item];
+    int newRowIndex = [_goals count];
+    [_goals addObject:goal];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
@@ -92,32 +93,71 @@
     }
 }
 
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int lastRow = [items count] - 1;
+
+/*
+    int lastRow = [_goals count] - 1;
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
-    
+*/
     
 /*
-
-    [items removeObjectAtIndex:indexPath.row];
+    [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-
 */
 
+
 }
+
+
+
+
+/*
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:( UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
 {
-    [items removeObjectAtIndex:indexPath.row];
+    
+
+    int lastRow = [_goals count] - 1;
+    NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
+
+    
+    
+
+ [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+ 
+ 
 }
+
+*/
+
+
+
+
+
+
+-(UIColor*)colorForIndex:(NSInteger) index {
+    NSUInteger goalCount = _goals.count - 1;
+    float val = ((float)index / (float)goalCount) * 0.6;
+    return [UIColor colorWithRed: 1.0 green:val blue: 0.0 alpha:1.0];
+}
+
+ 
+#pragma mark - UITableViewDataDelegate protocol methods
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50.0f;
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [self colorForIndex:indexPath.row];
+}
+
 
 
 
