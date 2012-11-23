@@ -8,7 +8,6 @@
 
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
-#import "RegimenCell.h"
 
 @interface RegimenDayController ()
 
@@ -56,9 +55,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    //    RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
-    RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
     RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
@@ -96,11 +96,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-/*
+
     int lastRow = [_goals count] - 1;
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
-*/
+
     
 /*
     [_goals removeObjectAtIndex:indexPath.row];
@@ -125,7 +125,6 @@
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
 
     
-    
 
  [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
@@ -139,26 +138,24 @@
 
 
 
-
+/*
 
 -(UIColor*)colorForIndex:(NSInteger) index {
     NSUInteger goalCount = _goals.count - 1;
     float val = ((float)index / (float)goalCount) * 0.6;
     return [UIColor colorWithRed: 1.0 green:val blue: 0.0 alpha:1.0];
 }
-
  
 #pragma mark - UITableViewDataDelegate protocol methods
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50.0f;
 }
 
-
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = [self colorForIndex:indexPath.row];
 }
 
-
+*/
 
 
 @end
