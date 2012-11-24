@@ -40,9 +40,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="308" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="294" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-Od-Nno">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-Od-Nno">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="294" id="EXD-b9-649"/>
+                                                        <constraint firstAttribute="width" constant="290" id="27U-eg-oVA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,8 +53,8 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="centerX" secondItem="AaS-Lr-zXf" secondAttribute="centerX" type="default" id="OCP-3l-NM6"/>
-                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="centerY" secondItem="AaS-Lr-zXf" secondAttribute="centerY" type="default" id="aKn-qe-vd7"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="centerX" secondItem="AaS-Lr-zXf" secondAttribute="centerX" type="default" id="SqE-3z-5ee"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="bottom" secondItem="AaS-Lr-zXf" secondAttribute="bottom" type="default" id="aHJ-wl-hdr"/>
                                             <constraint firstItem="jAi-Od-Nno" firstAttribute="top" secondItem="AaS-Lr-zXf" secondAttribute="top" type="default" id="srH-Eb-6xN"/>
                                         </constraints>
                                     </tableViewCell>

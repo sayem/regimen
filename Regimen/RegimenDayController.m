@@ -9,6 +9,7 @@
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
 #import "RegimenCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface RegimenDayController ()
@@ -22,8 +23,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    _tableView.backgroundColor = [UIColor colorWithRed: 238.0 / 255 green:238.0 / 255 blue: 238.0 / 255 alpha:1.0];
     
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
@@ -63,9 +62,6 @@
     
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
-
-    
-    
     
     /*
      
@@ -104,10 +100,9 @@
      
      label.text = goal.text;
      [cell.contentView addSubview:label];
+     
      */
 
-    
-    
     RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
     [self configureTextForCell:cell withRegimenGoal:goal];
     
@@ -142,8 +137,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
     int lastRow = [_goals count] - 1;
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
@@ -200,15 +193,16 @@
 
  */
 
-/*
+
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    cell.backgroundColor = [UIColor colorWithRed: 225.0 / 255 green:225.0 / 255 blue: 225.0 / 255 alpha:1.0];
 
-  
+    cell.backgroundColor = [UIColor colorWithRed: 238.0 / 255 green:238.0 / 255 blue: 238.0 / 255 alpha:1.0];
+    
+    [cell.layer setBorderWidth: 2.0];
+    [cell.layer setMasksToBounds:YES];
+    [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
 }
-*/
 
 
 @end
