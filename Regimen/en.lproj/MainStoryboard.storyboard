@@ -31,11 +31,11 @@
                                     <constraint firstAttribute="height" constant="359" id="UIy-Sp-Cep"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="RegimenGoal" rowHeight="52" id="AaS-Lr-zXf">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="52"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="RegimenGoal" rowHeight="56" id="AaS-Lr-zXf">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="left" text="" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="310" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-Od-Nno">
@@ -53,8 +53,8 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="top" secondItem="AaS-Lr-zXf" secondAttribute="top" constant="8" id="BTH-P0-th8"/>
                                             <constraint firstItem="jAi-Od-Nno" firstAttribute="centerX" secondItem="AaS-Lr-zXf" secondAttribute="centerX" type="default" id="aPk-aD-Drg"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="centerY" secondItem="AaS-Lr-zXf" secondAttribute="centerY" type="default" id="nei-sb-pBM"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>

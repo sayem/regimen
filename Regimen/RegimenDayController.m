@@ -8,6 +8,8 @@
 
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
+#import "RegimenCell.h"
+
 
 @interface RegimenDayController ()
 
@@ -55,11 +57,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
     cell.textLabel.backgroundColor = [UIColor clearColor];
+    
+    
+    
+    
     
     RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
     [self configureTextForCell:cell withRegimenGoal:goal];
