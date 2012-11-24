@@ -22,6 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    _tableView.backgroundColor = [UIColor colorWithRed: 238.0 / 255 green:238.0 / 255 blue: 238.0 / 255 alpha:1.0];
     
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
@@ -61,10 +63,49 @@
     
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
-    cell.textLabel.backgroundColor = [UIColor clearColor];
+
     
     
     
+    /*
+     
+     _tableView.backgroundColor = [UIColor colorWithRed: 220.0 / 255 green: 220.0 / 255 blue: 220.0 / 255 alpha:1.0];
+     
+     UILabel *label;
+     CGRect tableRect;
+     CGRect labelRect;
+     CGFloat x, y, w, h, labelMargin;
+     
+     tableRect = [tableView rectForRowAtIndexPath:indexPath];
+     
+     // Set whatever margin around the label you prefer.
+     labelMargin = 10;
+     
+     // Determine rect values for the label.
+     x = tableRect.origin.x + labelMargin;
+     
+     // Calculate width of label
+     w = tableRect.size.width - (labelMargin * 2);
+     
+     // Calculate height of table based on font set earlier.
+     h = cell.bounds.size.height;
+     
+     // Calculate y position for the label text baseline to center
+     // vertically within the cell.
+     y = (tableRect.origin.y / 2) - (h / 4);
+     
+     //    labelRect = CGRectMake(x, y, w, h);
+     
+     const float LABEL_LEFT_MARGIN = 15.0f;
+     
+     labelRect = CGRectMake(0, 0, 310,48);
+     
+     label = [[UILabel alloc] initWithFrame:labelRect];
+     
+     label.text = goal.text;
+     [cell.contentView addSubview:label];
+     */
+
     
     
     RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
@@ -157,10 +198,16 @@
     return 50.0f;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = [self colorForIndex:indexPath.row];
-}
+ */
 
+/*
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+    cell.backgroundColor = [UIColor colorWithRed: 225.0 / 255 green:225.0 / 255 blue: 225.0 / 255 alpha:1.0];
+
+  
+}
 */
 
 
