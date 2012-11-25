@@ -26,7 +26,15 @@
 
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+    
+    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.tableView addGestureRecognizer:leftRecognizer];
 
+    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [rightRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.tableView addGestureRecognizer:rightRecognizer];
+    
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM dd"];
@@ -60,53 +68,16 @@
 {
     RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
-    
-    
-    /*
-     
-     _tableView.backgroundColor = [UIColor colorWithRed: 220.0 / 255 green: 220.0 / 255 blue: 220.0 / 255 alpha:1.0];
-     
-     UILabel *label;
-     CGRect tableRect;
-     CGRect labelRect;
-     CGFloat x, y, w, h, labelMargin;
-     
-     tableRect = [tableView rectForRowAtIndexPath:indexPath];
-     
-     // Set whatever margin around the label you prefer.
-     labelMargin = 10;
-     
-     // Determine rect values for the label.
-     x = tableRect.origin.x + labelMargin;
-     
-     // Calculate width of label
-     w = tableRect.size.width - (labelMargin * 2);
-     
-     // Calculate height of table based on font set earlier.
-     h = cell.bounds.size.height;
-     
-     // Calculate y position for the label text baseline to center
-     // vertically within the cell.
-     y = (tableRect.origin.y / 2) - (h / 4);
-     
-     //    labelRect = CGRectMake(x, y, w, h);
-     
-     const float LABEL_LEFT_MARGIN = 15.0f;
-     
-     labelRect = CGRectMake(0, 0, 310,48);
-     
-     label = [[UILabel alloc] initWithFrame:labelRect];
-     
-     label.text = goal.text;
-     [cell.contentView addSubview:label];
-     
-     */
-
     RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
     [self configureTextForCell:cell withRegimenGoal:goal];
-    
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithRed: 233.0 / 255 green:233.0 / 255 blue: 233.0 / 255 alpha:1.0];
+    [cell.layer setBorderWidth: 2.0];
+    [cell.layer setMasksToBounds:YES];
+    [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
 }
 
 - (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
@@ -143,15 +114,11 @@
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
 
-    
-    
     [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-
 }
 */
-
 
 
 /*
@@ -161,54 +128,34 @@
     int lastRow = [_goals count] - 1;
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
-
-
  
- [_goals removeObjectAtIndex:indexPath.row];
+    [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
- 
- 
-}
-
-*/
-
-
-/*
-
--(UIColor*)colorForIndex:(NSInteger) index {
-    NSUInteger goalCount = _goals.count - 1;
-    float val = ((float)index / (float)goalCount) * 0.6;
-    return [UIColor colorWithRed: 1.0 green:val blue: 0.0 alpha:1.0];
-}
- 
-#pragma mark - UITableViewDataDelegate protocol methods
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.0f;
 }
 
 */
 
 
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = [UIColor colorWithRed: 238.0 / 255 green:238.0 / 255 blue: 238.0 / 255 alpha:1.0];
-
-    [cell.layer setBorderWidth: 2.0];
-    [cell.layer setMasksToBounds:YES];
-    [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-}
 
 - (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
     CGPoint location = [recognizer locationInView:_tableView];
 
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        NSLog(@"asdfasdf");
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:location];
+        [_goals removeObjectAtIndex:indexPath.row];
+        NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+        [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     else {
         NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
         int lastRow = [_goals count] - 1;
         NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
+
+        UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
+        cell.backgroundColor = [UIColor colorWithRed: 245.0 / 255 green:245.0 / 255 blue: 245.0 / 255 alpha:1.0];
+    
         [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
     }
 }

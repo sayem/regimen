@@ -28,8 +28,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ktv-pO-1vJ">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="359" id="UIy-Sp-Cep"/>
-                                    <constraint firstAttribute="width" constant="308" id="sxB-Aq-rmV"/>
+                                    <constraint firstAttribute="width" constant="308" id="BBa-jI-LDi"/>
+                                    <constraint firstAttribute="height" constant="367" id="Rwe-ou-99e"/>
                                 </constraints>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -53,8 +53,8 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="centerX" secondItem="AaS-Lr-zXf" secondAttribute="centerX" type="default" id="SqE-3z-5ee"/>
                                             <constraint firstItem="jAi-Od-Nno" firstAttribute="bottom" secondItem="AaS-Lr-zXf" secondAttribute="bottom" type="default" id="aHJ-wl-hdr"/>
+                                            <constraint firstItem="jAi-Od-Nno" firstAttribute="leading" secondItem="AaS-Lr-zXf" secondAttribute="leading" constant="9" id="cX4-g5-goz"/>
                                             <constraint firstItem="jAi-Od-Nno" firstAttribute="top" secondItem="AaS-Lr-zXf" secondAttribute="top" type="default" id="srH-Eb-6xN"/>
                                         </constraints>
                                     </tableViewCell>
@@ -62,16 +62,14 @@
                                 <connections>
                                     <outlet property="dataSource" destination="2" id="3VW-06-dFI"/>
                                     <outlet property="delegate" destination="2" id="fFQ-uq-zaP"/>
-                                    <outletCollection property="gestureRecognizers" destination="sVO-Cg-Q2e" appends="YES" id="6QX-vE-pW4"/>
-                                    <outletCollection property="gestureRecognizers" destination="ZOy-SV-FZS" appends="YES" id="5cQ-Rj-lKY"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="OWZ-6H-Xce" firstAttribute="top" secondItem="RId-qV-A4G" secondAttribute="top" constant="20" symbolic="YES" type="default" id="14Y-qY-Stk"/>
-                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="centerX" secondItem="RId-qV-A4G" secondAttribute="centerX" type="default" id="Nss-TY-ytu"/>
-                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="top" secondItem="RId-qV-A4G" secondAttribute="top" constant="91" id="Zvf-A8-KDq"/>
+                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="top" secondItem="RId-qV-A4G" secondAttribute="top" constant="83" id="5UZ-qq-2z1"/>
+                            <constraint firstItem="ktv-pO-1vJ" firstAttribute="centerX" secondItem="RId-qV-A4G" secondAttribute="centerX" type="default" id="UHp-m7-das"/>
                             <constraint firstItem="OWZ-6H-Xce" firstAttribute="leading" secondItem="RId-qV-A4G" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="gkf-S2-qHT"/>
                         </constraints>
                     </view>
@@ -84,16 +82,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="sVO-Cg-Q2e" userLabel="Right Swipe Gesture Recognizer">
-                    <connections>
-                        <action selector="handleSwipeFrom:" destination="2" id="g0G-tZ-hSK"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="ZOy-SV-FZS" userLabel="Left Swipe Gesture Recognizer">
-                    <connections>
-                        <action selector="handleSwipeFrom:" destination="2" id="xbl-3M-6T5"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1075" y="-1161"/>
         </scene>
@@ -620,7 +608,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenDayController.h"/>
             <relationships>
                 <relationship kind="action" name="handleSwipeFrom:" candidateClass="UISwipeGestureRecognizer"/>
-                <relationship kind="outlet" name="swipeLeftRecognizer" candidateClass="UISwipeGestureRecognizer"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
