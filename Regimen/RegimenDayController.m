@@ -154,19 +154,32 @@
         NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
 
         UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
-        cell.backgroundColor = [UIColor colorWithRed: 245.0 / 255 green:245.0 / 255 blue: 245.0 / 255 alpha:1.0];
-        
-        UIView *viewUnderline = [[UIView alloc] init];
+        cell.backgroundColor = [UIColor colorWithRed: 247.0 / 255 green:247.0 / 255 blue: 247.0 / 255 alpha:1.0];
         
         CGFloat x = 7.0;
+        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+        CGFloat w = [goal.text sizeWithFont:[UIFont systemFontOfSize:15.0f]].width;
         CGFloat y = (cell.contentView.frame.size.height / 2);
         
-        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
-        CGFloat w = [goal.text sizeWithFont:[UIFont systemFontOfSize:15.0f]].width + 5;
-        
-        viewUnderline.frame = CGRectMake(x, y, w, 3);
-        viewUnderline.backgroundColor = [UIColor redColor];
-        [cell addSubview:viewUnderline];
+        if (w > 290) {
+            UIView *crossoutTop = [[UIView alloc] init];
+            crossoutTop.frame = CGRectMake(x, 15, 292, 2);
+            crossoutTop.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+            [cell addSubview:crossoutTop];
+            
+            UIView *crossoutBottom = [[UIView alloc] init];
+            
+            CGFloat w2 = (w > 580) ? 292 : w - 280;
+            crossoutBottom.frame = CGRectMake(x, 35, w2, 2);
+            crossoutBottom.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+            [cell addSubview:crossoutBottom];
+        }
+        else {
+            UIView *crossout = [[UIView alloc] init];
+            crossout.frame = CGRectMake(x, y, w + 5, 2);
+            crossout.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+            [cell addSubview:crossout];
+        }
         
         [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
     }
