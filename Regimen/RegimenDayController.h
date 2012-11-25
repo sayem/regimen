@@ -12,7 +12,10 @@
 @interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic) BOOL completed;
+@property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *swipeLeftRecognizer;
+
+- (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer;
+- (IBAction)takeLeftSwipeRecognitionEnabledFrom:(UISegmentedControl *)aSegmentedControl;
 
 @end

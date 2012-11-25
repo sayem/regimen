@@ -26,7 +26,7 @@
     
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    
+
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM dd"];
@@ -135,6 +135,8 @@
     }
 }
 
+
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int lastRow = [_goals count] - 1;
@@ -142,15 +144,13 @@
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
 
     
-/*
+    
     [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-*/
-
 
 }
-
+*/
 
 
 
@@ -158,14 +158,12 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:( UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
 {
-    
-
     int lastRow = [_goals count] - 1;
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
 
-    
 
+ 
  [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -174,8 +172,6 @@
 }
 
 */
-
-
 
 
 /*
@@ -191,17 +187,32 @@
     return 50.0f;
 }
 
- */
+*/
 
 
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
     cell.backgroundColor = [UIColor colorWithRed: 238.0 / 255 green:238.0 / 255 blue: 238.0 / 255 alpha:1.0];
-    
+
     [cell.layer setBorderWidth: 2.0];
     [cell.layer setMasksToBounds:YES];
     [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+}
+
+- (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+	CGPoint location = [recognizer locationInView:_tableView];
+    NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
+    int lastRow = [_goals count] - 1;
+
+    NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
+
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        location.x -= 220.0;
+    }
+    else {
+        location.x += 220.0;
+    }
 }
 
 
