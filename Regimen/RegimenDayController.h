@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "AddGoalViewController.h"
 
-@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
+@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic) BOOL completed;
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *swipeLeftRecognizer;
 
+@property (nonatomic) BOOL completed;
+
 - (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer;
-- (IBAction)takeLeftSwipeRecognitionEnabledFrom:(UISegmentedControl *)aSegmentedControl;
 
 @end
