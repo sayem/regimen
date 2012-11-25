@@ -155,7 +155,19 @@
 
         UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
         cell.backgroundColor = [UIColor colorWithRed: 245.0 / 255 green:245.0 / 255 blue: 245.0 / 255 alpha:1.0];
-    
+        
+        UIView *viewUnderline = [[UIView alloc] init];
+        
+        CGFloat x = 7.0;
+        CGFloat y = (cell.contentView.frame.size.height / 2);
+        
+        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+        CGFloat w = [goal.text sizeWithFont:[UIFont systemFontOfSize:15.0f]].width + 5;
+        
+        viewUnderline.frame = CGRectMake(x, y, w, 3);
+        viewUnderline.backgroundColor = [UIColor redColor];
+        [cell addSubview:viewUnderline];
+        
         [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
     }
 }
