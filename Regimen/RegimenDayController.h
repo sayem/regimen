@@ -1,5 +1,5 @@
 //
-//  RegimenFirstViewController.h
+//  RegimenDayController.h
 //  Regimen
 //
 //  Created by Sayem Islam on 10/3/12.
@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "AddGoalViewController.h"
 
-@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *swipeLeftRecognizer;
-
 @property (nonatomic) BOOL completed;
 
 - (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer;

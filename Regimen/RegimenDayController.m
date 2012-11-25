@@ -1,5 +1,5 @@
 //
-//  RegimenFirstViewController.m
+//  RegimenDayController.m
 //  Regimen
 //
 //  Created by Sayem Islam on 10/3/12.
@@ -20,14 +20,10 @@
     NSMutableArray* _goals;
 }
 
-@synthesize swipeLeftRecognizer=_swipeLeftRecognizer;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    [self.view addGestureRecognizer:self.swipeLeftRecognizer];
-    
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
 
@@ -206,18 +202,10 @@
 - (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
     CGPoint location = [recognizer locationInView:_tableView];
 
-    NSLog(@"%u", recognizer.direction);
-
-    
-    
-    
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-
         NSLog(@"asdfasdf");
-
     }
     else {
-        
         NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
         int lastRow = [_goals count] - 1;
         NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
