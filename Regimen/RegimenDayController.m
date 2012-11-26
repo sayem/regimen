@@ -10,13 +10,9 @@
 #import "RegimenGoal.h"
 #import <QuartzCore/QuartzCore.h>
 
-
-@interface RegimenDayController ()
-
-@end
-
 @implementation RegimenDayController {
     NSMutableArray* _goals;
+    NSMutableArray* _completedGoals;
 }
 
 - (void)viewDidLoad
@@ -25,6 +21,9 @@
 
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+    
+    _completedGoals = [[NSMutableArray alloc] initWithCapacity:20];
+    [_completedGoals addObject:[RegimenGoal goalWithText:@"damnit"]];
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -52,9 +51,22 @@
     [super didReceiveMemoryWarning];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [_goals count];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return [_goals count];
+            break;
+        case 1:
+            return [_completedGoals count];
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (void)configureTextForCell:(UITableViewCell *)cell withRegimenGoal:(RegimenGoal *)goal
@@ -66,17 +78,75 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    UILabel *label = (UILabel *)[cell viewWithTag:1000];
     
-    RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
-    [self configureTextForCell:cell withRegimenGoal:goal];
+    switch (indexPath.section) {
+        case 0: {
+            RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
+            label.text = goal.text;
+            break;
+        }
+        case 1: {
+            RegimenGoal *completedGoal = [_completedGoals objectAtIndex:indexPath.row];
+            label.text = completedGoal.text;
+            break;
+        }
+        default:
+            break;
+
+    }
+    
+//    [self configureTextForCell:cell withRegimenGoal:goal];
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = [UIColor colorWithRed: 233.0 / 255 green:233.0 / 255 blue: 233.0 / 255 alpha:1.0];
-    [cell.layer setBorderWidth: 2.0];
-    [cell.layer setMasksToBounds:YES];
-    [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+
+    switch (indexPath.section) {
+        case 0: {
+            cell.backgroundColor = [UIColor colorWithRed: 233.0 / 255 green:233.0 / 255 blue: 233.0 / 255 alpha:1.0];
+            [cell.layer setBorderWidth: 2.0];
+            [cell.layer setMasksToBounds:YES];
+            [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+            break;
+        }
+        case 1: {
+            cell.backgroundColor = [UIColor colorWithRed: 247.0 / 255 green:247.0 / 255 blue: 247.0 / 255 alpha:1.0];
+            
+            RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
+
+            //            goal.completed = YES;
+
+            CGFloat x = 7.0;
+            CGFloat w = [goal.text sizeWithFont:[UIFont systemFontOfSize:15.0f]].width;
+            CGFloat y = (cell.contentView.frame.size.height / 2);
+            
+            if (w > 290) {
+                UIView *crossoutTop = [[UIView alloc] init];
+                crossoutTop.frame = CGRectMake(x, 15, 292, 2);
+                crossoutTop.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+                crossoutTop.tag = 1;
+                [cell addSubview:crossoutTop];
+                
+                UIView *crossoutBottom = [[UIView alloc] init];
+                CGFloat w2 = (w > 580) ? 292 : w - 280;
+                crossoutBottom.frame = CGRectMake(x, 35, w2, 2);
+                crossoutBottom.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+                crossoutBottom.tag = 1;
+                [cell addSubview:crossoutBottom];
+            }
+            else {
+                UIView *crossout = [[UIView alloc] init];
+                crossout.frame = CGRectMake(x, y, w + 5, 2);
+                crossout.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+                crossout.tag = 1;
+                [cell addSubview:crossout];
+            }
+        }
+        default:
+            break;
+    }
 }
 
 - (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
@@ -144,7 +214,6 @@
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
         [_goals removeObjectAtIndex:swipedIndexPath.row];
         NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
         [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -156,12 +225,55 @@
         }
     }
     else {
-        int lastRow = [_goals count] - 1;
-        NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
+        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+
+        [_goals removeObjectAtIndex:swipedIndexPath.row];
+        NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
+        [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        for(UIView *subview in [cell subviews]) {
+            if(subview.tag == 1) {
+                [subview removeFromSuperview];
+            }
+        }
+
+        int newRowIndex = [_completedGoals count];
+        [_completedGoals addObject:goal];
+        
+        NSIndexPath *lastPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
+        NSArray *lastPaths = [NSArray arrayWithObject:lastPath];
+        
+        [self.tableView insertRowsAtIndexPaths:lastPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+
+        
+        
+
+        
+        
+        
+        
+        
+//        [_completedGoals insertObject:goal atIndex:lastRow];
+
+/*
+        
+        [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:swipedIndexPath.row inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationFade];
+        [_tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:lastRow inSection:1]]
+                              withRowAnimation:UITableViewRowAnimationFade];
+ 
+*/ 
+ 
+ 
+/*
+        
+        NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:1];
 
         cell.backgroundColor = [UIColor colorWithRed: 247.0 / 255 green:247.0 / 255 blue: 247.0 / 255 alpha:1.0];
         
-        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+//        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
         goal.completed = YES;
         CGFloat x = 7.0;
         CGFloat w = [goal.text sizeWithFont:[UIFont systemFontOfSize:15.0f]].width;
@@ -188,8 +300,10 @@
             crossout.tag = 1;
             [cell addSubview:crossout];
         }
+ */
+ 
         
-        [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
+  //      [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
     }
 }
 
