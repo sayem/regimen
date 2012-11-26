@@ -8,7 +8,6 @@
 
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
-#import "RegimenCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -66,7 +65,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RegimenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     
     RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
     [self configureTextForCell:cell withRegimenGoal:goal];
@@ -141,23 +140,30 @@
 
 - (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
     CGPoint location = [recognizer locationInView:_tableView];
-
+    NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
+    UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
+    
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:location];
-        [_goals removeObjectAtIndex:indexPath.row];
-        NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+        NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
+        [_goals removeObjectAtIndex:swipedIndexPath.row];
+        NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
         [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        for(UIView *subview in [cell subviews]) {
+            if(subview.tag == 1) {
+                [subview removeFromSuperview];
+            }
+        }
     }
     else {
-        NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
         int lastRow = [_goals count] - 1;
         NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
 
-        UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
         cell.backgroundColor = [UIColor colorWithRed: 247.0 / 255 green:247.0 / 255 blue: 247.0 / 255 alpha:1.0];
         
-        CGFloat x = 7.0;
         RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+        goal.completed = YES;
+        CGFloat x = 7.0;
         CGFloat w = [goal.text sizeWithFont:[UIFont systemFontOfSize:15.0f]].width;
         CGFloat y = (cell.contentView.frame.size.height / 2);
         
@@ -165,19 +171,21 @@
             UIView *crossoutTop = [[UIView alloc] init];
             crossoutTop.frame = CGRectMake(x, 15, 292, 2);
             crossoutTop.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+            crossoutTop.tag = 1;
             [cell addSubview:crossoutTop];
             
             UIView *crossoutBottom = [[UIView alloc] init];
-            
             CGFloat w2 = (w > 580) ? 292 : w - 280;
             crossoutBottom.frame = CGRectMake(x, 35, w2, 2);
             crossoutBottom.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+            crossoutBottom.tag = 1;
             [cell addSubview:crossoutBottom];
         }
         else {
             UIView *crossout = [[UIView alloc] init];
             crossout.frame = CGRectMake(x, y, w + 5, 2);
             crossout.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
+            crossout.tag = 1;
             [cell addSubview:crossout];
         }
         

@@ -11,7 +11,6 @@
 @interface RegimenGoal : NSObject
 
 @property (nonatomic, copy) NSString *text;
-
 @property (nonatomic) BOOL completed;
 
 -(id)initWithText:(NSString*)text;
