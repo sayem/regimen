@@ -69,12 +69,6 @@
     }
 }
 
-- (void)configureTextForCell:(UITableViewCell *)cell withRegimenGoal:(RegimenGoal *)goal
-{
-    UILabel *label = (UILabel *)[cell viewWithTag:1000];
-    label.text = goal.text;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
@@ -95,8 +89,6 @@
             break;
 
     }
-    
-//    [self configureTextForCell:cell withRegimenGoal:goal];
     
     return cell;
 }
@@ -214,7 +206,11 @@
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        [_goals removeObjectAtIndex:swipedIndexPath.row];
+        if (swipedIndexPath.section == 0)
+            [_goals removeObjectAtIndex:swipedIndexPath.row];
+        else
+            [_completedGoals removeObjectAtIndex:swipedIndexPath.row];
+        
         NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
         [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         
@@ -225,30 +221,96 @@
         }
     }
     else {
-        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+        if (swipedIndexPath.section == 0) {
+            RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
 
-        [_goals removeObjectAtIndex:swipedIndexPath.row];
-        NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
-        [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+
+
+            int newRowIndex = 0;
+
+            
+//            int newRowIndex = [_completedGoals count];
+
+            
+            [_completedGoals addObject:goal];
+            
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
+
+            NSMutableArray *indexPaths = [NSMutableArray arrayWithObject:indexPath];
+  
+            [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+
+            
+            
+  //          [self dismissViewControllerAnimated:YES completion:nil];
+
+         
+            
         
-        for(UIView *subview in [cell subviews]) {
-            if(subview.tag == 1) {
-                [subview removeFromSuperview];
+/*
+            [_goals removeObjectAtIndex:swipedIndexPath.row];
+
+            NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
+            [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+            for(UIView *subview in [cell subviews]) {
+                if(subview.tag == 1) {
+                    [subview removeFromSuperview];
+                }
             }
-        }
-
-        int newRowIndex = [_completedGoals count];
-        [_completedGoals addObject:goal];
-        
-        NSIndexPath *lastPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
-        NSArray *lastPaths = [NSArray arrayWithObject:lastPath];
-        
-        [self.tableView insertRowsAtIndexPaths:lastPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self dismissViewControllerAnimated:YES completion:nil];
+*/
 
 
+/*
+            int insertIdx = 1;
+            
+            
+            [_goals removeObjectAtIndex:swipedIndexPath.row];
+            [_completedGoals insertObject:goal atIndex:insertIdx];
+            [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:swipedIndexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+ */
+
+//            [_tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:insertIdx inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            
+            /*
         
+            int newRowIndex = 1;
+            NSIndexPath *lastPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
+            NSArray *lastPaths = [NSArray arrayWithObject:lastPath];
+            
+            [self.tableView insertRowsAtIndexPaths:lastPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+
+
+
+            int lastRow = [_completedGoals count] - 1;
+
+            
+             */
+             
+             
+//            NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:1];
+            
+//            [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
+
+            
+
+            /*
+             
+            [_completedGoals addObject:goal];
+            int newRowIndex = 1;
+            NSIndexPath *lastPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
+            NSArray *lastPaths = [NSArray arrayWithObject:lastPath];
         
+            [self.tableView insertRowsAtIndexPaths:lastPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+            */
+            
+            
+ //       [self dismissViewControllerAnimated:YES completion:nil];
+
 
         
         
@@ -271,6 +333,8 @@
         
         NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:1];
 
+      [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
+ 
         cell.backgroundColor = [UIColor colorWithRed: 247.0 / 255 green:247.0 / 255 blue: 247.0 / 255 alpha:1.0];
         
 //        RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
@@ -304,6 +368,9 @@
  
         
   //      [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
+            
+            
+        }
     }
 }
 
