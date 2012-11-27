@@ -21,9 +21,13 @@
 
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    
+    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+
     _completedGoals = [[NSMutableArray alloc] initWithCapacity:20];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"damnit"]];
+    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
+    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
+    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -106,8 +110,7 @@
         case 1: {
             cell.backgroundColor = [UIColor colorWithRed: 247.0 / 255 green:247.0 / 255 blue: 247.0 / 255 alpha:1.0];
             
-            RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
-
+            RegimenGoal *goal = [_completedGoals objectAtIndex:indexPath.row];
             //            goal.completed = YES;
 
             CGFloat x = 7.0;
@@ -135,6 +138,11 @@
                 crossout.tag = 1;
                 [cell addSubview:crossout];
             }
+            
+            [cell.layer setBorderWidth: 2.0];
+            [cell.layer setMasksToBounds:YES];
+            [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+            break;
         }
         default:
             break;
@@ -223,114 +231,29 @@
     else {
         if (swipedIndexPath.section == 0) {
             RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
-
-
-
-            int newRowIndex = 0;
-
-            
-//            int newRowIndex = [_completedGoals count];
-
-            
             [_completedGoals addObject:goal];
             
+            int newRowIndex = [_completedGoals count] - 1;
+            NSIndexPath *newIndex = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
+            NSMutableArray *newIndexPaths = [NSMutableArray arrayWithObject:newIndex];
+            [_tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationFade];
             
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
+//           [self dismissViewControllerAnimated:YES completion:nil];
+            
 
-            NSMutableArray *indexPaths = [NSMutableArray arrayWithObject:indexPath];
-  
-            [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-
-            
-            
-  //          [self dismissViewControllerAnimated:YES completion:nil];
-
-         
-            
-        
-/*
             [_goals removeObjectAtIndex:swipedIndexPath.row];
-
-            NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
-            [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        
+            NSArray *removeindexPaths = [NSArray arrayWithObject:swipedIndexPath];
+            [_tableView deleteRowsAtIndexPaths:removeindexPaths withRowAnimation:UITableViewRowAnimationFade];
+            
             for(UIView *subview in [cell subviews]) {
                 if(subview.tag == 1) {
                     [subview removeFromSuperview];
                 }
             }
-*/
 
 
-/*
-            int insertIdx = 1;
-            
-            
-            [_goals removeObjectAtIndex:swipedIndexPath.row];
-            [_completedGoals insertObject:goal atIndex:insertIdx];
-            [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:swipedIndexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
- */
-
-//            [_tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:insertIdx inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            
-            /*
-        
-            int newRowIndex = 1;
-            NSIndexPath *lastPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
-            NSArray *lastPaths = [NSArray arrayWithObject:lastPath];
-            
-            [self.tableView insertRowsAtIndexPaths:lastPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-
-
-
-            int lastRow = [_completedGoals count] - 1;
-
-            
-             */
-             
-             
-//            NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:1];
-            
-//            [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
-
-            
-
-            /*
-             
-            [_completedGoals addObject:goal];
-            int newRowIndex = 1;
-            NSIndexPath *lastPath = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
-            NSArray *lastPaths = [NSArray arrayWithObject:lastPath];
-        
-            [self.tableView insertRowsAtIndexPaths:lastPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-            */
-            
-            
- //       [self dismissViewControllerAnimated:YES completion:nil];
-
-
-        
-        
-        
-        
-        
-//        [_completedGoals insertObject:goal atIndex:lastRow];
-
-/*
-        
-        [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:swipedIndexPath.row inSection:0]]
-                              withRowAnimation:UITableViewRowAnimationFade];
-        [_tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:lastRow inSection:1]]
-                              withRowAnimation:UITableViewRowAnimationFade];
- 
-*/ 
- 
  
 /*
-        
         NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:1];
 
       [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
@@ -364,11 +287,10 @@
             crossout.tag = 1;
             [cell addSubview:crossout];
         }
- */
+*/
  
         
-  //      [_tableView moveRowAtIndexPath:swipedIndexPath toIndexPath:lastRowIndex];
-            
+        
             
         }
     }
