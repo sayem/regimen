@@ -9,10 +9,6 @@
 #import "RegimenWeekController.h"
 #import "RegimenGoal.h"
 
-@interface RegimenWeekController ()
-
-@end
-
 @implementation RegimenWeekController {
     NSMutableArray *items;
 }
@@ -47,6 +43,13 @@
     
     UINavigationItem *nav = [self navigationItem];
     [nav setTitle:week];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
+    button.frame=CGRectMake(0,0, 29, 29);
+    [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
+    nav.leftBarButtonItem = btnDone;
 }
 
 - (void)didReceiveMemoryWarning

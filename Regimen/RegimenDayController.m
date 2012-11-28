@@ -13,6 +13,8 @@
 @implementation RegimenDayController {
     NSMutableArray* _goals;
     NSMutableArray* _completedGoals;
+
+    UIBarButtonItem *settingsButton;
 }
 
 - (void)viewDidLoad
@@ -43,6 +45,13 @@
     
     UINavigationItem *nav = [self navigationItem];
     [nav setTitle:[formatter stringFromDate:now]];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
+    button.frame=CGRectMake(0,0, 29, 29);
+    [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
+    nav.leftBarButtonItem = btnDone;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

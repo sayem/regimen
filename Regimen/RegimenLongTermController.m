@@ -32,6 +32,13 @@
     
     UINavigationItem *nav = [self navigationItem];
     [nav setTitle:@"Long-Term"];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
+    button.frame=CGRectMake(0,0, 29, 29);
+    [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
+    nav.leftBarButtonItem = btnDone;
 }
 
 - (void)didReceiveMemoryWarning

@@ -59,7 +59,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h8S-aa-W4K">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="bVa-9B-wD7"/>
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="IbL-t6-9rb">
                             <connections>
                                 <segue destination="eQc-WC-dlz" kind="modal" identifier="AddGoal" id="Ksu-sb-fbW"/>
@@ -174,8 +174,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DE3-gy-zcK">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="btg-Y5-lJB"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="48t-jE-JuK"/>
+                        <barButtonItem key="leftBarButtonItem" image="83-calendar.png" id="btg-Y5-lJB"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="48t-jE-JuK"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ksK-hg-ePs" id="RAX-Hj-B1t"/>
@@ -410,8 +410,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RWe-Wi-SJ6">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="OI1-ps-ag8"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="uG4-QA-2Cw"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="uG4-QA-2Cw"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="owL-Yh-2pD" id="R1G-AC-wuQ"/>
@@ -489,8 +488,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pql-Pi-5b0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="AXj-oo-UoJ"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="g1Z-1z-rQ1"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="g1Z-1z-rQ1"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="hZq-p3-ooh" id="Ikj-RW-DLP"/>
@@ -568,8 +566,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XsC-cK-udo">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="iEt-3p-QD0"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="uxI-W1-D1v"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="uxI-W1-D1v"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Qmz-t6-PMN" id="qEO-Pt-oRp"/>
@@ -580,57 +577,15 @@
             <point key="canvasLocation" x="1075" y="1540"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="AddGoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel"/>
-                <relationship kind="action" name="done"/>
-                <relationship kind="outlet" name="doneBarButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="RegimenDayController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenDayController.h"/>
-            <relationships>
-                <relationship kind="action" name="handleSwipeFrom:" candidateClass="UISwipeGestureRecognizer"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RegimenLongTermController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenLongTermController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RegimenMonthController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenMonthController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RegimenWeekController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenWeekController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RegimenYearController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegimenYearController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
+    <resources>
+        <image name="83-calendar.png" width="16" height="16"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Ksu-sb-fbW"/>
+        <segue reference="cE7-YN-mLz"/>
     </inferredMetricsTieBreakers>
 </document>
