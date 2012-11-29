@@ -13,8 +13,6 @@
 @implementation RegimenDayController {
     NSMutableArray* _goals;
     NSMutableArray* _completedGoals;
-
-    UIBarButtonItem *settingsButton;
 }
 
 - (void)viewDidLoad
