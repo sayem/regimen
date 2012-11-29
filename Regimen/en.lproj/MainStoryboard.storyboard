@@ -189,7 +189,7 @@
         <scene sceneID="l36-iU-uy8">
             <objects>
                 <tableViewController id="2VM-Wc-XNg" customClass="AddGoalViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ra9-pQ-HCq">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ra9-pQ-HCq">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -197,17 +197,18 @@
                         <sections>
                             <tableViewSection id="agw-yx-G6u">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="169" id="Qt9-RV-iuJ">
-                                        <rect key="frame" x="0.0" y="10" width="320" height="171"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" rowHeight="53" id="Qt9-RV-iuJ">
+                                        <rect key="frame" x="0.0" y="10" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="168"/>
+                                            <rect key="frame" x="10" y="1" width="300" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KrF-cP-4eU">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KrF-cP-4eU">
+                                                    <color key="backgroundColor" red="0.89000676079999996" green="0.89012789729999997" blue="0.8899558783" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="92p-DZ-5Kt"/>
-                                                        <constraint firstAttribute="height" constant="43" id="Qto-7C-o1i"/>
+                                                        <constraint firstAttribute="height" constant="50" id="WD5-yM-OoX"/>
+                                                        <constraint firstAttribute="width" constant="300" id="fy1-EM-Zt5"/>
                                                     </constraints>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
@@ -221,8 +222,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="KrF-cP-4eU" firstAttribute="centerX" secondItem="Qt9-RV-iuJ" secondAttribute="centerX" type="default" id="C6I-4b-U7e"/>
-                                            <constraint firstItem="KrF-cP-4eU" firstAttribute="top" secondItem="Qt9-RV-iuJ" secondAttribute="top" constant="1" id="qKx-Ak-mm8"/>
+                                            <constraint firstItem="KrF-cP-4eU" firstAttribute="centerY" secondItem="Qt9-RV-iuJ" secondAttribute="centerY" type="default" id="K3H-ud-jAs"/>
+                                            <constraint firstItem="KrF-cP-4eU" firstAttribute="centerX" secondItem="Qt9-RV-iuJ" secondAttribute="centerX" type="default" id="crw-9Q-r5k"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -632,6 +633,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cE7-YN-mLz"/>
+        <segue reference="8MX-ND-XFM"/>
     </inferredMetricsTieBreakers>
 </document>
