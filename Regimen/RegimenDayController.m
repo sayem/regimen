@@ -84,7 +84,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegimenGoal"];
     UILabel *label = (UILabel *)[cell viewWithTag:1000];
-    
+
     switch (indexPath.section) {
         case 0: {
             RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
@@ -98,14 +98,13 @@
         }
         default:
             break;
-
     }
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     switch (indexPath.section) {
         case 0: {
             cell.backgroundColor = [UIColor colorWithRed: 233.0 / 255 green:233.0 / 255 blue: 233.0 / 255 alpha:1.0];
@@ -145,7 +144,7 @@
                 crossout.tag = 1;
                 [cell addSubview:crossout];
             }
-            
+
             [cell.layer setBorderWidth: 2.0];
             [cell.layer setMasksToBounds:YES];
             [cell.layer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -154,6 +153,7 @@
         default:
             break;
     }
+        
 }
 
 - (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
