@@ -18,9 +18,10 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         label = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 290, 50)];
+        label.numberOfLines = 2;
         label.textColor = [UIColor colorWithRed: 102.0 / 255 green:102.0 / 255 blue: 102.0 / 255 alpha:1.0];
         label.font = [UIFont fontWithName:@"Helvetica" size:15.0];
-        
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
         [self.contentView addSubview:label];
     }
     return self;
@@ -53,7 +54,7 @@
                 [self.contentView addSubview:crossoutTop];
                 
                 UIView *crossoutBottom = [[UIView alloc] init];
-                CGFloat w2 = (w > 580) ? 292 : w - 280;
+                CGFloat w2 = (w > 580) ? 292 : w - 265;
                 crossoutBottom.frame = CGRectMake(x, 35, w2, 2);
                 crossoutBottom.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
                 crossoutBottom.tag = 1;
