@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegimenCell : UITableViewCell
+@interface RegimenCell : UITableViewCell 
+
+@property (nonatomic, retain) UILabel *label;
+
+- (void) formatCell: (NSInteger)section;
 
 @end

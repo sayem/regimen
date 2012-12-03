@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B0149C0A165A01E100DCBEF6 /* RegimenStrikethroughLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0149C09165A01E100DCBEF6 /* RegimenStrikethroughLabel.m */; };
 		B0643AB7161DE0310086CEEB /* RegimenMonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643AB6161DE0310086CEEB /* RegimenMonthController.m */; };
 		B0643ABB161DE0D30086CEEB /* RegimenYearController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABA161DE0D30086CEEB /* RegimenYearController.m */; };
 		B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */; };
@@ -31,8 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B0149C08165A01E000DCBEF6 /* RegimenStrikethroughLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenStrikethroughLabel.h; sourceTree = "<group>"; };
-		B0149C09165A01E100DCBEF6 /* RegimenStrikethroughLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenStrikethroughLabel.m; sourceTree = "<group>"; };
 		B0643AB5161DE0310086CEEB /* RegimenMonthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenMonthController.h; sourceTree = "<group>"; };
 		B0643AB6161DE0310086CEEB /* RegimenMonthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenMonthController.m; sourceTree = "<group>"; };
 		B0643AB9161DE0D30086CEEB /* RegimenYearController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenYearController.h; sourceTree = "<group>"; };
@@ -130,8 +127,6 @@
 				B0B3D455164F363D0029660A /* AddGoalViewController.m */,
 				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
 				B0D60D7B165B6994004555F7 /* RegimenCell.m */,
-				B0149C08165A01E000DCBEF6 /* RegimenStrikethroughLabel.h */,
-				B0149C09165A01E100DCBEF6 /* RegimenStrikethroughLabel.m */,
 				B0B3D444164CEBB50029660A /* RegimenGoal.h */,
 				B0B3D445164CEBB50029660A /* RegimenGoal.m */,
 				B0FEDAA8161CE4B0008D1CBA /* Supporting Files */,
@@ -231,7 +226,6 @@
 				B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */,
 				B0B3D446164CEBB50029660A /* RegimenGoal.m in Sources */,
 				B0B3D456164F363D0029660A /* AddGoalViewController.m in Sources */,
-				B0149C0A165A01E100DCBEF6 /* RegimenStrikethroughLabel.m in Sources */,
 				B0D60D7C165B6994004555F7 /* RegimenCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
