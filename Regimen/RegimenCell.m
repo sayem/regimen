@@ -21,7 +21,7 @@
         label.numberOfLines = 2;
         label.textColor = [UIColor colorWithRed: 102.0 / 255 green:102.0 / 255 blue: 102.0 / 255 alpha:1.0];
         label.font = [UIFont fontWithName:@"Helvetica" size:15.0];
-        self.selectionStyle = UITableViewCellSelectionStyleGray;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:label];
     }
     return self;

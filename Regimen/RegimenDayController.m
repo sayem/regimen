@@ -111,6 +111,7 @@
 
 - (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
 {
+    [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -130,10 +131,11 @@
 {
     int index = [_goals indexOfObject:goal];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    cell.text = goal.text;
-    
+    RegimenCell *cell = (RegimenCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.label.text = goal.text;
+
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -155,43 +157,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-
-      
+        RegimenCell *cell = (RegimenCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
+        cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
+        
         RegimenGoal *item = [_goals objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"EditItem" sender:item];
-
     }
-    
-
-    /*
-     
-    int lastRow = [_goals count] - 1;
-    NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
-
-    [_goals removeObjectAtIndex:indexPath.row];
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-    [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-     
-     */
 }
-
-
-/*
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:( UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
-{
-    int lastRow = [_goals count] - 1;
-    NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
- 
-    [_goals removeObjectAtIndex:indexPath.row];
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-    [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-*/
-
 
 - (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
     CGPoint location = [recognizer locationInView:_tableView];
