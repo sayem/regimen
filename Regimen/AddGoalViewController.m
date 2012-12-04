@@ -19,6 +19,7 @@
 @synthesize textField;
 @synthesize doneBarButton;
 @synthesize delegate;
+@synthesize itemToEdit;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,12 +33,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if (self.itemToEdit != nil) {
+        self.title = @"Edit Item";
+        self.textField.text = self.itemToEdit.text;
+        self.doneBarButton.enabled = YES;
+	}
 }
 
 - (void)viewDidUnload
@@ -50,10 +51,15 @@
 }
 
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.textField becomeFirstResponder];
 }
+
+
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -73,9 +79,15 @@
 
 - (IBAction)done
 {
-    RegimenGoal *item = [[RegimenGoal alloc] init];
-    item.text = self.textField.text;
-    [self.delegate addGoalViewController:self didFinishAddingItem:item];
+
+    if (self.itemToEdit == nil) {
+        RegimenGoal *item = [[RegimenGoal alloc] init];
+        item.text = self.textField.text;
+        [self.delegate addGoalViewController:self didFinishAddingItem:item];
+    } else {
+        self.itemToEdit.text = self.textField.text;
+        [self.delegate addGoalViewController:self didFinishEditingItem:self.itemToEdit];
+    }
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath

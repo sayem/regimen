@@ -126,19 +126,45 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)addGoalViewController:(AddGoalViewController *)controller didFinishEditingItem:(RegimenGoal *)goal
+{
+    int index = [_goals indexOfObject:goal];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.text = goal.text;
+    
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddGoal"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         AddGoalViewController *controller = (AddGoalViewController *)
         navigationController.topViewController;
         controller.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"EditItem"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddGoalViewController *controller = (AddGoalViewController *)navigationController.topViewController;
+        controller.delegate = self;
+        controller.itemToEdit = sender;
     }
 }
 
-
-/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+
+      
+        RegimenGoal *item = [_goals objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"EditItem" sender:item];
+
+    }
+    
+
+    /*
+     
     int lastRow = [_goals count] - 1;
     NSIndexPath *lastRowIndex = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [tableView moveRowAtIndexPath:indexPath toIndexPath:lastRowIndex];
@@ -146,8 +172,9 @@
     [_goals removeObjectAtIndex:indexPath.row];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+     
+     */
 }
-*/
 
 
 /*
@@ -211,6 +238,5 @@
         }
     }
 }
-
 
 @end

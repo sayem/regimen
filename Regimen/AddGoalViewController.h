@@ -16,6 +16,8 @@
 
 - (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item;
 
+- (void)addGoalViewController:(AddGoalViewController *)controller didFinishEditingItem:(RegimenGoal *)item;
+
 @end
 
 
@@ -23,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
 @property (nonatomic, weak) id <AddGoalViewControllerDelegate> delegate;
+@property (nonatomic, strong) RegimenGoal *itemToEdit;
 
 
 - (IBAction)cancel;
