@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddGoalViewController.h"
+#import "GoalViewController.h"
 
-@interface RegimenWeekController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
+@interface RegimenWeekController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

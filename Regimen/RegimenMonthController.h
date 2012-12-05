@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddGoalViewController.h"
+#import "GoalViewController.h"
 
-@interface RegimenMonthController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate>
+@interface RegimenMonthController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

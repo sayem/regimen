@@ -68,7 +68,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ktv-pO-1vJ" id="Ok1-O1-VD5"/>
-                        <segue destination="eQc-WC-dlz" kind="modal" identifier="EditItem" id="Eo1-FI-RNV"/>
+                        <segue destination="eQc-WC-dlz" kind="modal" identifier="EditGoal" id="Eo1-FI-RNV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
@@ -186,10 +186,10 @@
             </objects>
             <point key="canvasLocation" x="1075" y="-485"/>
         </scene>
-        <!--Add Goal View Controller - Add Goal-->
+        <!--Goal View Controller - Add Goal-->
         <scene sceneID="l36-iU-uy8">
             <objects>
-                <tableViewController id="2VM-Wc-XNg" customClass="AddGoalViewController" sceneMemberID="viewController">
+                <tableViewController id="2VM-Wc-XNg" customClass="GoalViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ra9-pQ-HCq">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -584,8 +584,8 @@
         <image name="83-calendar.png" width="16" height="16"/>
     </resources>
     <classes>
-        <class className="AddGoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddGoalViewController.h"/>
+        <class className="GoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
                 <relationship kind="action" name="done"/>
@@ -638,6 +638,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Eo1-FI-RNV"/>
+        <segue reference="Ksu-sb-fbW"/>
     </inferredMetricsTieBreakers>
 </document>

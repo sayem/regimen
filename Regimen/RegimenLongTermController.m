@@ -68,12 +68,12 @@
     return cell;
 }
 
-- (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
+- (void)addGoalViewControllerDidCancel:(GoalViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item
+- (void)addGoalViewController:(GoalViewController *)controller didFinishAddingItem:(RegimenGoal *)item
 {
     int newRowIndex = [items count];
     [items addObject:item];
@@ -88,7 +88,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddGoal"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        AddGoalViewController *controller = (AddGoalViewController *)
+        GoalViewController *controller = (GoalViewController *)
         navigationController.topViewController;
         controller.delegate = self;
     }

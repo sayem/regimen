@@ -1,25 +1,24 @@
 //
-//  AddGoalViewController.m
+//  GoalViewController.m
 //  Regimen
 //
 //  Created by Sayem Islam on 11/10/12.
 //  Copyright (c) 2012 HatTrick Labs, LLC. All rights reserved.
 //
 
-#import "AddGoalViewController.h"
+#import "GoalViewController.h"
 #import "RegimenGoal.h"
 
-
-@interface AddGoalViewController ()
+@interface GoalViewController ()
 
 @end
 
-@implementation AddGoalViewController
+@implementation GoalViewController
 
 @synthesize textField;
 @synthesize doneBarButton;
 @synthesize delegate;
-@synthesize itemToEdit;
+@synthesize goalToEdit;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,9 +33,9 @@
 {
     [super viewDidLoad];
     
-    if (self.itemToEdit != nil) {
-        self.title = @"Edit Item";
-        self.textField.text = self.itemToEdit.text;
+    if (self.goalToEdit != nil) {
+        self.title = @"Edit Goal";
+        self.textField.text = self.goalToEdit.text;
         self.doneBarButton.enabled = YES;
 	}
 }
@@ -46,20 +45,12 @@
 	[self setTextField:nil];
 	[self setDoneBarButton:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.textField becomeFirstResponder];
 }
-
-
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -69,24 +60,22 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)cancel
 {
-    [self.delegate addGoalViewControllerDidCancel:self];
+    [self.delegate goalViewControllerDidCancel:self];
 }
 
 - (IBAction)done
 {
-
-    if (self.itemToEdit == nil) {
-        RegimenGoal *item = [[RegimenGoal alloc] init];
-        item.text = self.textField.text;
-        [self.delegate addGoalViewController:self didFinishAddingItem:item];
+    if (self.goalToEdit == nil) {
+        RegimenGoal *goal = [[RegimenGoal alloc] init];
+        goal.text = self.textField.text;
+        [self.delegate goalViewController:self didFinishAddingGoal:goal];
     } else {
-        self.itemToEdit.text = self.textField.text;
-        [self.delegate addGoalViewController:self didFinishEditingItem:self.itemToEdit];
+        self.goalToEdit.text = self.textField.text;
+        [self.delegate goalViewController:self didFinishEditingGoal:self.goalToEdit];
     }
 }
 
@@ -102,6 +91,5 @@
     self.doneBarButton.enabled = ([newText length] > 0);
     return YES;
 }
-
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddGoalViewController.h"
+#import "GoalViewController.h"
 #import "RegimenCell.h"
 
-@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGoalViewControllerDelegate> 
+@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet RegimenCell *regimenCell;

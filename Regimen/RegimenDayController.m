@@ -109,13 +109,13 @@
     return cell;
 }
 
-- (void)addGoalViewControllerDidCancel:(AddGoalViewController *)controller
+- (void)goalViewControllerDidCancel:(GoalViewController *)controller
 {
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)addGoalViewController:(AddGoalViewController *)controller didFinishAddingItem:(RegimenGoal *)goal
+- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(RegimenGoal *)goal
 {
     int newRowIndex = [_goals count];
     [_goals addObject:goal];
@@ -127,7 +127,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)addGoalViewController:(AddGoalViewController *)controller didFinishEditingItem:(RegimenGoal *)goal
+- (void)goalViewController:(GoalViewController *)controller didFinishEditingGoal:(RegimenGoal *)goal
 {
     int index = [_goals indexOfObject:goal];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -143,14 +143,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddGoal"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        AddGoalViewController *controller = (AddGoalViewController *)
+        GoalViewController *controller = (GoalViewController *)
         navigationController.topViewController;
         controller.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"EditItem"]) {
+    } else if ([segue.identifier isEqualToString:@"EditGoal"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        AddGoalViewController *controller = (AddGoalViewController *)navigationController.topViewController;
+        GoalViewController *controller = (GoalViewController *)navigationController.topViewController;
         controller.delegate = self;
-        controller.itemToEdit = sender;
+        controller.goalToEdit = sender;
     }
 }
 
@@ -161,8 +161,8 @@
         cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         
-        RegimenGoal *item = [_goals objectAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"EditItem" sender:item];
+        RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"EditGoal" sender:goal];
     }
 }
 
@@ -195,9 +195,6 @@
             NSIndexPath *newIndex = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
             NSMutableArray *newIndexPaths = [NSMutableArray arrayWithObject:newIndex];
             [_tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationFade];
-            
-//           [self dismissViewControllerAnimated:YES completion:nil];
-            
 
             [_goals removeObjectAtIndex:swipedIndexPath.row];
             NSArray *removeindexPaths = [NSArray arrayWithObject:swipedIndexPath];
