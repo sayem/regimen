@@ -38,19 +38,27 @@
     [rightRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self.tableView addGestureRecognizer:rightRecognizer];
     
-    NSDate *now = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM dd"];
-    
-    UINavigationItem *nav = [self navigationItem];
-    [nav setTitle:[formatter stringFromDate:now]];
-
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
     button.frame=CGRectMake(0,0, 29, 29);
     [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+    UINavigationItem *nav = [self navigationItem];
     nav.leftBarButtonItem = btnDone;
+    [self setNavTitle];
+}
+
+- (void)setNavTitle
+{
+    NSDate *now = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM dd"];
+    CGFloat progress = (float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]);
+
+    NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", [formatter stringFromDate:now], (int)(progress*100)];
+    UINavigationItem *nav = [self navigationItem];
+    [nav setTitle:navTitle];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -125,6 +133,7 @@
     
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self setNavTitle];
 }
 
 - (void)goalViewController:(GoalViewController *)controller didFinishEditingGoal:(RegimenGoal *)goal
@@ -185,6 +194,8 @@
                 [subview removeFromSuperview];
             }
         }
+        
+        [self setNavTitle];
     }
     else {
         if (swipedIndexPath.section == 0) {
@@ -205,6 +216,8 @@
                     [subview removeFromSuperview];
                 }
             }
+            
+            [self setNavTitle];
         }
     }
 }
