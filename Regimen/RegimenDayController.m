@@ -53,12 +53,61 @@
 {
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM dd"];
-    CGFloat progress = (float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]);
+    [formatter setDateFormat:@"MMM d"];
+    NSInteger progress = ((float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]))*100;
+    
+    NSString *date = [formatter stringFromDate:now];
+    NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
+    
+    NSInteger progressStart = date.length + 2;
+    NSInteger progressEnd = navTitle.length - progressStart;
 
-    NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", [formatter stringFromDate:now], (int)(progress*100)];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
+    
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, progressStart)];
+    [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, progressStart)];
+    
+    
+
+    float val = ((float)progress / 100.0) * 0.6;
+    NSLog(@"%f", val);
+    
+    
+//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:val blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+    
+    
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+
+    
+//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.0 green:0.5 blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+
+    
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.attributedText = str;
+    self.navigationItem.titleView = label;
+    [label sizeToFit];
+    
+
+/*
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor yellowColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"PageThreeTitle", @"");
+    [label sizeToFit];
+*/
+    
+/*
+    NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", [formatter stringFromDate:now], progress];
     UINavigationItem *nav = [self navigationItem];
     [nav setTitle:navTitle];
+*/
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -11,6 +11,7 @@
 		B0643ABB161DE0D30086CEEB /* RegimenYearController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABA161DE0D30086CEEB /* RegimenYearController.m */; };
 		B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */; };
 		B066FA911665F92A0086662E /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = B066FA901665F92A0086662E /* calendar.png */; };
+		B0803BD3166F52A400D7C2CF /* RegimenTable.m in Sources */ = {isa = PBXBuildFile; fileRef = B0803BD2166F52A400D7C2CF /* RegimenTable.m */; };
 		B0B3D446164CEBB50029660A /* RegimenGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D445164CEBB50029660A /* RegimenGoal.m */; };
 		B0B3D456164F363D0029660A /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D455164F363D0029660A /* GoalViewController.m */; };
 		B0D60D78165B5B3A004555F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D60D77165B5B3A004555F7 /* QuartzCore.framework */; };
@@ -37,6 +38,8 @@
 		B0643ABC161DE1060086CEEB /* RegimenLongTermController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenLongTermController.h; sourceTree = "<group>"; };
 		B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenLongTermController.m; sourceTree = "<group>"; };
 		B066FA901665F92A0086662E /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		B0803BD1166F52A400D7C2CF /* RegimenTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenTable.h; sourceTree = "<group>"; };
+		B0803BD2166F52A400D7C2CF /* RegimenTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenTable.m; sourceTree = "<group>"; };
 		B0B3D444164CEBB50029660A /* RegimenGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenGoal.h; sourceTree = "<group>"; };
 		B0B3D445164CEBB50029660A /* RegimenGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenGoal.m; sourceTree = "<group>"; };
 		B0B3D454164F363D0029660A /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 				B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */,
 				B0B3D454164F363D0029660A /* GoalViewController.h */,
 				B0B3D455164F363D0029660A /* GoalViewController.m */,
+				B0803BD1166F52A400D7C2CF /* RegimenTable.h */,
+				B0803BD2166F52A400D7C2CF /* RegimenTable.m */,
 				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
 				B0D60D7B165B6994004555F7 /* RegimenCell.m */,
 				B0B3D444164CEBB50029660A /* RegimenGoal.h */,
@@ -227,6 +232,7 @@
 				B0B3D446164CEBB50029660A /* RegimenGoal.m in Sources */,
 				B0B3D456164F363D0029660A /* GoalViewController.m in Sources */,
 				B0D60D7C165B6994004555F7 /* RegimenCell.m in Sources */,
+				B0803BD3166F52A400D7C2CF /* RegimenTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
