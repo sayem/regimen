@@ -67,47 +67,20 @@
     [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, progressStart)];
     [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, progressStart)];
     
-    
+    float colorVal = ((float) progress / 100.0);
 
-    float val = ((float)progress / 100.0) * 0.6;
-    NSLog(@"%f", val);
-    
-    
-//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:val blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
-    
-    
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
-
-    
-//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.0 green:0.5 blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
-
-    
+    if (progress < 50) {
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+    }
+    else {
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.5 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+    }
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.attributedText = str;
     self.navigationItem.titleView = label;
     [label sizeToFit];
-    
-
-/*
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor yellowColor]; // change this color
-    self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"PageThreeTitle", @"");
-    [label sizeToFit];
-*/
-    
-/*
-    NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", [formatter stringFromDate:now], progress];
-    UINavigationItem *nav = [self navigationItem];
-    [nav setTitle:navTitle];
-*/
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
