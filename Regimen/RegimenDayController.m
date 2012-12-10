@@ -8,7 +8,6 @@
 
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
-#import "RegimenCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation RegimenDayController {
@@ -46,39 +45,13 @@
 
     UINavigationItem *nav = [self navigationItem];
     nav.leftBarButtonItem = btnDone;
+    
     [self setNavTitle];
 }
 
 - (void)setNavTitle
 {
-    NSDate *now = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM d"];
-    NSInteger progress = ((float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]))*100;
-    
-    NSString *date = [formatter stringFromDate:now];
-    NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
-    
-    NSInteger progressStart = date.length + 2;
-    NSInteger progressEnd = navTitle.length - progressStart;
-
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
-    
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, progressStart)];
-    [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, progressStart)];
-    
-    float colorVal = ((float) progress / 100.0);
-
-    if (progress < 50) {
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
-    }
-    else {
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.5 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
-    }
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.attributedText = str;
+    UILabel *label = [self.tableView setNav:_goals andCompletedGoals:_completedGoals];
     self.navigationItem.titleView = label;
     [label sizeToFit];
 }
@@ -238,7 +211,7 @@
                     [subview removeFromSuperview];
                 }
             }
-            
+
             [self setNavTitle];
         }
     }

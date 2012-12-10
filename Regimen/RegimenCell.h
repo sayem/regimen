@@ -12,6 +12,6 @@
 
 @property (nonatomic, retain) UILabel *label;
 
-- (void) formatCell: (NSInteger)section;
+- (void) formatCell:(NSInteger)section;
 
 @end

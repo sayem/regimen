@@ -10,4 +10,6 @@
 
 @interface RegimenTable : UITableView
 
+- (UILabel *) setNav:(NSMutableArray *)goals andCompletedGoals:(NSMutableArray *)completedGoals;
+
 @end
