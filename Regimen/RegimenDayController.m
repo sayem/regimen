@@ -31,11 +31,11 @@
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [self.tableView addGestureRecognizer:leftRecognizer];
+    [_tableView addGestureRecognizer:leftRecognizer];
 
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [rightRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.tableView addGestureRecognizer:rightRecognizer];
+    [_tableView addGestureRecognizer:rightRecognizer];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
@@ -51,7 +51,43 @@
 
 - (void)setNavTitle
 {
-    UILabel *label = [self.tableView setNav:_goals andCompletedGoals:_completedGoals];
+    NSDate *now = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d"];
+    NSString *date = [formatter stringFromDate:now];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    
+    if ([_goals count] + [_completedGoals count] > 0) {
+        NSInteger progress = ((float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]))*100;
+
+        NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
+        
+        NSInteger progressStart = date.length + 2;
+        NSInteger progressEnd = navTitle.length - progressStart;
+        float colorVal = ((float) progress / 100.0);
+    
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, progressStart)];
+        [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, progressStart)];
+        
+        if (progress < 50) {
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+        }
+        else {
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.5 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+        }
+        
+        label.attributedText = str;
+    }
+    else {
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:date];
+        
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, date.length)];
+        [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, date.length)];
+        label.attributedText = str;
+    }
+    
     self.navigationItem.titleView = label;
     [label sizeToFit];
 }
@@ -114,7 +150,7 @@
 
 - (void)goalViewControllerDidCancel:(GoalViewController *)controller
 {
-    [self.tableView reloadData];
+    [_tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -126,7 +162,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     
-    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self setNavTitle];
 }
@@ -135,11 +171,11 @@
 {
     int index = [_goals indexOfObject:goal];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    RegimenCell *cell = (RegimenCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
     cell.label.text = goal.text;
 
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -161,7 +197,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        RegimenCell *cell = (RegimenCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
         cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         
