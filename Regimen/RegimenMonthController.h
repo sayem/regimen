@@ -1,5 +1,5 @@
 //
-//  RegimenMonthViewController.h
+//  RegimenMonthController.h
 //  Regimen
 //
 //  Created by Sayem Islam on 10/4/12.
@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "GoalViewController.h"
+#import "RegimenCell.h"
 
 @interface RegimenMonthController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet RegimenCell *regimenCell;
+
+- (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer;
 
 @end
