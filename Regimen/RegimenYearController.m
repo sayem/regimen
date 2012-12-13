@@ -15,6 +15,9 @@
     NSMutableArray* _completedGoals;
 }
 
+
+/*
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -253,4 +256,6 @@
     }
 }
 
+*/
+ 
 @end

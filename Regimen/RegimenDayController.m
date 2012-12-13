@@ -19,6 +19,9 @@
 {
     [super viewDidLoad];
 
+    
+    /*
+    
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
@@ -28,7 +31,9 @@
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
-    
+   
+     */
+     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [_tableView addGestureRecognizer:leftRecognizer];
@@ -47,6 +52,9 @@
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
+     
+     
+     
 }
 
 - (void)setNavTitle

@@ -2,19 +2,19 @@
 //  RegimenGoal.h
 //  Regimen
 //
-//  Created by Sayem Islam on 11/8/12.
+//  Created by Sayem Khan on 12/12/12.
 //  Copyright (c) 2012 HatTrick Labs, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface RegimenGoal : NSObject
 
-@property (nonatomic, copy) NSString *text;
-@property (nonatomic) BOOL completed;
+@interface RegimenGoal : NSManagedObject
 
--(id)initWithText:(NSString*)text;
-
-+(id)goalWithText:(NSString*)text;
+@property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) NSDate * dateCreated;
+@property (nonatomic, retain) NSNumber * completed;
+@property (nonatomic, retain) NSManagedObject *time;
 
 @end
