@@ -15,12 +15,19 @@
     NSMutableArray* _completedGoals;
 }
 
-/*
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+
+    NSLog(@"month");
+    
+    NSLog(@"%@", [self managedObjectContext]);
+
+    
+    
+/*
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
@@ -30,6 +37,8 @@
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
+ 
+*/
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -255,6 +264,6 @@
     }
 }
 
-*/
+
  
 @end

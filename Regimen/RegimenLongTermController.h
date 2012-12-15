@@ -12,6 +12,7 @@
 
 @interface RegimenLongTermController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet RegimenCell *regimenCell;
 

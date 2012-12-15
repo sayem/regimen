@@ -8,6 +8,12 @@
 
 #import "RegimenAppDelegate.h"
 #import <CoreData/CoreData.h>
+#import "RegimenDayController.h"
+#import "RegimenWeekController.h"
+#import "RegimenMonthController.h"
+#import "RegimenYearController.h"
+#import "RegimenLongTermController.h"
+
 
 @implementation RegimenAppDelegate
 
@@ -17,7 +23,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    
+    RegimenDayController *dayController = [[[tabBarController.viewControllers objectAtIndex:0] viewControllers] objectAtIndex:0];
+    dayController.managedObjectContext = self.managedObjectContext;
+
+    RegimenWeekController *weekController = [[[tabBarController.viewControllers objectAtIndex:1] viewControllers] objectAtIndex:0];
+    weekController.managedObjectContext = self.managedObjectContext;
+
+    RegimenMonthController *monthController = [[[tabBarController.viewControllers objectAtIndex:2] viewControllers] objectAtIndex:0];
+    monthController.managedObjectContext = self.managedObjectContext;
+
+    RegimenYearController *yearController = [[[tabBarController.viewControllers objectAtIndex:3] viewControllers] objectAtIndex:0];
+    yearController.managedObjectContext = self.managedObjectContext;
+    
+    RegimenLongTermController *longTermController = [[[tabBarController.viewControllers objectAtIndex:4] viewControllers] objectAtIndex:0];
+    longTermController.managedObjectContext = self.managedObjectContext;
+
+    // Override point for customization after application launch.    
     return YES;
 }
 

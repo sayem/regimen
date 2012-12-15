@@ -15,12 +15,16 @@
     NSMutableArray* _completedGoals;
 }
 
-
-/*
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    NSLog(@"year");
+    
+    NSLog(@"%@", [self managedObjectContext]);
+
+/*
     
     _goals = [[NSMutableArray alloc] initWithCapacity:20];
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
@@ -31,6 +35,8 @@
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
     [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
+ 
+*/
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -226,7 +232,7 @@
         for(UIView *subview in [cell subviews]) {
             if(subview.tag == 1) {
                 [subview removeFromSuperview];
-            }
+           }
         }
         
         [self setNavTitle];
@@ -255,7 +261,5 @@
         }
     }
 }
-
-*/
  
 @end

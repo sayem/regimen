@@ -9,6 +9,8 @@
 #import "RegimenDayController.h"
 #import "RegimenGoal.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RegimenAppDelegate.h"
+
 
 @implementation RegimenDayController {
     NSMutableArray* _goals;
@@ -18,6 +20,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    
+    NSLog(@"day");
+    
+    NSLog(@"%@", [self managedObjectContext]);
 
     
     /*
@@ -52,9 +59,6 @@
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
-     
-     
-     
 }
 
 - (void)setNavTitle
