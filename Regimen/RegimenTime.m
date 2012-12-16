@@ -1,20 +1,18 @@
 //
-//  RegimenGoal.m
+//  RegimenTime.m
 //  Regimen
 //
 //  Created by Sayem Khan on 12/15/12.
 //  Copyright (c) 2012 HatTrick Labs, LLC. All rights reserved.
 //
 
-#import "RegimenGoal.h"
 #import "RegimenTime.h"
+#import "RegimenGoal.h"
 
 
-@implementation RegimenGoal
+@implementation RegimenTime
 
-@dynamic completed;
-@dynamic dateCreated;
-@dynamic text;
-@dynamic time;
+@dynamic duration;
+@dynamic goals;
 
 @end

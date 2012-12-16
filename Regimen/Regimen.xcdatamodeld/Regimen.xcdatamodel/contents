@@ -6,7 +6,7 @@
         <attribute name="text" optional="YES" attributeType="String" minValueString="1" syncable="YES"/>
         <relationship name="time" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RegimenTime" inverseName="goals" inverseEntity="RegimenTime" syncable="YES"/>
     </entity>
-    <entity name="RegimenTime" syncable="YES">
+    <entity name="RegimenTime" representedClassName="RegimenTime" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RegimenGoal" inverseName="time" inverseEntity="RegimenGoal" syncable="YES"/>
     </entity>

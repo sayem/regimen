@@ -7,9 +7,8 @@
 //
 
 #import "RegimenDayController.h"
-#import "RegimenGoal.h"
 #import <QuartzCore/QuartzCore.h>
-#import "RegimenAppDelegate.h"
+
 
 @implementation RegimenDayController {
 
@@ -18,24 +17,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:context];
+    [dayRequest setEntity:dayEntity];
+
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
+    [dayRequest setPredicate:dayPredicate];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
+    RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
+
+    _goals = [timeDay.goals allObjects];
 
     
-/*
-    NSManagedObjectContext *context = [self managedObjectContext];
-    RegimenGoal *failedBankInfo = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
-    failedBankInfo.text = @"finish regimen app";
-    failedBankInfo.dateCreated = [NSDate date];
-    failedBankInfo.completed = [NSNumber numberWithBool:YES];
-    NSError *errror;
-    [context save:&errror];
-*/
+    // completed goals
     
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    _goals = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];

@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "RegimenTime.h"
 
+@class RegimenTime;
 
-@interface RegimenGoal : NSManagedObject
+@interface RegimenGoal : RegimenTime
 
 @property (nonatomic, retain) NSNumber * completed;
 @property (nonatomic, retain) NSDate * dateCreated;
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSManagedObject *time;
+@property (nonatomic, retain) RegimenTime *time;
 
 @end
