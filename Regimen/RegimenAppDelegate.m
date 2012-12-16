@@ -14,7 +14,6 @@
 #import "RegimenYearController.h"
 #import "RegimenLongTermController.h"
 
-
 @implementation RegimenAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;

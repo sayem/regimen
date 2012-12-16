@@ -11,10 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RegimenAppDelegate.h"
 
-
 @implementation RegimenDayController {
-    NSMutableArray* _goals;
-    NSMutableArray* _completedGoals;
+
 }
 
 - (void)viewDidLoad
@@ -22,25 +20,23 @@
     [super viewDidLoad];
 
     
-    NSLog(@"day");
+/*
+    NSManagedObjectContext *context = [self managedObjectContext];
+    RegimenGoal *failedBankInfo = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
+    failedBankInfo.text = @"finish regimen app";
+    failedBankInfo.dateCreated = [NSDate date];
+    failedBankInfo.completed = [NSNumber numberWithBool:YES];
+    NSError *errror;
+    [context save:&errror];
+*/
     
-    NSLog(@"%@", [self managedObjectContext]);
-
     
-    /*
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    _goals = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    _goals = [[NSMutableArray alloc] initWithCapacity:20];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-
-    _completedGoals = [[NSMutableArray alloc] initWithCapacity:20];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
-   
-     */
-     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [_tableView addGestureRecognizer:leftRecognizer];
@@ -48,7 +44,7 @@
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [rightRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [_tableView addGestureRecognizer:rightRecognizer];
-    
+
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
     button.frame=CGRectMake(0,0, 29, 29);
@@ -169,7 +165,11 @@
 - (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(RegimenGoal *)goal
 {
     int newRowIndex = [_goals count];
-    [_goals addObject:goal];
+//    [_goals addObject:goal];
+    
+    
+    
+    
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
@@ -184,8 +184,13 @@
     int index = [_goals indexOfObject:goal];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
+
+    
+    
     cell.label.text = goal.text;
 
+    
+    
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     
@@ -224,8 +229,18 @@
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
+        /*
+        
         if (swipedIndexPath.section == 0)
+         
+         
+         
             [_goals removeObjectAtIndex:swipedIndexPath.row];
+         
+         
+         
+         
         else
             [_completedGoals removeObjectAtIndex:swipedIndexPath.row];
         
@@ -237,20 +252,22 @@
                 [subview removeFromSuperview];
             }
         }
+         
+        */
         
         [self setNavTitle];
     }
     else {
         if (swipedIndexPath.section == 0) {
             RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
-            [_completedGoals addObject:goal];
+//            [_completedGoals addObject:goal];
             
             int newRowIndex = [_completedGoals count] - 1;
             NSIndexPath *newIndex = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
             NSMutableArray *newIndexPaths = [NSMutableArray arrayWithObject:newIndex];
             [_tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationFade];
 
-            [_goals removeObjectAtIndex:swipedIndexPath.row];
+//            [_goals removeObjectAtIndex:swipedIndexPath.row];
             NSArray *removeindexPaths = [NSArray arrayWithObject:swipedIndexPath];
             [_tableView deleteRowsAtIndexPaths:removeindexPaths withRowAnimation:UITableViewRowAnimationFade];
             

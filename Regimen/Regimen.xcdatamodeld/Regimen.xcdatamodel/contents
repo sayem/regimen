@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="RegimenGoal" representedClassName="RegimenGoal" syncable="YES">
-        <attribute name="completed" optional="YES" attributeType="Boolean" syncable="YES"/>
+    <entity name="RegimenGoal" representedClassName="RegimenGoal" parentEntity="RegimenTime" syncable="YES">
+        <attribute name="completed" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" minValueString="1" syncable="YES"/>
         <relationship name="time" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RegimenTime" inverseName="goals" inverseEntity="RegimenTime" syncable="YES"/>
     </entity>
     <entity name="RegimenTime" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RegimenGoal" inverseName="time" inverseEntity="RegimenGoal" syncable="YES"/>
+        <relationship name="goals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RegimenGoal" inverseName="time" inverseEntity="RegimenGoal" syncable="YES"/>
     </entity>
     <elements>
         <element name="RegimenGoal" positionX="160" positionY="192" width="128" height="105"/>

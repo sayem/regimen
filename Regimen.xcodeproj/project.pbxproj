@@ -12,10 +12,10 @@
 		B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */; };
 		B066FA911665F92A0086662E /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = B066FA901665F92A0086662E /* calendar.png */; };
 		B07EB20816795E1D0060E916 /* Regimen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */; };
-		B07EB20C16795E870060E916 /* RegimenGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = B07EB20B16795E870060E916 /* RegimenGoal.m */; };
 		B0B3D456164F363D0029660A /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D455164F363D0029660A /* GoalViewController.m */; };
 		B0D60D78165B5B3A004555F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D60D77165B5B3A004555F7 /* QuartzCore.framework */; };
 		B0D60D7C165B6994004555F7 /* RegimenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D60D7B165B6994004555F7 /* RegimenCell.m */; };
+		B0D66839167D6B1D000957CA /* RegimenGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D66838167D6B1D000957CA /* RegimenGoal.m */; };
 		B0DC51B31679CBBB005E7102 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0DC51B21679CBBB005E7102 /* CoreData.framework */; };
 		B0FEDAA2161CE4B0008D1CBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */; };
 		B0FEDAA4161CE4B0008D1CBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA3161CE4B0008D1CBA /* Foundation.framework */; };
@@ -40,13 +40,13 @@
 		B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenLongTermController.m; sourceTree = "<group>"; };
 		B066FA901665F92A0086662E /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		B07EB20716795E1D0060E916 /* Regimen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Regimen.xcdatamodel; sourceTree = "<group>"; };
-		B07EB20A16795E870060E916 /* RegimenGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenGoal.h; sourceTree = "<group>"; };
-		B07EB20B16795E870060E916 /* RegimenGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenGoal.m; sourceTree = "<group>"; };
 		B0B3D454164F363D0029660A /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		B0B3D455164F363D0029660A /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		B0D60D77165B5B3A004555F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B0D60D7A165B6994004555F7 /* RegimenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenCell.h; sourceTree = "<group>"; };
 		B0D60D7B165B6994004555F7 /* RegimenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenCell.m; sourceTree = "<group>"; };
+		B0D66837167D6B1D000957CA /* RegimenGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenGoal.h; sourceTree = "<group>"; };
+		B0D66838167D6B1D000957CA /* RegimenGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenGoal.m; sourceTree = "<group>"; };
 		B0DC51B21679CBBB005E7102 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B0FEDA9D161CE4B0008D1CBA /* Regimen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Regimen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -134,8 +134,8 @@
 				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
 				B0D60D7B165B6994004555F7 /* RegimenCell.m */,
 				B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */,
-				B07EB20A16795E870060E916 /* RegimenGoal.h */,
-				B07EB20B16795E870060E916 /* RegimenGoal.m */,
+				B0D66837167D6B1D000957CA /* RegimenGoal.h */,
+				B0D66838167D6B1D000957CA /* RegimenGoal.m */,
 				B0FEDAA8161CE4B0008D1CBA /* Supporting Files */,
 			);
 			path = Regimen;
@@ -234,7 +234,7 @@
 				B0B3D456164F363D0029660A /* GoalViewController.m in Sources */,
 				B0D60D7C165B6994004555F7 /* RegimenCell.m in Sources */,
 				B07EB20816795E1D0060E916 /* Regimen.xcdatamodeld in Sources */,
-				B07EB20C16795E870060E916 /* RegimenGoal.m in Sources */,
+				B0D66839167D6B1D000957CA /* RegimenGoal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

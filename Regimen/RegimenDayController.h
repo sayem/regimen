@@ -13,6 +13,8 @@
 @interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSArray *goals;
+@property (nonatomic, strong) NSArray *completedGoals;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet RegimenCell *regimenCell;
 
