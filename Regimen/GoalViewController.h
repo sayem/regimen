@@ -15,7 +15,7 @@
 
 - (void)goalViewControllerDidCancel:(GoalViewController *)controller;
 
-- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(RegimenGoal *)goal;
+- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(NSString *)goal;
 
 - (void)goalViewController:(GoalViewController *)controller didFinishEditingGoal:(RegimenGoal *)goal;
 

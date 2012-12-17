@@ -11,30 +11,101 @@
 
 
 @implementation RegimenDayController {
-
+    
+    NSMutableArray* _completedGoals;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
+    
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);
+	}
+    
+    
+    /*
+     _goals = [[NSMutableArray alloc] initWithCapacity:20];
+    
+    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
+     */
+    
+    //    NSManagedObjectContext *context = [self managedObjectContext];
+
+
+    
+/*
+
+    RegimenTime *dayTime = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenTime" inManagedObjectContext:context];
+    
+    dayTime.duration = @"Day";
+    
+    RegimenTime *weekTime = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenTime" inManagedObjectContext:context];
+    
+    weekTime.duration = @"Week";
+
     
     NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:context];
     [dayRequest setEntity:dayEntity];
-
     NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
     [dayRequest setPredicate:dayPredicate];
     
     NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
     RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
+    
 
-    _goals = [timeDay.goals allObjects];
+    RegimenGoal *daygoal1 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
+    
+    daygoal1.text = @"finish regimen app";
+    daygoal1.dateCreated = [NSDate date];
+    daygoal1.time = timeDay;
+
+    
+    RegimenGoal *daygoal2 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
+    
+    daygoal2.text = @"finish this appppppp";
+    daygoal2.dateCreated = [NSDate date];
+    daygoal2.time = timeDay;
+
+    [context save:&error];
+
+*/
+    
+/*
+
+    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:context];
+    [dayRequest setEntity:dayEntity];
+    
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"Day"];
+    [dayRequest setPredicate:dayPredicate];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+    [dayRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
+
+*/
+    
+    
+//    RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
+
+    
+//    _goals = [timeDay.goals allObjects];
+
+ 
+    
+//    NSLog(@"%i", [_goals count]);
 
     
     // completed goals
+    
     
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
@@ -57,6 +128,13 @@
     [self setNavTitle];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    self.fetchedResultsController = nil;
+}
+
 - (void)setNavTitle
 {
     NSDate *now = [NSDate date];
@@ -65,6 +143,8 @@
     NSString *date = [formatter stringFromDate:now];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
+
+    /*
     
     if ([_goals count] + [_completedGoals count] > 0) {
         NSInteger progress = ((float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]))*100;
@@ -95,6 +175,9 @@
         [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, date.length)];
         label.attributedText = str;
     }
+     
+     
+    */
     
     self.navigationItem.titleView = label;
     [label sizeToFit];
@@ -111,10 +194,23 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
+
+// fixing section/row count
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    id  sectionInfo =
+    [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+    
+
+    
+    
+/*
+    
     switch (section) {
         case 0:
             return [_goals count];
@@ -124,6 +220,26 @@
             break;
         default:
             return 0;
+            break;
+    }
+ 
+*/
+    
+}
+
+- (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0: {
+            RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
+            cell.label.text = goal.text;
+            break;
+        }
+        case 1: {
+            RegimenGoal *completedGoal = [_completedGoals objectAtIndex:indexPath.row];
+            cell.label.text = completedGoal.text;
+            break;
+        }
+        default:
             break;
     }
 }
@@ -137,21 +253,7 @@
         cell = [[RegimenCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    switch (indexPath.section) {
-        case 0: {
-            RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
-            cell.label.text = goal.text;
-            break;
-        }
-        case 1: {
-            RegimenGoal *completedGoal = [_completedGoals objectAtIndex:indexPath.row];
-            cell.label.text = completedGoal.text;
-            break;
-        }
-        default:
-            break;
-    }
-    
+    [self configureCell:cell atIndexPath:indexPath];
     [cell formatCell:indexPath.section];
     return cell;
 }
@@ -162,26 +264,78 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(RegimenGoal *)goal
+- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(NSString *)goal
 {
-    int newRowIndex = [_goals count];
-//    [_goals addObject:goal];
+    [_tableView beginUpdates];
     
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+
+    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:context];
+    [dayRequest setEntity:dayEntity];
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
+    [dayRequest setPredicate:dayPredicate];
     
+    NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
+    RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
+
     
+    RegimenGoal *addGoal = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
+    addGoal.text = goal;
+    addGoal.dateCreated = [NSDate date];
+    addGoal.time = timeDay;
+    [context save:&error];
+
+
+    
+    NSArray *dayGoals = [timeDay.goals allObjects];
+    NSLog(@"%i", [dayGoals count]);
+
+
+    /*
+    
+    int newRowIndex = [_goals count] + 1;
+    //    [_goals addObject:goal];
+    
+    NSLog(@"%i", newRowIndex);
+    NSLog(@"%i",[_tableView numberOfRowsInSection:0]);
+    
+
+    [_tableView reloadData];
+
     
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+
     
     [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    
+    */
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+
+//    [_tableView endUpdates];
+
+    
+    
     [self setNavTitle];
 }
 
 - (void)goalViewController:(GoalViewController *)controller didFinishEditingGoal:(RegimenGoal *)goal
 {
-    int index = [_goals indexOfObject:goal];
+    
+/*
+    
+    int index = [_fetch indexOfObject:goal];
+    
+    
+    RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
+
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
 
@@ -193,6 +347,9 @@
     
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+ 
+*/
+ 
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -218,7 +375,7 @@
         cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         
-        RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
+        RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"EditGoal" sender:goal];
     }
 }
@@ -259,7 +416,8 @@
     }
     else {
         if (swipedIndexPath.section == 0) {
-            RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
+            RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
+            
 //            [_completedGoals addObject:goal];
             
             int newRowIndex = [_completedGoals count] - 1;
@@ -281,5 +439,85 @@
         }
     }
 }
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+    [dayRequest setEntity:dayEntity];
+ 
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"Day"];
+    [dayRequest setPredicate:dayPredicate];
+ 
+    NSSortDescriptor *daySort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+    [dayRequest setSortDescriptors:[NSArray arrayWithObject:daySort]];
+
+    [dayRequest setFetchBatchSize:20];
+ 
+    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:dayRequest
+                                        managedObjectContext:_managedObjectContext sectionNameKeyPath:nil
+                                                   cacheName:@"Root"];
+    
+    self.fetchedResultsController = theFetchedResultsController;
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:(RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+}
+
 
 @end

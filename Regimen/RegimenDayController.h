@@ -13,11 +13,10 @@
 #import "RegimenTime.h"
 
 
-@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
+@interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSArray *goals;
-@property (nonatomic, strong) NSArray *completedGoals;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet RegimenCell *regimenCell;
 

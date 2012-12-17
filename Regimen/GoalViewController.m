@@ -70,8 +70,7 @@
 - (IBAction)done
 {
     if (self.goalToEdit == nil) {
-        RegimenGoal *goal = [[RegimenGoal alloc] init];
-        goal.text = self.textField.text;
+        NSString *goal = self.textField.text;
         [self.delegate goalViewController:self didFinishAddingGoal:goal];
     } else {
         self.goalToEdit.text = self.textField.text;
