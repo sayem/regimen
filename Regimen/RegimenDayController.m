@@ -35,7 +35,7 @@
     [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
      */
     
-    //    NSManagedObjectContext *context = [self managedObjectContext];
+//        NSManagedObjectContext *context = [self managedObjectContext];
 
 
     
@@ -48,7 +48,6 @@
     RegimenTime *weekTime = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenTime" inManagedObjectContext:context];
     
     weekTime.duration = @"Week";
-
     
     NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:context];
@@ -58,24 +57,26 @@
     
     NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
     RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
-    
+
+
 
     RegimenGoal *daygoal1 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
     
-    daygoal1.text = @"finish regimen app";
+    daygoal1.text = @"yo man";
     daygoal1.dateCreated = [NSDate date];
+    daygoal1.completed = [NSNumber numberWithBool:YES];
     daygoal1.time = timeDay;
 
-    
     RegimenGoal *daygoal2 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
     
-    daygoal2.text = @"finish this appppppp";
+    daygoal2.text = @"testing out 2";
     daygoal2.dateCreated = [NSDate date];
+    daygoal2.completed = [NSNumber numberWithBool:YES];
     daygoal2.time = timeDay;
-
+ 
     [context save:&error];
-
 */
+
     
 /*
 
@@ -194,20 +195,21 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-
-// fixing section/row count
-
+    return [[_fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    id  sectionInfo =
-    [[_fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
-    
 
+    NSInteger numberOfRows = 0;
+	
+    if ([[_fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
     
+    return numberOfRows;
+
+
     
 /*
     
@@ -228,6 +230,11 @@
 }
 
 - (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
+    cell.label.text = goal.text;
+
+    
+/*
     switch (indexPath.section) {
         case 0: {
             RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
@@ -242,6 +249,9 @@
         default:
             break;
     }
+*/
+ 
+ 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -459,7 +469,7 @@
     [dayRequest setFetchBatchSize:20];
  
     NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:dayRequest
-                                        managedObjectContext:_managedObjectContext sectionNameKeyPath:nil
+                                        managedObjectContext:_managedObjectContext sectionNameKeyPath:@"completed"
                                                    cacheName:@"Root"];
     
     self.fetchedResultsController = theFetchedResultsController;
