@@ -10,10 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@implementation RegimenDayController {
-    
-    NSMutableArray* _completedGoals;
-}
+@implementation RegimenDayController
 
 - (void)viewDidLoad
 {
@@ -27,17 +24,27 @@
 	}
     
     
-    /*
-     _goals = [[NSMutableArray alloc] initWithCapacity:20];
-    
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-     */
-    
 //        NSManagedObjectContext *context = [self managedObjectContext];
 
 
+    
+/*
+    
+    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+    [dayRequest setEntity:dayEntity];
+    
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"completed == 0"];
+    [dayRequest setPredicate:dayPredicate];
+
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
+    
+    for (RegimenGoal *crap in fetchedObjects) {
+        
+        NSLog(@"%@", crap.text);
+    }
+*/
+    
     
 /*
 
@@ -95,20 +102,6 @@
 */
     
     
-//    RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
-
-    
-//    _goals = [timeDay.goals allObjects];
-
- 
-    
-//    NSLog(@"%i", [_goals count]);
-
-    
-    // completed goals
-    
-    
-    
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [_tableView addGestureRecognizer:leftRecognizer];
@@ -144,11 +137,26 @@
     NSString *date = [formatter stringFromDate:now];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
-
-    /*
+  
     
-    if ([_goals count] + [_completedGoals count] > 0) {
-        NSInteger progress = ((float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]))*100;
+    
+    
+//    int goalsCount = [_tableView numberOfRowsInSection:0];
+//    int completedCount = [_tableView numberOfRowsInSection:1];
+    
+//    NSLog(@"%i", completedCount);
+
+
+       int goalsCount = [[[_fetchedResultsController sections] objectAtIndex:0] numberOfObjects];
+    int completedCount = [[[_fetchedResultsController sections] objectAtIndex:1] numberOfObjects];
+  
+    
+    
+    
+    
+    
+    if ([_fetchedResultsController.fetchedObjects count] > 0) {
+        NSInteger progress = ((float)completedCount / ((float)goalsCount + completedCount))*100;
 
         NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
@@ -176,9 +184,6 @@
         [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, date.length)];
         label.attributedText = str;
     }
-     
-     
-    */
     
     self.navigationItem.titleView = label;
     [label sizeToFit];
@@ -199,9 +204,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = nil;
-    sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    NSInteger numberOfRows = 0;
+	
+    if ([[_fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
+    
+    return numberOfRows;
 }
 
 - (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -255,43 +265,21 @@
 
 - (void)goalViewController:(GoalViewController *)controller didFinishEditingGoal:(RegimenGoal *)goal
 {
+    NSError *error;
+    [_managedObjectContext save:&error];
     
-/*
-    
-    int index = [_fetch indexOfObject:goal];
-    
-    
-    RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
-
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
-
-    
-    
-    cell.label.text = goal.text;
-
-    
-    
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    NSArray *indexPaths = [NSArray arrayWithObject:[_fetchedResultsController indexPathForObject:goal]];
     [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
- 
-*/
- 
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"AddGoal"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        GoalViewController *controller = (GoalViewController *)
-        navigationController.topViewController;
-        controller.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"EditGoal"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        GoalViewController *controller = (GoalViewController *)navigationController.topViewController;
-        controller.delegate = self;
+    UINavigationController *navigationController = segue.destinationViewController;
+    GoalViewController *controller = (GoalViewController *)navigationController.topViewController;
+    controller.delegate = self;
+    
+    if ([segue.identifier isEqualToString:@"EditGoal"]) {
         controller.goalToEdit = sender;
     }
 }
@@ -312,38 +300,50 @@
     CGPoint location = [recognizer locationInView:_tableView];
     NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
+
+    NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+    NSError *error;
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        
-        /*
-        
-        if (swipedIndexPath.section == 0)
-         
-         
-         
-            [_goals removeObjectAtIndex:swipedIndexPath.row];
-         
-         
-         
-         
-        else
-            [_completedGoals removeObjectAtIndex:swipedIndexPath.row];
-        
-        NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
-        [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+		[context deleteObject:[_fetchedResultsController objectAtIndexPath:swipedIndexPath]];
+        [context save:&error];
         
         for(UIView *subview in [cell subviews]) {
             if(subview.tag == 1) {
                 [subview removeFromSuperview];
             }
         }
-         
-        */
         
         [self setNavTitle];
     }
     else {
+        
+        
         if (swipedIndexPath.section == 0) {
+            
+            NSLog(@"crap");
+
+            
+            RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
+            goal.completed = [NSNumber numberWithBool:YES];
+        
+            [context save:&error];
+            
+            
+            for(UIView *subview in [cell subviews]) {
+                if(subview.tag == 1) {
+                    [subview removeFromSuperview];
+                }
+            }
+            
+            [self setNavTitle];
+            
+        }
+        
+        
+        
+        /*
+        
             RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
             
 //            [_completedGoals addObject:goal];
@@ -365,11 +365,13 @@
 
             [self setNavTitle];
         }
+         
+         */
+         
     }
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
-    
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
