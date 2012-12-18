@@ -199,59 +199,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSInteger numberOfRows = 0;
-	
-    if ([[_fetchedResultsController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
-        numberOfRows = [sectionInfo numberOfObjects];
-    }
-    
-    return numberOfRows;
-
-
-    
-/*
-    
-    switch (section) {
-        case 0:
-            return [_goals count];
-            break;
-        case 1:
-            return [_completedGoals count];
-            break;
-        default:
-            return 0;
-            break;
-    }
- 
-*/
-    
+    id <NSFetchedResultsSectionInfo> sectionInfo = nil;
+    sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.label.text = goal.text;
-
-    
-/*
-    switch (indexPath.section) {
-        case 0: {
-            RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
-            cell.label.text = goal.text;
-            break;
-        }
-        case 1: {
-            RegimenGoal *completedGoal = [_completedGoals objectAtIndex:indexPath.row];
-            cell.label.text = completedGoal.text;
-            break;
-        }
-        default:
-            break;
-    }
-*/
- 
- 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -276,62 +231,25 @@
 
 - (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(NSString *)goal
 {
-    [_tableView beginUpdates];
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
-
+    
     NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:context];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:_managedObjectContext];
     [dayRequest setEntity:dayEntity];
     NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
     [dayRequest setPredicate:dayPredicate];
     
-    NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
     RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
-
     
-    RegimenGoal *addGoal = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
+    RegimenGoal *addGoal = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
     addGoal.text = goal;
     addGoal.dateCreated = [NSDate date];
     addGoal.time = timeDay;
-    [context save:&error];
 
-
-    
-    NSArray *dayGoals = [timeDay.goals allObjects];
-    NSLog(@"%i", [dayGoals count]);
-
-
-    /*
-    
-    int newRowIndex = [_goals count] + 1;
-    //    [_goals addObject:goal];
-    
-    NSLog(@"%i", newRowIndex);
-    NSLog(@"%i",[_tableView numberOfRowsInSection:0]);
-    
-
-    [_tableView reloadData];
-
-    
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-
-    
-    [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    
-    */
+    [addGoal.managedObjectContext save:&error];
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-
-//    [_tableView endUpdates];
-
-    
-    
     [self setNavTitle];
 }
 
@@ -511,15 +429,14 @@
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    
+    NSIndexSet *set = [NSIndexSet indexSetWithIndex:sectionIndex];
     switch(type) {
-            
         case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertSections:set withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteSections:set withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
