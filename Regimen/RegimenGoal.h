@@ -21,18 +21,3 @@
 @property (nonatomic, retain) RegimenTime *time;
 
 @end
-
-/*
-#import <Foundation/Foundation.h>
-
-@interface RegimenGoal : NSObject
-
-@property (nonatomic, copy) NSString *text;
-@property (nonatomic) BOOL completed;
-
--(id)initWithText:(NSString*)text;
-
-+(id)goalWithText:(NSString*)text;
-
-@end
-*/

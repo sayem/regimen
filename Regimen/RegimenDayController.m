@@ -301,21 +301,10 @@
     }
     else {
         if (swipedIndexPath.section == 0) {
-            
-            
             RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
             goal.completed = [NSNumber numberWithBool:YES];
         
-            
-            
-            
             [context save:&error];
-        
-            
-            NSLog(@"%@", goal.text);
-            NSLog(@"%@", goal.completed);
-
-            
             
             for(UIView *subview in [cell subviews]) {
                 if(subview.tag == 1) {
@@ -324,37 +313,7 @@
             }
             
             [self setNavTitle];
-            
         }
-        
-        
-        
-        /*
-        
-            RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
-            
-//            [_completedGoals addObject:goal];
-            
-            int newRowIndex = [_completedGoals count] - 1;
-            NSIndexPath *newIndex = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
-            NSMutableArray *newIndexPaths = [NSMutableArray arrayWithObject:newIndex];
-            [_tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationFade];
-
-//            [_goals removeObjectAtIndex:swipedIndexPath.row];
-            NSArray *removeindexPaths = [NSArray arrayWithObject:swipedIndexPath];
-            [_tableView deleteRowsAtIndexPaths:removeindexPaths withRowAnimation:UITableViewRowAnimationFade];
-            
-            for(UIView *subview in [cell subviews]) {
-                if(subview.tag == 1) {
-                    [subview removeFromSuperview];
-                }
-            }
-
-            [self setNavTitle];
-        }
-         
-         */
-         
     }
 }
 
