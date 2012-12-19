@@ -25,8 +25,6 @@
     
     
 //        NSManagedObjectContext *context = [self managedObjectContext];
-
-
     
 /*
     
@@ -64,8 +62,6 @@
     
     NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
     RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
-
-
 
     RegimenGoal *daygoal1 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
     
@@ -137,24 +133,17 @@
     NSString *date = [formatter stringFromDate:now];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
-  
+      
+    int goalsCount = [_tableView numberOfRowsInSection:0];
+    int completedCount = [_tableView numberOfRowsInSection:1];
     
-    
-    
-//    int goalsCount = [_tableView numberOfRowsInSection:0];
-//    int completedCount = [_tableView numberOfRowsInSection:1];
-    
-//    NSLog(@"%i", completedCount);
+    if (goalsCount == 2147483647) {
+        goalsCount = 0;
+    }
+    else if (completedCount == 2147483647) {
+        completedCount = 0;
+    }
 
-
-       int goalsCount = [[[_fetchedResultsController sections] objectAtIndex:0] numberOfObjects];
-    int completedCount = [[[_fetchedResultsController sections] objectAtIndex:1] numberOfObjects];
-  
-    
-    
-    
-    
-    
     if ([_fetchedResultsController.fetchedObjects count] > 0) {
         NSInteger progress = ((float)completedCount / ((float)goalsCount + completedCount))*100;
 
@@ -204,14 +193,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger numberOfRows = 0;
-	
-    if ([[_fetchedResultsController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
-        numberOfRows = [sectionInfo numberOfObjects];
-    }
-    
-    return numberOfRows;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -317,17 +300,21 @@
         [self setNavTitle];
     }
     else {
-        
-        
         if (swipedIndexPath.section == 0) {
             
-            NSLog(@"crap");
-
             
             RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
             goal.completed = [NSNumber numberWithBool:YES];
         
+            
+            
+            
             [context save:&error];
+        
+            
+            NSLog(@"%@", goal.text);
+            NSLog(@"%@", goal.completed);
+
             
             
             for(UIView *subview in [cell subviews]) {
