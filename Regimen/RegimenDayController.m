@@ -20,7 +20,7 @@
     
     NSError *error;
     
-	if (![[self fetchedResultsController] performFetch:&error]) {
+	if (![self.fetchedResultsController performFetch:&error]) {
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);
 	}
@@ -60,20 +60,32 @@
     NSString *date = [formatter stringFromDate:now];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
-      
-    int goalsCount = [_tableView numberOfRowsInSection:0];
-    int completedCount = [_tableView numberOfRowsInSection:1];
     
-    if (goalsCount == 2147483647) {
-        goalsCount = 0;
+    int goalsCount; int completedCount;
+
+    if (_tableView.numberOfSections > 1) {
+        goalsCount = [_tableView numberOfRowsInSection:0];
+        completedCount = [_tableView numberOfRowsInSection:1];
     }
-    else if (completedCount == 2147483647) {
+    else if (_tableView.numberOfSections == 1) {
+        RegimenGoal *goal = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
+
+        if (goal.completed.boolValue) {
+            goalsCount = 0;
+            completedCount = [_tableView numberOfRowsInSection:0];
+        }
+        else {
+            goalsCount = [_tableView numberOfRowsInSection:0];
+            completedCount = 0;
+        }
+    }
+    else {
+        goalsCount = 0;
         completedCount = 0;
     }
-
-    if ([_fetchedResultsController.fetchedObjects count] > 0) {
+    
+    if ([self.fetchedResultsController.fetchedObjects count] > 0) {
         NSInteger progress = ((float)completedCount / ((float)goalsCount + completedCount))*100;
-
         NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
         
@@ -116,30 +128,32 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[_fetchedResultsController sections] count];
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
 - (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.label.text = goal.text;
+    [cell formatCell:goal.completed.intValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"%d-%d", indexPath.row, indexPath.section];
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSString *CellIdentifier = [NSString stringWithFormat:@"%d-%d", indexPath.row, goal.completed.intValue];
     RegimenCell *cell = (RegimenCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
- 
+    
     if (cell == nil) {
         cell = [[RegimenCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-
+    
     [self configureCell:cell atIndexPath:indexPath];
-    [cell formatCell:indexPath.section];
     return cell;
 }
 
@@ -198,7 +212,7 @@
         cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         
-        RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:indexPath];
+        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"EditGoal" sender:goal];
     }
 }
@@ -208,11 +222,11 @@
     NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
 
-    NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSError *error;
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-		[context deleteObject:[_fetchedResultsController objectAtIndexPath:swipedIndexPath]];
+		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:swipedIndexPath]];
         [context save:&error];
         
         for(UIView *subview in [cell subviews]) {
@@ -225,8 +239,7 @@
     }
     else {
         if (swipedIndexPath.section == 0) {
-            
-            RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
+            RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
             goal.completed = [NSNumber numberWithBool:YES];
         
             [context save:&error];
@@ -240,7 +253,6 @@
             [self setNavTitle];
         }
     }
-    
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -256,8 +268,11 @@
     [dayRequest setPredicate:dayPredicate];
  
     NSSortDescriptor *daySort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
-    [dayRequest setSortDescriptors:[NSArray arrayWithObject:daySort]];
 
+    NSSortDescriptor *completeSort = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
+    
+    [dayRequest setSortDescriptors:[NSArray arrayWithObjects:completeSort, daySort, nil]];
+    
     [dayRequest setFetchBatchSize:20];
  
     NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:dayRequest
@@ -279,12 +294,6 @@
     
     UITableView *tableView = self.tableView;
     
-    RegimenGoal *myInstance = (RegimenGoal *)anObject;
-    if ((NSFetchedResultsChangeUpdate == type) && ([myInstance completed])) {
-        type = NSFetchedResultsChangeMove;
-        newIndexPath = indexPath;
-    }
-
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -297,9 +306,6 @@
             
         case NSFetchedResultsChangeUpdate: {
             [self configureCell:(RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            
-            NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-            [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         }
         case NSFetchedResultsChangeMove:
@@ -308,10 +314,6 @@
             
             [tableView insertRowsAtIndexPaths:[NSArray
                                                arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
- 
-            
-            NSLog(@"%d", newIndexPath.row);
-            NSLog(@"%d", newIndexPath.section);
             
             break;
     }
@@ -332,6 +334,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    
     [self.tableView endUpdates];
 }
 
