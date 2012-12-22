@@ -10,9 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@implementation RegimenDayController {
-    BOOL userDrivenDataModelChange;
-}
+@implementation RegimenDayController
 
 - (void)viewDidLoad
 {
