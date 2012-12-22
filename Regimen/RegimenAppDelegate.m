@@ -126,11 +126,23 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Regimen.sqlite"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]]) {
-        NSURL *preloadURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"RegimenTime" ofType:@"sqlite"]];
-        NSError* err = nil;
         
-        if (![[NSFileManager defaultManager] copyItemAtURL:preloadURL toURL:storeURL error:&err]) {
-            NSLog(@"Error, couldn't copy preloaded data");
+        
+        
+//        NSURL *preloadTime = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"RegimenTime" ofType:@"sqlite"]];
+
+        
+        NSURL *preloadGoals = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"RegimenTime" ofType:@"sqlite"]];
+        NSError* err = nil;
+
+/*
+        if (![[NSFileManager defaultManager] copyItemAtURL:preloadTime toURL:storeURL error:&err]) {
+            NSLog(@"Error, couldn't copy preloaded time");
+        }
+*/
+        
+        if (![[NSFileManager defaultManager] copyItemAtURL:preloadGoals toURL:storeURL error:&err]) {
+            NSLog(@"Error, couldn't copy preloaded goals");
         }
     }
     

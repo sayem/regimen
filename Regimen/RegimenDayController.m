@@ -10,7 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@implementation RegimenDayController
+@implementation RegimenDayController {
+    BOOL userDrivenDataModelChange;
+}
 
 - (void)viewDidLoad
 {
@@ -22,81 +24,6 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);
 	}
-    
-    
-//        NSManagedObjectContext *context = [self managedObjectContext];
-    
-/*
-    
-    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
-    [dayRequest setEntity:dayEntity];
-    
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"completed == 0"];
-    [dayRequest setPredicate:dayPredicate];
-
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
-    
-    for (RegimenGoal *crap in fetchedObjects) {
-        
-        NSLog(@"%@", crap.text);
-    }
-*/
-    
-    
-/*
-
-    RegimenTime *dayTime = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenTime" inManagedObjectContext:context];
-    
-    dayTime.duration = @"Day";
-    
-    RegimenTime *weekTime = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenTime" inManagedObjectContext:context];
-    
-    weekTime.duration = @"Week";
-    
-    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:context];
-    [dayRequest setEntity:dayEntity];
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
-    [dayRequest setPredicate:dayPredicate];
-    
-    NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
-    RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
-
-    RegimenGoal *daygoal1 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
-    
-    daygoal1.text = @"yo man";
-    daygoal1.dateCreated = [NSDate date];
-    daygoal1.completed = [NSNumber numberWithBool:YES];
-    daygoal1.time = timeDay;
-
-    RegimenGoal *daygoal2 = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:context];
-    
-    daygoal2.text = @"testing out 2";
-    daygoal2.dateCreated = [NSDate date];
-    daygoal2.completed = [NSNumber numberWithBool:YES];
-    daygoal2.time = timeDay;
- 
-    [context save:&error];
-*/
-
-    
-/*
-
-    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:context];
-    [dayRequest setEntity:dayEntity];
-    
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"Day"];
-    [dayRequest setPredicate:dayPredicate];
-    
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
-    [dayRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    NSArray *fetchedObjects = [context executeFetchRequest:dayRequest error:&error];
-
-*/
-    
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -206,11 +133,11 @@
 {
     NSString *CellIdentifier = [NSString stringWithFormat:@"%d-%d", indexPath.row, indexPath.section];
     RegimenCell *cell = (RegimenCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+ 
     if (cell == nil) {
         cell = [[RegimenCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+
     [self configureCell:cell atIndexPath:indexPath];
     [cell formatCell:indexPath.section];
     return cell;
@@ -251,10 +178,7 @@
     NSError *error;
     [_managedObjectContext save:&error];
     
-    NSArray *indexPaths = [NSArray arrayWithObject:[_fetchedResultsController indexPathForObject:goal]];
-    [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -301,6 +225,7 @@
     }
     else {
         if (swipedIndexPath.section == 0) {
+            
             RegimenGoal *goal = [_fetchedResultsController objectAtIndexPath:swipedIndexPath];
             goal.completed = [NSNumber numberWithBool:YES];
         
@@ -315,6 +240,7 @@
             [self setNavTitle];
         }
     }
+    
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -326,7 +252,7 @@
     NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
     [dayRequest setEntity:dayEntity];
  
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"Day"];
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration ==     %@", @"Day"];
     [dayRequest setPredicate:dayPredicate];
  
     NSSortDescriptor *daySort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
@@ -353,6 +279,12 @@
     
     UITableView *tableView = self.tableView;
     
+    RegimenGoal *myInstance = (RegimenGoal *)anObject;
+    if ((NSFetchedResultsChangeUpdate == type) && ([myInstance completed])) {
+        type = NSFetchedResultsChangeMove;
+        newIndexPath = indexPath;
+    }
+
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -363,15 +295,24 @@
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
-        case NSFetchedResultsChangeUpdate:
+        case NSFetchedResultsChangeUpdate: {
             [self configureCell:(RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            break;
             
+            NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+            [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:[NSArray
                                                arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
             [tableView insertRowsAtIndexPaths:[NSArray
                                                arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+ 
+            
+            NSLog(@"%d", newIndexPath.row);
+            NSLog(@"%d", newIndexPath.section);
+            
             break;
     }
 }
