@@ -41,33 +41,6 @@
         
         [noGoals.managedObjectContext save:&error];
     }
-
-
-    
-
-    
-    
-
-    NSDate *today = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
-    
-    NSTimeInterval minusDays = ([components weekday]-1) * 24 * 60 * 60;
-    NSTimeInterval plusDays = (7-[components weekday]) * 24 * 60 * 60;
-    
-    NSDate *startWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:-minusDays];
-    NSDate *endWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:plusDays];
-    
-    NSDateComponents *sunday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:startWeek];
-    NSDateComponents *saturday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:endWeek];
-    
-    NSString *date = [NSString stringWithFormat:@"%d/%d - %d/%d", [sunday month], [sunday day],[saturday month], [saturday day]];
-
-    
-    
-    
-    
-    
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
