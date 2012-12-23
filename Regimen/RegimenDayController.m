@@ -9,7 +9,6 @@
 #import "RegimenDayController.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 @implementation RegimenDayController
 
 - (void)viewDidLoad
@@ -97,6 +96,9 @@
         if (progress < 50) {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
+        else if (progress < 75) {
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.75 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+        }
         else {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.5 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
@@ -144,7 +146,7 @@
 {
     RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"%d-%d", indexPath.row, goal.completed.intValue];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"%@", goal.dateCreated];
     RegimenCell *cell = (RegimenCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
@@ -302,10 +304,10 @@
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
-        case NSFetchedResultsChangeUpdate: {
+        case NSFetchedResultsChangeUpdate:
             [self configureCell:(RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
-        }
+    
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:[NSArray
                                                arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
