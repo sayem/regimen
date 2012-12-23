@@ -62,8 +62,8 @@
 - (void)setNavTitle
 {
     NSDate *today = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:NSWeekdayCalendarUnit fromDate:today];
     
     NSTimeInterval minusDays = ([components weekday]-1) * 24 * 60 * 60;
     NSTimeInterval plusDays = (7-[components weekday]) * 24 * 60 * 60;
@@ -71,8 +71,8 @@
     NSDate *startWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:-minusDays];
     NSDate *endWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:plusDays];
     
-    NSDateComponents *sunday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:startWeek];
-    NSDateComponents *saturday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:endWeek];
+    NSDateComponents *sunday = [cal components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:startWeek];
+    NSDateComponents *saturday = [cal components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:endWeek];
     
     NSString *date = [NSString stringWithFormat:@"%d/%d - %d/%d", [sunday month], [sunday day],[saturday month], [saturday day]];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];

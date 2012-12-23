@@ -16,7 +16,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     NSError *error;
     
 	if (![self.fetchedResultsController performFetch:&error]) {
@@ -33,6 +33,24 @@
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
     _timeDay = [fetchedObjects objectAtIndex:0];
 
+    NSArray *dayGoals = self.fetchedResultsController.fetchedObjects;
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    for (RegimenGoal *dayGoal in dayGoals) {
+        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:dayGoal.dateCreated];
+        [components setHour:+(24 - [components hour])];
+        [components setMinute:-[components minute]];
+        [components setSecond:-[components second]];
+        
+        NSDate *dayStart = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0];
+        NSDate *checkNow = [NSDate date];
+
+        if ([checkNow compare:dayStart] == 1) {
+            [_managedObjectContext deleteObject:dayGoal];
+            [_managedObjectContext save:&error];
+        }
+    }
+    
     if ([self.fetchedResultsController.fetchedObjects count] == 0) {
         RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
         noGoals.text = @"Add a goal for today";
