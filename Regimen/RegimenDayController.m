@@ -9,7 +9,9 @@
 #import "RegimenDayController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation RegimenDayController
+@implementation RegimenDayController {
+    RegimenTime* _timeDay;
+}
 
 - (void)viewDidLoad
 {
@@ -21,6 +23,51 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);
 	}
+    
+    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:_managedObjectContext];
+    [dayRequest setEntity:dayEntity];
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
+    [dayRequest setPredicate:dayPredicate];
+    
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
+    _timeDay = [fetchedObjects objectAtIndex:0];
+
+    if ([self.fetchedResultsController.fetchedObjects count] == 0) {
+        RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+        noGoals.text = @"Add a goal for today";
+        noGoals.dateCreated = [NSDate date];
+        noGoals.time = _timeDay;
+        
+        [noGoals.managedObjectContext save:&error];
+    }
+
+
+    
+
+    
+    
+
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
+    
+    NSTimeInterval minusDays = ([components weekday]-1) * 24 * 60 * 60;
+    NSTimeInterval plusDays = (7-[components weekday]) * 24 * 60 * 60;
+    
+    NSDate *startWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:-minusDays];
+    NSDate *endWeek = [[NSDate alloc] initWithTimeIntervalSinceNow:plusDays];
+    
+    NSDateComponents *sunday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:startWeek];
+    NSDateComponents *saturday = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:endWeek];
+    
+    NSString *date = [NSString stringWithFormat:@"%d/%d - %d/%d", [sunday month], [sunday day],[saturday month], [saturday day]];
+
+    
+    
+    
+    
+    
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -81,8 +128,10 @@
         completedCount = 0;
     }
     
-    if ([self.fetchedResultsController.fetchedObjects count] > 0) {
-        NSInteger progress = ((float)completedCount / ((float)goalsCount + completedCount))*100;
+    int totalGoals = goalsCount + completedCount;
+    
+    if (totalGoals > 0) {
+        NSInteger progress = ((float)completedCount / ((float)totalGoals))*100;
         NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
         
@@ -167,19 +216,10 @@
 {
     NSError *error;
     
-    NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:_managedObjectContext];
-    [dayRequest setEntity:dayEntity];
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
-    [dayRequest setPredicate:dayPredicate];
-    
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
-    RegimenTime *timeDay = [fetchedObjects objectAtIndex:0];
-    
     RegimenGoal *addGoal = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
     addGoal.text = goal;
     addGoal.dateCreated = [NSDate date];
-    addGoal.time = timeDay;
+    addGoal.time = _timeDay;
 
     [addGoal.managedObjectContext save:&error];
     

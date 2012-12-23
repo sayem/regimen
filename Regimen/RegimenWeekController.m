@@ -21,10 +21,7 @@
     [super viewDidLoad];
     
     
-    NSLog(@"week");
-    
-    NSLog(@"%@", [self managedObjectContext]);
-
+    NSLog(@"crap");
 
     
     /*
