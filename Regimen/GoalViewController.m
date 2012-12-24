@@ -9,16 +9,7 @@
 #import "GoalViewController.h"
 #import "RegimenGoal.h"
 
-@interface GoalViewController ()
-
-@end
-
 @implementation GoalViewController
-
-@synthesize textField;
-@synthesize doneBarButton;
-@synthesize delegate;
-@synthesize goalToEdit;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

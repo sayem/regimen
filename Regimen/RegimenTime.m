@@ -9,7 +9,6 @@
 #import "RegimenTime.h"
 #import "RegimenGoal.h"
 
-
 @implementation RegimenTime
 
 @dynamic duration;

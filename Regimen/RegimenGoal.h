@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "RegimenTime.h"
 
-
 @class RegimenTime;
 
 @interface RegimenGoal : RegimenTime

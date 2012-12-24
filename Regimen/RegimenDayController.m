@@ -23,35 +23,48 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);
 	}
+
+    
+    // get timeDay object
     
     NSFetchRequest *dayRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:_managedObjectContext];
     [dayRequest setEntity:dayEntity];
     NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"Day"];
     [dayRequest setPredicate:dayPredicate];
-    
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:dayRequest error:&error];
     _timeDay = [fetchedObjects objectAtIndex:0];
 
     NSArray *dayGoals = self.fetchedResultsController.fetchedObjects;
-    NSCalendar *cal = [NSCalendar currentCalendar];
     
-    for (RegimenGoal *dayGoal in dayGoals) {
-        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:dayGoal.dateCreated];
+    if ([dayGoals count] > 0) {
+
+        // delete yesterday's goals
+    
+        RegimenGoal *checkGoal = [dayGoals objectAtIndex:0];
+    
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:checkGoal.dateCreated];
         [components setHour:+(24 - [components hour])];
         [components setMinute:-[components minute]];
         [components setSecond:-[components second]];
-        
-        NSDate *dayStart = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0];
+
+        NSDate *dayEnd = [cal dateByAddingComponents:components toDate:checkGoal.dateCreated options:0];
         NSDate *checkNow = [NSDate date];
 
-        if ([checkNow compare:dayStart] == 1) {
-            [_managedObjectContext deleteObject:dayGoal];
+        if ([checkNow compare:dayEnd] == 1) {
+        
+            for (RegimenGoal *deleteGoal in dayGoals) {
+                [_managedObjectContext deleteObject:deleteGoal];
+            }
+        
             [_managedObjectContext save:&error];
         }
     }
+    else {
+        
+        // default reminder to add a goal if no goals present
     
-    if ([self.fetchedResultsController.fetchedObjects count] == 0) {
         RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
         noGoals.text = @"Add a goal for today";
         noGoals.dateCreated = [NSDate date];
@@ -59,6 +72,9 @@
         
         [noGoals.managedObjectContext save:&error];
     }
+
+    
+    // swipe gestures, help button, navbar
     
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -120,11 +136,12 @@
     }
     
     int totalGoals = goalsCount + completedCount;
+    NSMutableAttributedString *str;
     
     if (totalGoals > 0) {
         NSInteger progress = ((float)completedCount / ((float)totalGoals))*100;
         NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
+        str = [[NSMutableAttributedString alloc] initWithString:navTitle];
         
         NSInteger progressStart = date.length + 2;
         NSInteger progressEnd = navTitle.length - progressStart;
@@ -142,17 +159,14 @@
         else {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.5 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
-        
-        label.attributedText = str;
     }
     else {
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:date];
-        
+        str = [[NSMutableAttributedString alloc] initWithString:date];
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, date.length)];
         [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, date.length)];
-        label.attributedText = str;
     }
     
+    label.attributedText = str;
     self.navigationItem.titleView = label;
     [label sizeToFit];
 }
@@ -260,12 +274,7 @@
 		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:swipedIndexPath]];
         [context save:&error];
         
-        for(UIView *subview in [cell subviews]) {
-            if(subview.tag == 1) {
-                [subview removeFromSuperview];
-            }
-        }
-        
+        [self removeSubviews:[cell subviews]];
         [self setNavTitle];
     }
     else {
@@ -274,14 +283,17 @@
             goal.completed = [NSNumber numberWithBool:YES];
         
             [context save:&error];
-            
-            for(UIView *subview in [cell subviews]) {
-                if(subview.tag == 1) {
-                    [subview removeFromSuperview];
-                }
-            }
-            
+
+            [self removeSubviews:[cell subviews]];
             [self setNavTitle];
+        }
+    }
+}
+
+- (void)removeSubviews:(NSArray *)subviews {
+    for(UIView *subview in subviews) {
+        if(subview.tag == 1) {
+            [subview removeFromSuperview];
         }
     }
 }
@@ -308,7 +320,7 @@
  
     NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:dayRequest
                                         managedObjectContext:_managedObjectContext sectionNameKeyPath:@"completed"
-                                                   cacheName:@"Root"];
+                                                   cacheName:@"Day"];
     
     self.fetchedResultsController = theFetchedResultsController;
     _fetchedResultsController.delegate = self;
@@ -317,7 +329,6 @@
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
     [self.tableView beginUpdates];
 }
 
@@ -364,8 +375,6 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
-    
     [self.tableView endUpdates];
 }
 

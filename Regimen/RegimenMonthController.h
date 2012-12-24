@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "GoalViewController.h"
 #import "RegimenCell.h"
+#import "RegimenGoal.h"
+#import "RegimenTime.h"
 
-@interface RegimenMonthController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate>
+@interface RegimenMonthController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet RegimenCell *regimenCell;
 

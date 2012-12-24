@@ -7,39 +7,47 @@
 //
 
 #import "RegimenLongTermController.h"
-#import "RegimenGoal.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation RegimenLongTermController {
-    NSMutableArray* _goals;
-    NSMutableArray* _completedGoals;
+    RegimenTime* _timeLongTerm;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    NSError *error;
     
-    NSLog(@"long-term");
+	if (![self.fetchedResultsController performFetch:&error]) {
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);
+	}
     
-    NSLog(@"%@", [self managedObjectContext]);
-
-
-    /*
- 
-    _goals = [[NSMutableArray alloc] initWithCapacity:20];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
-    [_goals addObject:[RegimenGoal goalWithText:@"Finish Regimen app"]];
     
-    _completedGoals = [[NSMutableArray alloc] initWithCapacity:20];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
-    [_completedGoals addObject:[RegimenGoal goalWithText:@"Completed goal"]];
+    // get timeLongTerm object
     
-    */
-     
-     
+    NSFetchRequest *longtermRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *longtermEntity = [NSEntityDescription entityForName:@"RegimenTime" inManagedObjectContext:_managedObjectContext];
+    [longtermRequest setEntity:longtermEntity];
+    NSPredicate *longtermPredicate = [NSPredicate predicateWithFormat:@"duration == %@", @"LongTerm"];
+    [longtermRequest setPredicate:longtermPredicate];
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:longtermRequest error:&error];
+    _timeLongTerm = [fetchedObjects objectAtIndex:0];
+    
+    
+    if ([self.fetchedResultsController.fetchedObjects count] == 0) {
+        RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+        noGoals.text = @"Add a long-term goal";
+        noGoals.dateCreated = [NSDate date];
+        noGoals.time = _timeLongTerm;
+            
+        [noGoals.managedObjectContext save:&error];
+    }
+    
+    
+    // swipe gestures, help button, navbar
+    
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [leftRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [_tableView addGestureRecognizer:leftRecognizer];
@@ -66,11 +74,36 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     
-    if ([_goals count] + [_completedGoals count] > 0) {
-        NSInteger progress = ((float)[_completedGoals count] / (float)([_goals count] + [_completedGoals count]))*100;
+    int goalsCount; int completedCount;
+    
+    if (_tableView.numberOfSections > 1) {
+        goalsCount = [_tableView numberOfRowsInSection:0];
+        completedCount = [_tableView numberOfRowsInSection:1];
+    }
+    else if (_tableView.numberOfSections == 1) {
+        RegimenGoal *goal = [self.fetchedResultsController.fetchedObjects objectAtIndex:0];
         
+        if (goal.completed.boolValue) {
+            goalsCount = 0;
+            completedCount = [_tableView numberOfRowsInSection:0];
+        }
+        else {
+            goalsCount = [_tableView numberOfRowsInSection:0];
+            completedCount = 0;
+        }
+    }
+    else {
+        goalsCount = 0;
+        completedCount = 0;
+    }
+    
+    int totalGoals = goalsCount + completedCount;
+    NSMutableAttributedString *str;
+    
+    if (totalGoals > 0) {
+        NSInteger progress = ((float)completedCount / ((float)totalGoals))*100;
         NSString *navTitle = [NSString stringWithFormat:@"%@  (%i%%)", date, progress];
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:navTitle];
+        str = [[NSMutableAttributedString alloc] initWithString:navTitle];
         
         NSInteger progressStart = date.length + 2;
         NSInteger progressEnd = navTitle.length - progressStart;
@@ -82,20 +115,20 @@
         if (progress < 50) {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
+        else if (progress < 75) {
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.75 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
+        }
         else {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.5 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
-        
-        label.attributedText = str;
     }
     else {
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:date];
-        
+        str = [[NSMutableAttributedString alloc] initWithString:date];
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, date.length)];
         [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:18] range:NSMakeRange(0, date.length)];
-        label.attributedText = str;
     }
     
+    label.attributedText = str;
     self.navigationItem.titleView = label;
     [label sizeToFit];
 }
@@ -111,48 +144,32 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return [_goals count];
-            break;
-        case 1:
-            return [_completedGoals count];
-            break;
-        default:
-            return 0;
-            break;
-    }
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (void)configureCell:(RegimenCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.label.text = goal.text;
+    [cell formatCell:goal.completed.intValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"%d-%d", indexPath.row, indexPath.section];
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSString *CellIdentifier = [NSString stringWithFormat:@"%@", goal.dateCreated];
     RegimenCell *cell = (RegimenCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
         cell = [[RegimenCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    switch (indexPath.section) {
-        case 0: {
-            RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
-            cell.label.text = goal.text;
-            break;
-        }
-        case 1: {
-            RegimenGoal *completedGoal = [_completedGoals objectAtIndex:indexPath.row];
-            cell.label.text = completedGoal.text;
-            break;
-        }
-        default:
-            break;
-    }
-    
-    [cell formatCell:indexPath.section];
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
@@ -162,42 +179,35 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(RegimenGoal *)goal
+- (void)goalViewController:(GoalViewController *)controller didFinishAddingGoal:(NSString *)goal
 {
-    int newRowIndex = [_goals count];
-    [_goals addObject:goal];
+    NSError *error;
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    RegimenGoal *addGoal = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+    addGoal.text = goal;
+    addGoal.dateCreated = [NSDate date];
+    addGoal.time = _timeLongTerm;
     
-    [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [addGoal.managedObjectContext save:&error];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     [self setNavTitle];
 }
 
 - (void)goalViewController:(GoalViewController *)controller didFinishEditingGoal:(RegimenGoal *)goal
 {
-    int index = [_goals indexOfObject:goal];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
-    cell.label.text = goal.text;
-    
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-    [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSError *error;
+    [_managedObjectContext save:&error];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"AddGoal"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        GoalViewController *controller = (GoalViewController *)
-        navigationController.topViewController;
-        controller.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"EditGoal"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        GoalViewController *controller = (GoalViewController *)navigationController.topViewController;
-        controller.delegate = self;
+    UINavigationController *navigationController = segue.destinationViewController;
+    GoalViewController *controller = (GoalViewController *)navigationController.topViewController;
+    controller.delegate = self;
+    
+    if ([segue.identifier isEqualToString:@"EditGoal"]) {
         controller.goalToEdit = sender;
     }
 }
@@ -209,7 +219,7 @@
         cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         
-        RegimenGoal *goal = [_goals objectAtIndex:indexPath.row];
+        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"EditGoal" sender:goal];
     }
 }
@@ -219,46 +229,114 @@
     NSIndexPath *swipedIndexPath = [_tableView indexPathForRowAtPoint:location];
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:swipedIndexPath];
     
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSError *error;
+    
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        if (swipedIndexPath.section == 0)
-            [_goals removeObjectAtIndex:swipedIndexPath.row];
-        else
-            [_completedGoals removeObjectAtIndex:swipedIndexPath.row];
+		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:swipedIndexPath]];
+        [context save:&error];
         
-        NSArray *indexPaths = [NSArray arrayWithObject:swipedIndexPath];
-        [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        for(UIView *subview in [cell subviews]) {
-            if(subview.tag == 1) {
-                [subview removeFromSuperview];
-            }
-        }
-        
+        [self removeSubviews:[cell subviews]];
         [self setNavTitle];
     }
     else {
         if (swipedIndexPath.section == 0) {
-            RegimenGoal *goal = [_goals objectAtIndex:swipedIndexPath.row];
-            [_completedGoals addObject:goal];
+            RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+            goal.completed = [NSNumber numberWithBool:YES];
             
-            int newRowIndex = [_completedGoals count] - 1;
-            NSIndexPath *newIndex = [NSIndexPath indexPathForRow:newRowIndex inSection:1];
-            NSMutableArray *newIndexPaths = [NSMutableArray arrayWithObject:newIndex];
-            [_tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+            [context save:&error];
             
-            [_goals removeObjectAtIndex:swipedIndexPath.row];
-            NSArray *removeindexPaths = [NSArray arrayWithObject:swipedIndexPath];
-            [_tableView deleteRowsAtIndexPaths:removeindexPaths withRowAnimation:UITableViewRowAnimationFade];
-            
-            for(UIView *subview in [cell subviews]) {
-                if(subview.tag == 1) {
-                    [subview removeFromSuperview];
-                }
-            }
-            
+            [self removeSubviews:[cell subviews]];
             [self setNavTitle];
         }
     }
 }
+
+- (void)removeSubviews:(NSArray *)subviews {
+    for(UIView *subview in subviews) {
+        if(subview.tag == 1) {
+            [subview removeFromSuperview];
+        }
+    }
+}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *longtermRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *longtermEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+    [longtermRequest setEntity:longtermEntity];
+    
+    NSPredicate *longtermPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"LongTerm"];
+    [longtermRequest setPredicate:longtermPredicate];
+    
+    NSSortDescriptor *longtermSort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+    
+    NSSortDescriptor *completeSort = [[NSSortDescriptor alloc] initWithKey:@"completed" ascending:YES];
+    
+    [longtermRequest setSortDescriptors:[NSArray arrayWithObjects:completeSort, longtermSort, nil]];
+    
+    [longtermRequest setFetchBatchSize:20];
+    
+    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:longtermRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"completed"cacheName:@"LongTerm"];
+    
+    self.fetchedResultsController = theFetchedResultsController;
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:(RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    NSIndexSet *set = [NSIndexSet indexSetWithIndex:sectionIndex];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:set withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:set withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
 
 @end

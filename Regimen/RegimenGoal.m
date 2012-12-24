@@ -9,7 +9,6 @@
 #import "RegimenGoal.h"
 #import "RegimenTime.h"
 
-
 @implementation RegimenGoal
 
 @dynamic completed;

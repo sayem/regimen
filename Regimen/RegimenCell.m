@@ -11,18 +11,17 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation RegimenCell
-@synthesize label;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 290, 50)];
-        label.numberOfLines = 2;
-        label.textColor = [UIColor colorWithRed: 102.0 / 255 green:102.0 / 255 blue: 102.0 / 255 alpha:1.0];
-        label.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 290, 50)];
+        self.label.numberOfLines = 2;
+        self.label.textColor = [UIColor colorWithRed: 102.0 / 255 green:102.0 / 255 blue: 102.0 / 255 alpha:1.0];
+        self.label.font = [UIFont fontWithName:@"Helvetica" size:15.0];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self.contentView addSubview:label];
+        [self.contentView addSubview:self.label];
     }
     return self;
 }

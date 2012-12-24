@@ -12,7 +12,6 @@
 #import "RegimenGoal.h"
 #import "RegimenTime.h"
 
-
 @interface RegimenDayController : UIViewController <UITableViewDelegate, UITableViewDataSource, GoalViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
