@@ -15,12 +15,10 @@
 		B066FA911665F92A0086662E /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = B066FA901665F92A0086662E /* calendar.png */; };
 		B07EB20816795E1D0060E916 /* Regimen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */; };
 		B0B3D456164F363D0029660A /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D455164F363D0029660A /* GoalViewController.m */; };
+		B0CF20C21688FA310031AEBD /* startRegimen.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B0CF20C11688FA310031AEBD /* startRegimen.sqlite */; };
 		B0D60D78165B5B3A004555F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D60D77165B5B3A004555F7 /* QuartzCore.framework */; };
 		B0D60D7C165B6994004555F7 /* RegimenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D60D7B165B6994004555F7 /* RegimenCell.m */; };
 		B0DC51B31679CBBB005E7102 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0DC51B21679CBBB005E7102 /* CoreData.framework */; };
-		B0E5A43A1683DF27002B7E98 /* RegimenTime.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B0E5A4391683DF27002B7E98 /* RegimenTime.sqlite */; };
-		B0E5A4401683E6B9002B7E98 /* RegimenGoal.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B0E5A43F1683E6B9002B7E98 /* RegimenGoal.sqlite */; };
-		B0E5A45B16846840002B7E98 /* Regimennew.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B0E5A45A16846840002B7E98 /* Regimennew.sqlite */; };
 		B0FEDAA2161CE4B0008D1CBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */; };
 		B0FEDAA4161CE4B0008D1CBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA3161CE4B0008D1CBA /* Foundation.framework */; };
 		B0FEDAA6161CE4B0008D1CBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FEDAA5161CE4B0008D1CBA /* CoreGraphics.framework */; };
@@ -50,13 +48,11 @@
 		B07EB20716795E1D0060E916 /* Regimen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Regimen.xcdatamodel; sourceTree = "<group>"; };
 		B0B3D454164F363D0029660A /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		B0B3D455164F363D0029660A /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
+		B0CF20C11688FA310031AEBD /* startRegimen.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = startRegimen.sqlite; sourceTree = "<group>"; };
 		B0D60D77165B5B3A004555F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B0D60D7A165B6994004555F7 /* RegimenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenCell.h; sourceTree = "<group>"; };
 		B0D60D7B165B6994004555F7 /* RegimenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenCell.m; sourceTree = "<group>"; };
 		B0DC51B21679CBBB005E7102 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		B0E5A4391683DF27002B7E98 /* RegimenTime.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = RegimenTime.sqlite; sourceTree = "<group>"; };
-		B0E5A43F1683E6B9002B7E98 /* RegimenGoal.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = RegimenGoal.sqlite; sourceTree = "<group>"; };
-		B0E5A45A16846840002B7E98 /* Regimennew.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Regimennew.sqlite; sourceTree = "<group>"; };
 		B0FEDA9D161CE4B0008D1CBA /* Regimen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Regimen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FEDAA1161CE4B0008D1CBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0FEDAA3161CE4B0008D1CBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,9 +138,7 @@
 				B0B3D455164F363D0029660A /* GoalViewController.m */,
 				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
 				B0D60D7B165B6994004555F7 /* RegimenCell.m */,
-				B0E5A45A16846840002B7E98 /* Regimennew.sqlite */,
-				B0E5A43F1683E6B9002B7E98 /* RegimenGoal.sqlite */,
-				B0E5A4391683DF27002B7E98 /* RegimenTime.sqlite */,
+				B0CF20C11688FA310031AEBD /* startRegimen.sqlite */,
 				B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */,
 				B01785E0167D77360079CC96 /* RegimenGoal.h */,
 				B01785E1167D77360079CC96 /* RegimenGoal.m */,
@@ -228,9 +222,7 @@
 				B0FEDAB8161CE4B0008D1CBA /* Default-568h@2x.png in Resources */,
 				B0FEDABB161CE4B1008D1CBA /* MainStoryboard.storyboard in Resources */,
 				B066FA911665F92A0086662E /* calendar.png in Resources */,
-				B0E5A43A1683DF27002B7E98 /* RegimenTime.sqlite in Resources */,
-				B0E5A4401683E6B9002B7E98 /* RegimenGoal.sqlite in Resources */,
-				B0E5A45B16846840002B7E98 /* Regimennew.sqlite in Resources */,
+				B0CF20C21688FA310031AEBD /* startRegimen.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
