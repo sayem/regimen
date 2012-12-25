@@ -44,31 +44,24 @@
         RegimenGoal *checkGoal = [yearGoals objectAtIndex:0];
         
         NSCalendar *cal = [NSCalendar currentCalendar];
-        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:checkGoal.dateCreated];
         
-        
-        
-        
+        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSDayCalendarUnit |NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:checkGoal.dateCreated];
         [components setHour:-[components hour]];
         [components setMinute:-[components minute]];
         [components setSecond:-[components second]];
-        
+        [components setDay:-([components day] - 1)];
+        [components setMonth:-([components month] - 1)];
+        [components setYear:+1];
+
         NSDate *yearEnd = [cal dateByAddingComponents:components toDate:checkGoal.dateCreated options:0];
         NSDate *checkNow = [NSDate date];
         
         if ([checkNow compare:yearEnd] == 1) {
+            for (RegimenGoal *deleteGoal in yearGoals) {
+                [_managedObjectContext deleteObject:deleteGoal];
+            }
             
-            
-            /*
-             
-             for (RegimenGoal *deleteGoal in yearGoals) {
-             [_managedObjectContext deleteObject:deleteGoal];
-             }
-             
-             [_managedObjectContext save:&error];
-             
-             */
-            
+            [_managedObjectContext save:&error];
         }
     }
     else {

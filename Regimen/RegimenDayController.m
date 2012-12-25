@@ -45,15 +45,15 @@
     
         NSCalendar *cal = [NSCalendar currentCalendar];
         NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:checkGoal.dateCreated];
+        [components setTimeZone:[NSTimeZone defaultTimeZone]];
         [components setHour:+(24 - [components hour])];
         [components setMinute:-[components minute]];
         [components setSecond:-[components second]];
-
+        
         NSDate *dayEnd = [cal dateByAddingComponents:components toDate:checkGoal.dateCreated options:0];
         NSDate *checkNow = [NSDate date];
 
         if ([checkNow compare:dayEnd] == 1) {
-        
             for (RegimenGoal *deleteGoal in dayGoals) {
                 [_managedObjectContext deleteObject:deleteGoal];
             }

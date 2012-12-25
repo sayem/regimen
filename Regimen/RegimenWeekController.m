@@ -42,33 +42,23 @@
         // delete last week's goals
         
         RegimenGoal *checkGoal = [weekGoals objectAtIndex:0];
-    
-        NSCalendar *cal = [NSCalendar currentCalendar];
-        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:checkGoal.dateCreated];
 
-    
-    
-    
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:checkGoal.dateCreated];
         [components setHour:-[components hour]];
         [components setMinute:-[components minute]];
         [components setSecond:-[components second]];
+        [components setDay:+(6 - [components weekday])];
     
         NSDate *weekEnd = [cal dateByAddingComponents:components toDate:checkGoal.dateCreated options:0];
         NSDate *checkNow = [NSDate date];
-    
+        
         if ([checkNow compare:weekEnd] == 1) {
-
+            for (RegimenGoal *deleteGoal in weekGoals) {
+                [_managedObjectContext deleteObject:deleteGoal];
+            }
         
-        /*
-        
-        for (RegimenGoal *deleteGoal in weekGoals) {
-            [_managedObjectContext deleteObject:deleteGoal];
-        }
-        
-        [_managedObjectContext save:&error];
-         
-         */
-         
+            [_managedObjectContext save:&error];
         }
     }
     else {
