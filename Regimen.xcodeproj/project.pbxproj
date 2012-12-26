@@ -18,6 +18,7 @@
 		B06F8C1E168A6872000EADC3 /* RegimenInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = B06F8C1D168A6871000EADC3 /* RegimenInfo.html */; };
 		B07EB20816795E1D0060E916 /* Regimen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */; };
 		B0B3D456164F363D0029660A /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D455164F363D0029660A /* GoalViewController.m */; };
+		B0B72841168B06220074E0DA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B72840168B06220074E0DA /* Default@2x.png */; };
 		B0CF20C21688FA310031AEBD /* startRegimen.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B0CF20C11688FA310031AEBD /* startRegimen.sqlite */; };
 		B0D60D78165B5B3A004555F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D60D77165B5B3A004555F7 /* QuartzCore.framework */; };
 		B0D60D7C165B6994004555F7 /* RegimenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D60D7B165B6994004555F7 /* RegimenCell.m */; };
@@ -28,9 +29,6 @@
 		B0FEDAAC161CE4B0008D1CBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAAA161CE4B0008D1CBA /* InfoPlist.strings */; };
 		B0FEDAAE161CE4B0008D1CBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDAAD161CE4B0008D1CBA /* main.m */; };
 		B0FEDAB2161CE4B0008D1CBA /* RegimenAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDAB1161CE4B0008D1CBA /* RegimenAppDelegate.m */; };
-		B0FEDAB4161CE4B0008D1CBA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB3161CE4B0008D1CBA /* Default.png */; };
-		B0FEDAB6161CE4B0008D1CBA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB5161CE4B0008D1CBA /* Default@2x.png */; };
-		B0FEDAB8161CE4B0008D1CBA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB7161CE4B0008D1CBA /* Default-568h@2x.png */; };
 		B0FEDABB161CE4B1008D1CBA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0FEDAB9161CE4B1008D1CBA /* MainStoryboard.storyboard */; };
 		B0FEDABE161CE4B1008D1CBA /* RegimenDayController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */; };
 		B0FEDAC5161CE4B1008D1CBA /* RegimenWeekController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FEDAC4161CE4B1008D1CBA /* RegimenWeekController.m */; };
@@ -55,6 +53,7 @@
 		B07EB20716795E1D0060E916 /* Regimen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Regimen.xcdatamodel; sourceTree = "<group>"; };
 		B0B3D454164F363D0029660A /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		B0B3D455164F363D0029660A /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
+		B0B72840168B06220074E0DA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		B0CF20C11688FA310031AEBD /* startRegimen.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = startRegimen.sqlite; sourceTree = "<group>"; };
 		B0D60D77165B5B3A004555F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B0D60D7A165B6994004555F7 /* RegimenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenCell.h; sourceTree = "<group>"; };
@@ -70,9 +69,6 @@
 		B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Regimen-Prefix.pch"; sourceTree = "<group>"; };
 		B0FEDAB0161CE4B0008D1CBA /* RegimenAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegimenAppDelegate.h; sourceTree = "<group>"; };
 		B0FEDAB1161CE4B0008D1CBA /* RegimenAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegimenAppDelegate.m; sourceTree = "<group>"; };
-		B0FEDAB3161CE4B0008D1CBA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		B0FEDAB5161CE4B0008D1CBA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		B0FEDAB7161CE4B0008D1CBA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0FEDABA161CE4B1008D1CBA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		B0FEDABC161CE4B1008D1CBA /* RegimenDayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegimenDayController.h; sourceTree = "<group>"; };
 		B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegimenDayController.m; sourceTree = "<group>"; };
@@ -164,13 +160,11 @@
 			isa = PBXGroup;
 			children = (
 				B0FEDAA9161CE4B0008D1CBA /* Regimen-Info.plist */,
+				B0B72840168B06220074E0DA /* Default@2x.png */,
 				B0FEDAAA161CE4B0008D1CBA /* InfoPlist.strings */,
 				B0FEDAAD161CE4B0008D1CBA /* main.m */,
 				B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */,
-				B0FEDAB3161CE4B0008D1CBA /* Default.png */,
 				B066FA901665F92A0086662E /* calendar.png */,
-				B0FEDAB5161CE4B0008D1CBA /* Default@2x.png */,
-				B0FEDAB7161CE4B0008D1CBA /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -228,14 +222,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0FEDAAC161CE4B0008D1CBA /* InfoPlist.strings in Resources */,
-				B0FEDAB4161CE4B0008D1CBA /* Default.png in Resources */,
-				B0FEDAB6161CE4B0008D1CBA /* Default@2x.png in Resources */,
-				B0FEDAB8161CE4B0008D1CBA /* Default-568h@2x.png in Resources */,
 				B0FEDABB161CE4B1008D1CBA /* MainStoryboard.storyboard in Resources */,
 				B066FA911665F92A0086662E /* calendar.png in Resources */,
 				B0CF20C21688FA310031AEBD /* startRegimen.sqlite in Resources */,
 				B06F8C1A168A5130000EADC3 /* RegimenInfoController.xib in Resources */,
 				B06F8C1E168A6872000EADC3 /* RegimenInfo.html in Resources */,
+				B0B72841168B06220074E0DA /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

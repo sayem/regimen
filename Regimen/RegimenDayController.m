@@ -266,12 +266,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    if (!goal.completed.boolValue) {
         RegimenCell *cell = (RegimenCell *)[_tableView cellForRowAtIndexPath:indexPath];
         cell.contentView.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         cell.label.backgroundColor = [UIColor colorWithRed: 210.0 / 255 green:210.0 / 255 blue: 210.0 / 255 alpha:1.0];
         
-        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"EditGoal" sender:goal];
     }
 }
@@ -292,8 +293,9 @@
         [self setNavTitle];
     }
     else {
-        if (swipedIndexPath.section == 0) {
-            RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+        
+        if (!goal.completed.boolValue) {
             goal.completed = [NSNumber numberWithBool:YES];
         
             [context save:&error];
