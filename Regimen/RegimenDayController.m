@@ -97,6 +97,8 @@
     [button addTarget:self action:@selector(regimenInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
 
+    
+        
     UINavigationItem *nav = [self navigationItem];
     nav.leftBarButtonItem = btnDone;
     

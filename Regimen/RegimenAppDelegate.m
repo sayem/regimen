@@ -22,6 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0, -16.0)];
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     
     RegimenDayController *dayController = [[[tabBarController.viewControllers objectAtIndex:0] viewControllers] objectAtIndex:0];
