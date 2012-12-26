@@ -34,7 +34,9 @@
     [longtermRequest setPredicate:longtermPredicate];
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:longtermRequest error:&error];
     _timeLongTerm = [fetchedObjects objectAtIndex:0];
+
     
+    // default reminder to add a goal if no goals present
     
     if ([self.fetchedResultsController.fetchedObjects count] == 0) {
         RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
@@ -59,13 +61,20 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
     button.frame=CGRectMake(0,0, 29, 29);
-    [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(regimenInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     UINavigationItem *nav = [self navigationItem];
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
+}
+
+- (void)regimenInfo {
+	RegimenInfoController *controller = [[RegimenInfoController alloc] initWithNibName:@"RegimenInfoController" bundle:nil];
+	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+	[self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)setNavTitle

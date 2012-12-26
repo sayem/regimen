@@ -56,8 +56,15 @@
         NSDate *checkNow = [NSDate date];
         
         if ([checkNow compare:monthEnd] == 1) {
+            
+            NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
+            [formatDate setDateFormat:@"yyyy-MM-dd"];
+            
             for (RegimenGoal *deleteGoal in monthGoals) {
-                [_managedObjectContext deleteObject:deleteGoal];
+                NSString *checkDate = [formatDate stringFromDate:deleteGoal.dateCreated];
+                if (![checkDate isEqualToString:@"2012-12-24"]) {
+                    [_managedObjectContext deleteObject:deleteGoal];
+                }
             }
             
             [_managedObjectContext save:&error];
@@ -91,13 +98,20 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
     button.frame=CGRectMake(0,0, 29, 29);
-    [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(regimenInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     UINavigationItem *nav = [self navigationItem];
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
+}
+
+- (void)regimenInfo {
+	RegimenInfoController *controller = [[RegimenInfoController alloc] initWithNibName:@"RegimenInfoController" bundle:nil];
+	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+	[self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)setNavTitle

@@ -54,10 +54,17 @@
         NSDate *checkNow = [NSDate date];
         
         if ([checkNow compare:weekEnd] == 1) {
+            
+            NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
+            [formatDate setDateFormat:@"yyyy-MM-dd"];
+            
             for (RegimenGoal *deleteGoal in weekGoals) {
-                [_managedObjectContext deleteObject:deleteGoal];
+                NSString *checkDate = [formatDate stringFromDate:deleteGoal.dateCreated];
+                if (![checkDate isEqualToString:@"2012-12-24"]) {
+                    [_managedObjectContext deleteObject:deleteGoal];
+                }
             }
-        
+            
             [_managedObjectContext save:&error];
         }
     }
@@ -100,13 +107,8 @@
 
 - (void)regimenInfo {
 	RegimenInfoController *controller = [[RegimenInfoController alloc] initWithNibName:@"RegimenInfoController" bundle:nil];
+	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
-	// If you change modalTransitionStyle, the animation is different.
-	controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-	// To actually show the new screen, you must "present" it. Now the new
-	// view controller takes over. BullsEyeViewController will not receive any
-	// events until the About screen is closed.
 	[self presentViewController:controller animated:YES completion:nil];
 }
 

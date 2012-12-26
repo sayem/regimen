@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GoalViewController.h"
+#import "RegimenInfoController.h"
 #import "RegimenCell.h"
 #import "RegimenGoal.h"
 #import "RegimenTime.h"
