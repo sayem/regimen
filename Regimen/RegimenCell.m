@@ -16,7 +16,7 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 290, 50)];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(9, 0, 290, 65)];
         self.label.numberOfLines = 2;
         self.label.textColor = [UIColor colorWithRed: 102.0 / 255 green:102.0 / 255 blue: 102.0 / 255 alpha:1.0];
         self.label.font = [UIFont fontWithName:@"Helvetica" size:15.0];
@@ -47,7 +47,7 @@
             
             if (w > 290) {
                 UIView *crossoutTop = [[UIView alloc] init];
-                crossoutTop.frame = CGRectMake(x, 15, 292, 2);
+                crossoutTop.frame = CGRectMake(x, 23, 292, 2);
                 crossoutTop.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
                 crossoutTop.tag = 1;
                 [self.contentView addSubview:crossoutTop];
@@ -55,7 +55,7 @@
                 UIView *crossoutBottom = [[UIView alloc] init];
                 CGFloat w2 = (w > 580) ? 292 : w - 265;
                 
-                crossoutBottom.frame = CGRectMake(x, 35, w2, 2);
+                crossoutBottom.frame = CGRectMake(x, 42, w2, 2);
                 crossoutBottom.backgroundColor = [UIColor colorWithRed: 0.0 / 255 green:175.0 / 255 blue: 30.0 / 255 alpha:1.0];
                 crossoutBottom.tag = 1;
                 [self.contentView addSubview:crossoutBottom];
