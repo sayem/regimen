@@ -14,6 +14,8 @@
 		B0643ABE161DE1060086CEEB /* RegimenLongTermController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */; };
 		B066FA911665F92A0086662E /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = B066FA901665F92A0086662E /* calendar.png */; };
 		B06F8C1816898072000EADC3 /* RegimenInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F8C1716898072000EADC3 /* RegimenInfoController.m */; };
+		B06F8C1A168A5130000EADC3 /* RegimenInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */; };
+		B06F8C1E168A6872000EADC3 /* RegimenInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = B06F8C1D168A6871000EADC3 /* RegimenInfo.html */; };
 		B07EB20816795E1D0060E916 /* Regimen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */; };
 		B0B3D456164F363D0029660A /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D455164F363D0029660A /* GoalViewController.m */; };
 		B0CF20C21688FA310031AEBD /* startRegimen.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B0CF20C11688FA310031AEBD /* startRegimen.sqlite */; };
@@ -48,6 +50,8 @@
 		B066FA901665F92A0086662E /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		B06F8C1616898072000EADC3 /* RegimenInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegimenInfoController.h; sourceTree = "<group>"; };
 		B06F8C1716898072000EADC3 /* RegimenInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenInfoController.m; sourceTree = "<group>"; };
+		B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegimenInfoController.xib; sourceTree = "<group>"; };
+		B06F8C1D168A6871000EADC3 /* RegimenInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegimenInfo.html; sourceTree = "<group>"; };
 		B07EB20716795E1D0060E916 /* Regimen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Regimen.xcdatamodel; sourceTree = "<group>"; };
 		B0B3D454164F363D0029660A /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		B0B3D455164F363D0029660A /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 				B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */,
 				B06F8C1616898072000EADC3 /* RegimenInfoController.h */,
 				B06F8C1716898072000EADC3 /* RegimenInfoController.m */,
+				B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */,
+				B06F8C1D168A6871000EADC3 /* RegimenInfo.html */,
 				B0B3D454164F363D0029660A /* GoalViewController.h */,
 				B0B3D455164F363D0029660A /* GoalViewController.m */,
 				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
@@ -228,6 +234,8 @@
 				B0FEDABB161CE4B1008D1CBA /* MainStoryboard.storyboard in Resources */,
 				B066FA911665F92A0086662E /* calendar.png in Resources */,
 				B0CF20C21688FA310031AEBD /* startRegimen.sqlite in Resources */,
+				B06F8C1A168A5130000EADC3 /* RegimenInfoController.xib in Resources */,
+				B06F8C1E168A6872000EADC3 /* RegimenInfo.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

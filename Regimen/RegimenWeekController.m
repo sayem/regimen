@@ -89,13 +89,25 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"calendar.png"] forState:UIControlStateNormal];
     button.frame=CGRectMake(0,0, 29, 29);
-    [button addTarget:self action:@selector(locationButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(regimenInfo) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *btnDone = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     UINavigationItem *nav = [self navigationItem];
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
+}
+
+- (void)regimenInfo {
+	RegimenInfoController *controller = [[RegimenInfoController alloc] initWithNibName:@"RegimenInfoController" bundle:nil];
+    
+	// If you change modalTransitionStyle, the animation is different.
+	controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+	// To actually show the new screen, you must "present" it. Now the new
+	// view controller takes over. BullsEyeViewController will not receive any
+	// events until the About screen is closed.
+	[self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)setNavTitle

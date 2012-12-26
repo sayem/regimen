@@ -10,4 +10,8 @@
 
 @interface RegimenInfoController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+
+- (IBAction)close;
+
 @end

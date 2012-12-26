@@ -97,21 +97,16 @@
 }
 
 - (void)regimenInfo {
-    NSLog(@"crap");
-    
-    
 	RegimenInfoController *controller = [[RegimenInfoController alloc] initWithNibName:@"RegimenInfoController" bundle:nil];
     
 	// If you change modalTransitionStyle, the animation is different.
-	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 	// To actually show the new screen, you must "present" it. Now the new
 	// view controller takes over. BullsEyeViewController will not receive any
 	// events until the About screen is closed.
 	[self presentViewController:controller animated:YES completion:nil];
 }
-
-
 
 - (void)viewDidUnload
 {
