@@ -101,6 +101,12 @@
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
+    
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:19];
+
+    
+
 }
 
 - (void)regimenInfo {
@@ -373,6 +379,17 @@
             
             break;
     }
+
+    NSArray *dailyGoals = self.fetchedResultsController.fetchedObjects;
+    int notCompleted = 0;
+    
+    for (RegimenGoal *dailyGoal in dailyGoals) {
+        if (!dailyGoal.completed.boolValue) {
+            notCompleted++;
+        }
+    }
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:notCompleted];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
