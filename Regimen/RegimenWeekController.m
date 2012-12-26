@@ -172,7 +172,7 @@
         if (progress < 50) {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 1.0 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
-        else if (progress < 75) {
+        else if (progress >= 50 && progress < 75) {
             [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed: 0.75 green:colorVal blue: 0.0 alpha:1.0] range:NSMakeRange(progressStart, progressEnd)];
         }
         else {
