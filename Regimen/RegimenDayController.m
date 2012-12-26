@@ -101,12 +101,6 @@
     nav.leftBarButtonItem = btnDone;
     
     [self setNavTitle];
-    
-    
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:19];
-
-    
-
 }
 
 - (void)regimenInfo {
