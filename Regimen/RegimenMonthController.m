@@ -118,7 +118,7 @@
 {
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM yyyy"];
+    [formatter setDateFormat:@"MMMM"];
     NSString *date = [formatter stringFromDate:now];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
