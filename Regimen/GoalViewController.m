@@ -2,7 +2,7 @@
 //  GoalViewController.m
 //  Regimen
 //
-//  Created by Sayem Islam on 11/10/12.
+//  Created by Sayem Khan on 11/10/12.
 //  Copyright (c) 2012 HatTrick Labs, LLC. All rights reserved.
 //
 

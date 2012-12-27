@@ -92,6 +92,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B0704E66168BF5E5003EA23E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B0FEDABC161CE4B1008D1CBA /* RegimenDayController.h */,
+				B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */,
+				B0FEDAC3161CE4B1008D1CBA /* RegimenWeekController.h */,
+				B0FEDAC4161CE4B1008D1CBA /* RegimenWeekController.m */,
+				B0643AB5161DE0310086CEEB /* RegimenMonthController.h */,
+				B0643AB6161DE0310086CEEB /* RegimenMonthController.m */,
+				B0643AB9161DE0D30086CEEB /* RegimenYearController.h */,
+				B0643ABA161DE0D30086CEEB /* RegimenYearController.m */,
+				B0643ABC161DE1060086CEEB /* RegimenLongTermController.h */,
+				B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */,
+				B0B3D454164F363D0029660A /* GoalViewController.h */,
+				B0B3D455164F363D0029660A /* GoalViewController.m */,
+				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
+				B0D60D7B165B6994004555F7 /* RegimenCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B0704E67168BF63F003EA23E /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				B06F8C1616898072000EADC3 /* RegimenInfoController.h */,
+				B06F8C1716898072000EADC3 /* RegimenInfoController.m */,
+				B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */,
+				B06F8C1D168A6871000EADC3 /* RegimenInfo.html */,
+			);
+			name = Info;
+			sourceTree = "<group>";
+		};
+		B0704E70168BF69A003EA23E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B0CF20C11688FA310031AEBD /* startRegimen.sqlite */,
+				B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */,
+				B01785E0167D77360079CC96 /* RegimenGoal.h */,
+				B01785E1167D77360079CC96 /* RegimenGoal.m */,
+				B01785DC167D76FC0079CC96 /* RegimenTime.h */,
+				B01785DD167D76FC0079CC96 /* RegimenTime.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		B0FEDA92161CE4B0008D1CBA = {
 			isa = PBXGroup;
 			children = (
@@ -127,30 +172,9 @@
 				B0FEDAB0161CE4B0008D1CBA /* RegimenAppDelegate.h */,
 				B0FEDAB1161CE4B0008D1CBA /* RegimenAppDelegate.m */,
 				B0FEDAB9161CE4B1008D1CBA /* MainStoryboard.storyboard */,
-				B0FEDABC161CE4B1008D1CBA /* RegimenDayController.h */,
-				B0FEDABD161CE4B1008D1CBA /* RegimenDayController.m */,
-				B0FEDAC3161CE4B1008D1CBA /* RegimenWeekController.h */,
-				B0FEDAC4161CE4B1008D1CBA /* RegimenWeekController.m */,
-				B0643AB5161DE0310086CEEB /* RegimenMonthController.h */,
-				B0643AB6161DE0310086CEEB /* RegimenMonthController.m */,
-				B0643AB9161DE0D30086CEEB /* RegimenYearController.h */,
-				B0643ABA161DE0D30086CEEB /* RegimenYearController.m */,
-				B0643ABC161DE1060086CEEB /* RegimenLongTermController.h */,
-				B0643ABD161DE1060086CEEB /* RegimenLongTermController.m */,
-				B06F8C1616898072000EADC3 /* RegimenInfoController.h */,
-				B06F8C1716898072000EADC3 /* RegimenInfoController.m */,
-				B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */,
-				B06F8C1D168A6871000EADC3 /* RegimenInfo.html */,
-				B0B3D454164F363D0029660A /* GoalViewController.h */,
-				B0B3D455164F363D0029660A /* GoalViewController.m */,
-				B0D60D7A165B6994004555F7 /* RegimenCell.h */,
-				B0D60D7B165B6994004555F7 /* RegimenCell.m */,
-				B0CF20C11688FA310031AEBD /* startRegimen.sqlite */,
-				B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */,
-				B01785E0167D77360079CC96 /* RegimenGoal.h */,
-				B01785E1167D77360079CC96 /* RegimenGoal.m */,
-				B01785DC167D76FC0079CC96 /* RegimenTime.h */,
-				B01785DD167D76FC0079CC96 /* RegimenTime.m */,
+				B0704E66168BF5E5003EA23E /* Views */,
+				B0704E67168BF63F003EA23E /* Info */,
+				B0704E70168BF69A003EA23E /* Models */,
 				B0FEDAA8161CE4B0008D1CBA /* Supporting Files */,
 			);
 			path = Regimen;
@@ -159,12 +183,12 @@
 		B0FEDAA8161CE4B0008D1CBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B0FEDAA9161CE4B0008D1CBA /* Regimen-Info.plist */,
 				B0B72840168B06220074E0DA /* Default@2x.png */,
+				B066FA901665F92A0086662E /* calendar.png */,
+				B0FEDAA9161CE4B0008D1CBA /* Regimen-Info.plist */,
+				B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */,
 				B0FEDAAA161CE4B0008D1CBA /* InfoPlist.strings */,
 				B0FEDAAD161CE4B0008D1CBA /* main.m */,
-				B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */,
-				B066FA901665F92A0086662E /* calendar.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
