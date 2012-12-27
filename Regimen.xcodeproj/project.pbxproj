@@ -16,6 +16,8 @@
 		B06F8C1816898072000EADC3 /* RegimenInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F8C1716898072000EADC3 /* RegimenInfoController.m */; };
 		B06F8C1A168A5130000EADC3 /* RegimenInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */; };
 		B06F8C1E168A6872000EADC3 /* RegimenInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = B06F8C1D168A6871000EADC3 /* RegimenInfo.html */; };
+		B0704E72168C1195003EA23E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0704E71168C1195003EA23E /* Default.png */; };
+		B0704E74168C119F003EA23E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0704E73168C119F003EA23E /* Default-568h@2x.png */; };
 		B07EB20816795E1D0060E916 /* Regimen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B07EB20616795E1D0060E916 /* Regimen.xcdatamodeld */; };
 		B0B3D456164F363D0029660A /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3D455164F363D0029660A /* GoalViewController.m */; };
 		B0B72841168B06220074E0DA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B72840168B06220074E0DA /* Default@2x.png */; };
@@ -50,6 +52,8 @@
 		B06F8C1716898072000EADC3 /* RegimenInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegimenInfoController.m; sourceTree = "<group>"; };
 		B06F8C19168A5130000EADC3 /* RegimenInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegimenInfoController.xib; sourceTree = "<group>"; };
 		B06F8C1D168A6871000EADC3 /* RegimenInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegimenInfo.html; sourceTree = "<group>"; };
+		B0704E71168C1195003EA23E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B0704E73168C119F003EA23E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B07EB20716795E1D0060E916 /* Regimen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Regimen.xcdatamodel; sourceTree = "<group>"; };
 		B0B3D454164F363D0029660A /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		B0B3D455164F363D0029660A /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
@@ -183,7 +187,9 @@
 		B0FEDAA8161CE4B0008D1CBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B0704E71168C1195003EA23E /* Default.png */,
 				B0B72840168B06220074E0DA /* Default@2x.png */,
+				B0704E73168C119F003EA23E /* Default-568h@2x.png */,
 				B066FA901665F92A0086662E /* calendar.png */,
 				B0FEDAA9161CE4B0008D1CBA /* Regimen-Info.plist */,
 				B0FEDAAF161CE4B0008D1CBA /* Regimen-Prefix.pch */,
@@ -252,6 +258,8 @@
 				B06F8C1A168A5130000EADC3 /* RegimenInfoController.xib in Resources */,
 				B06F8C1E168A6872000EADC3 /* RegimenInfo.html in Resources */,
 				B0B72841168B06220074E0DA /* Default@2x.png in Resources */,
+				B0704E72168C1195003EA23E /* Default.png in Resources */,
+				B0704E74168C119F003EA23E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
