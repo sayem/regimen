@@ -112,6 +112,14 @@
 	[self presentViewController:controller animated:YES completion:nil];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    _timeWeek = nil;
+    self.fetchedResultsController = nil;
+}
+
 - (void)setNavTitle
 {
     NSDate *today = [NSDate date];

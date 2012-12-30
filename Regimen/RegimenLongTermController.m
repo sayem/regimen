@@ -77,6 +77,14 @@
 	[self presentViewController:controller animated:YES completion:nil];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    _timeLongTerm = nil;
+    self.fetchedResultsController = nil;
+}
+
 - (void)setNavTitle
 {
     NSString *date = @"Long-Term";

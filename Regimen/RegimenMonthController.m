@@ -114,6 +114,14 @@
 	[self presentViewController:controller animated:YES completion:nil];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    _timeMonth = nil;
+    self.fetchedResultsController = nil;
+}
+
 - (void)setNavTitle
 {
     NSDate *now = [NSDate date];

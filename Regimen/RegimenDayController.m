@@ -114,6 +114,7 @@
 {
     [super viewDidUnload];
     
+    _timeDay = nil;
     self.fetchedResultsController = nil;
 }
 
