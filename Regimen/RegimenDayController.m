@@ -324,7 +324,7 @@
     NSEntityDescription *dayEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
     [dayRequest setEntity:dayEntity];
  
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration ==     %@", @"Day"];
+    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"Day"];
     [dayRequest setPredicate:dayPredicate];
  
     NSSortDescriptor *daySort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];

@@ -336,7 +336,7 @@
     NSEntityDescription *weekEntity = [NSEntityDescription entityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
     [weekRequest setEntity:weekEntity];
     
-    NSPredicate *weekPredicate = [NSPredicate predicateWithFormat:@"time.duration ==     %@", @"Week"];
+    NSPredicate *weekPredicate = [NSPredicate predicateWithFormat:@"time.duration == %@", @"Week"];
     [weekRequest setPredicate:weekPredicate];
     
     NSSortDescriptor *weekSort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
