@@ -37,49 +37,16 @@
     
     NSArray *weekGoals = self.fetchedResultsController.fetchedObjects;
     
-    if ([weekGoals count] > 0) {
+    if ([weekGoals count] == 0) {
         
-        // delete last week's goals
-        
-        RegimenGoal *checkGoal = [weekGoals objectAtIndex:0];
-
-        NSCalendar *cal = [NSCalendar currentCalendar];
-        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:checkGoal.dateCreated];
-        [components setHour:-[components hour]];
-        [components setMinute:-[components minute]];
-        [components setSecond:-[components second]];
-        [components setDay:+(6 - [components weekday])];
-    
-        NSDate *weekEnd = [cal dateByAddingComponents:components toDate:checkGoal.dateCreated options:0];
-        NSDate *checkNow = [NSDate date];
-        
-        if ([checkNow compare:weekEnd] == 1) {
-            
-            NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
-            [formatDate setDateFormat:@"yyyy-MM-dd"];
-            
-            for (RegimenGoal *deleteGoal in weekGoals) {
-                NSString *checkDate = [formatDate stringFromDate:deleteGoal.dateCreated];
-                if (![checkDate isEqualToString:@"2012-12-24"]) {
-                    [_managedObjectContext deleteObject:deleteGoal];
-                }
-            }
-            
-            [_managedObjectContext save:&error];
-        }
-    }
-    else {
-    
         // default reminder to add a goal if no goals present
     
-        if ([self.fetchedResultsController.fetchedObjects count] == 0) {
-            RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
-            noGoals.text = @"Add a goal for this week";
-            noGoals.dateCreated = [NSDate date];
-            noGoals.time = _timeWeek;
+        RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+        noGoals.text = @"Add a goal for this week";
+        noGoals.dateCreated = [NSDate date];
+        noGoals.time = _timeWeek;
         
-            [noGoals.managedObjectContext save:&error];
-        }
+        [noGoals.managedObjectContext save:&error];
     }
     
     
@@ -298,25 +265,26 @@
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSError *error;
     
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:swipedIndexPath]];
-        [context save:&error];
-        
-        [self removeSubviews:[cell subviews]];
-        [self setNavTitle];
-    }
-    else {
-        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        
-        if (!goal.completed.boolValue) {
-            goal.completed = [NSNumber numberWithBool:YES];
-            
-            [context save:&error];
-            
-            [self removeSubviews:[cell subviews]];
-            [self setNavTitle];
+        if (goal.completed.boolValue) {
+            goal.completed = [NSNumber numberWithBool:NO];
+        }
+        else {
+            [context deleteObject:goal];
         }
     }
+    else {
+        if (!goal.completed.boolValue) {
+            goal.completed = [NSNumber numberWithBool:YES];
+        }
+    }
+    
+    [context save:&error];
+    
+    [self removeSubviews:[cell subviews]];
+    [self setNavTitle];
 }
 
 - (void)removeSubviews:(NSArray *)subviews {

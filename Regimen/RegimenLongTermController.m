@@ -35,10 +35,11 @@
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:longtermRequest error:&error];
     _timeLongTerm = [fetchedObjects objectAtIndex:0];
 
+    NSArray *longtermGoals = self.fetchedResultsController.fetchedObjects;
     
     // default reminder to add a goal if no goals present
     
-    if ([self.fetchedResultsController.fetchedObjects count] == 0) {
+    if ([longtermGoals count] == 0) {
         RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
         noGoals.text = @"Add a long-term goal";
         noGoals.dateCreated = [NSDate date];
@@ -249,26 +250,27 @@
     
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSError *error;
+
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:swipedIndexPath]];
-        [context save:&error];
-        
-        [self removeSubviews:[cell subviews]];
-        [self setNavTitle];
-    }
-    else {
-        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        
-        if (!goal.completed.boolValue) {
-            goal.completed = [NSNumber numberWithBool:YES];
-            
-            [context save:&error];
-            
-            [self removeSubviews:[cell subviews]];
-            [self setNavTitle];
+        if (goal.completed.boolValue) {
+            goal.completed = [NSNumber numberWithBool:NO];
+        }
+        else {
+            [context deleteObject:goal];
         }
     }
+    else {
+        if (!goal.completed.boolValue) {
+            goal.completed = [NSNumber numberWithBool:YES];
+        }
+    }
+    
+    [context save:&error];
+    
+    [self removeSubviews:[cell subviews]];
+    [self setNavTitle];
 }
 
 - (void)removeSubviews:(NSArray *)subviews {

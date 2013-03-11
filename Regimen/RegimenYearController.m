@@ -37,52 +37,16 @@
     
     NSArray *yearGoals = self.fetchedResultsController.fetchedObjects;
     
-    if ([yearGoals count] > 0) {
-        
-        // delete last year's goals
-        
-        RegimenGoal *checkGoal = [yearGoals objectAtIndex:0];
-        
-        NSCalendar *cal = [NSCalendar currentCalendar];
-        
-        NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSDayCalendarUnit |NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:checkGoal.dateCreated];
-        [components setHour:-[components hour]];
-        [components setMinute:-[components minute]];
-        [components setSecond:-[components second]];
-        [components setDay:-([components day] - 1)];
-        [components setMonth:-([components month] - 1)];
-        [components setYear:+1];
-
-        NSDate *yearEnd = [cal dateByAddingComponents:components toDate:checkGoal.dateCreated options:0];
-        NSDate *checkNow = [NSDate date];
-        
-        if ([checkNow compare:yearEnd] == 1) {
-            
-            NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
-            [formatDate setDateFormat:@"yyyy-MM-dd"];
-            
-            for (RegimenGoal *deleteGoal in yearGoals) {
-                NSString *checkDate = [formatDate stringFromDate:deleteGoal.dateCreated];
-                if (![checkDate isEqualToString:@"2012-12-24"]) {
-                    [_managedObjectContext deleteObject:deleteGoal];
-                }
-            }
-            
-            [_managedObjectContext save:&error];
-        }
-    }
-    else {
+    if ([yearGoals count] == 0) {
         
         // default reminder to add a goal if no goals present
         
-        if ([self.fetchedResultsController.fetchedObjects count] == 0) {
-            RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
-            noGoals.text = @"Add a goal for this year";
-            noGoals.dateCreated = [NSDate date];
-            noGoals.time = _timeYear;
+        RegimenGoal *noGoals = [NSEntityDescription insertNewObjectForEntityForName:@"RegimenGoal" inManagedObjectContext:_managedObjectContext];
+        noGoals.text = @"Add a goal for this year";
+        noGoals.dateCreated = [NSDate date];
+        noGoals.time = _timeYear;
             
-            [noGoals.managedObjectContext save:&error];
-        }
+        [noGoals.managedObjectContext save:&error];
     }
     
     
@@ -290,26 +254,27 @@
     
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSError *error;
+
+    RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
     
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:swipedIndexPath]];
-        [context save:&error];
-        
-        [self removeSubviews:[cell subviews]];
-        [self setNavTitle];
-    }
-    else {
-        RegimenGoal *goal = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        
-        if (!goal.completed.boolValue) {
-            goal.completed = [NSNumber numberWithBool:YES];
-            
-            [context save:&error];
-            
-            [self removeSubviews:[cell subviews]];
-            [self setNavTitle];
+        if (goal.completed.boolValue) {
+            goal.completed = [NSNumber numberWithBool:NO];
+        }
+        else {
+            [context deleteObject:goal];
         }
     }
+    else {
+        if (!goal.completed.boolValue) {
+            goal.completed = [NSNumber numberWithBool:YES];
+        }
+    }
+    
+    [context save:&error];
+    
+    [self removeSubviews:[cell subviews]];
+    [self setNavTitle];
 }
 
 - (void)removeSubviews:(NSArray *)subviews {
